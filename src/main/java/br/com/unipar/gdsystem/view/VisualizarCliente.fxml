@@ -9,10 +9,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-
-<AnchorPane id="apCliente" prefHeight="600.0" prefWidth="1200.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171">
+<AnchorPane id="apCliente" prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unipar.gdsystem.controller.VisualizarClienteController">
    <children>
-      <HBox id="hbFiltro" layoutY="27.0" prefHeight="48.0" prefWidth="1200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="27.0">
+      <HBox fx:id="hbFiltro" layoutY="27.0" prefHeight="48.0" prefWidth="1200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="27.0">
          <children>
             <Label text="Nome" HBox.hgrow="ALWAYS">
                <HBox.margin>
@@ -64,16 +63,16 @@
             <Insets bottom="20.0" top="20.0" />
          </padding>
       </HBox>
-      <TableView id="tvCliente" layoutX="9.0" layoutY="170.0" prefHeight="328.0" prefWidth="1163.0" AnchorPane.bottomAnchor="102.0" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="170.0">
+      <TableView fx:id="tvCliente" layoutX="9.0" layoutY="170.0" prefHeight="328.0" prefWidth="1163.0" AnchorPane.bottomAnchor="102.0" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="170.0">
         <columns>
-          <TableColumn id="tbcId" prefWidth="50.0" resizable="false" text="ID" />
-          <TableColumn id="tbcNome" prefWidth="363.0" resizable="false" text="Nome" />
-            <TableColumn id="tbcCpf" minWidth="0.0" prefWidth="151.0" resizable="false" text="CPF" />
-            <TableColumn id="tbcTelefone" prefWidth="151.0" resizable="false" text="Telefone" />
-            <TableColumn id="tbcCelular" prefWidth="170.0" resizable="false" text="Celular" />
-            <TableColumn id="tbcEndereco" prefWidth="297.0" resizable="false" text="Endereco" />
+          <TableColumn fx:id="tbcId" prefWidth="50.0" resizable="false" text="ID" />
+          <TableColumn fx:id="tbcNome" prefWidth="363.0" resizable="false" text="Nome" />
+            <TableColumn fx:id="tbcCpf" minWidth="0.0" prefWidth="151.0" resizable="false" text="CPF" />
+            <TableColumn fx:id="tbcTelefone" prefWidth="151.0" resizable="false" text="Telefone" />
+            <TableColumn fx:id="tbcCelular" prefWidth="170.0" resizable="false" text="Celular" />
+            <TableColumn fx:id="tbcEndereco" prefWidth="297.0" resizable="false" text="Endereco" />
         </columns>
       </TableView>
-      <Button id="btnAdicionar" layoutX="14.0" layoutY="521.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="130.0" text="Adicionar | F1" textAlignment="CENTER" AnchorPane.bottomAnchor="34.0" AnchorPane.leftAnchor="14.0" />
+      <Button fx:id="btnAdicionar" layoutX="14.0" layoutY="521.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="130.0" text="Adicionar | F1" textAlignment="CENTER" AnchorPane.bottomAnchor="34.0" AnchorPane.leftAnchor="14.0" />
    </children>
 </AnchorPane>

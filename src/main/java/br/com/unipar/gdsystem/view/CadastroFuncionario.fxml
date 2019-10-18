@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="404.0" prefWidth="1000.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="br.com.unipar.gdsystem.controller.CadastroUsuarioController">
+   <children>
+      <Label fx:id="lblNome" layoutX="80.0" layoutY="69.0" text="Nome" />
+      <TextField fx:id="txtNome" layoutX="119.0" layoutY="65.0" prefHeight="25.0" prefWidth="358.0" />
+      <ComboBox fx:id="cbAcesso" layoutX="453.0" layoutY="168.0" prefWidth="150.0" />
+      <Button layoutX="87.0" layoutY="340.0" mnemonicParsing="false" prefWidth="52.0" text="Button" />
+      <Button layoutX="780.0" layoutY="193.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Button" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="757.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../../imagens/cliente.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="lblRg" layoutX="80.0" layoutY="102.0" text="RG" />
+      <TextField fx:id="txtRg" layoutX="119.0" layoutY="98.0" />
+      <Label fx:id="lblCpf" layoutX="500.0" layoutY="69.0" text="CPF" />
+      <TextField fx:id="txtCpf" layoutX="528.0" layoutY="65.0" />
+      <Label fx:id="lblCracha" layoutX="291.0" layoutY="102.0" text="Crachá" />
+      <TextField fx:id="txtCracha" layoutX="332.0" layoutY="98.0" prefHeight="25.0" prefWidth="142.0" />
+      <Label fx:id="lblTelefone" layoutX="78.0" layoutY="172.0" text="Telefone" />
+      <TextField fx:id="txtTelefone" layoutX="134.0" layoutY="168.0" />
+      <Label fx:id="lblCelular" layoutX="78.0" layoutY="205.0" text="Celular" />
+      <TextField fx:id="txtCelular" layoutX="134.0" layoutY="201.0" />
+      <Label fx:id="lblEmail" layoutX="79.0" layoutY="242.0" text="E-Mail" />
+      <TextField fx:id="txtEmail" layoutX="134.0" layoutY="238.0" prefHeight="25.0" prefWidth="333.0" />
+      <Label fx:id="lblAcesso" layoutX="352.0" layoutY="172.0" prefHeight="17.0" prefWidth="86.0" text="Nivel Acesso" />
+   </children>
+</AnchorPane>

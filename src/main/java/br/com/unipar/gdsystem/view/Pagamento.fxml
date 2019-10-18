@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="464.0" prefWidth="365.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unipar.gdsystem.controller.PagamentoController">
+   <children>
+      <Label layoutX="14.0" layoutY="38.0" text="Selecione a forma de pagamento">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <Label fx:id="lblFormaPAg" layoutX="14.0" layoutY="108.0" text="Selecione a forma de pagamento" />
+      <TextField fx:id="txtValorCompra" disable="true" layoutX="181.0" layoutY="164.0" prefHeight="25.0" prefWidth="166.0" />
+      <Label fx:id="lblValorCompra" layoutX="77.0" layoutY="168.0" text="Valor Compra(R$)" />
+      <TextField fx:id="txtValorRecebido" layoutX="181.0" layoutY="198.0" prefHeight="25.0" prefWidth="166.0" />
+      <Label fx:id="lblValorRecebido" layoutX="66.0" layoutY="202.0" text="Valor Recebido (R$)" />
+      <TextField fx:id="txtTroco" layoutX="181.0" layoutY="235.0" prefHeight="25.0" prefWidth="166.0" />
+      <Label fx:id="Troco" layoutX="119.0" layoutY="239.0" text="Troco(R$)" />
+      <Button fx:id="btnOk" layoutX="202.0" layoutY="407.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="62.0" text="OK" />
+      <Button fx:id="btnCancelar" layoutX="285.0" layoutY="407.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Cancelar" />
+      <ComboBox fx:id="cbFormaPagamento" layoutX="202.0" layoutY="104.0" prefWidth="150.0" />
+   </children>
+</AnchorPane>
