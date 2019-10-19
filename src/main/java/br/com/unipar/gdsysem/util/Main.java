@@ -1,4 +1,4 @@
-package br.com.unipar.gdsystem.model;
+package br.com.unipar.gdsysem.util;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

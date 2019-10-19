@@ -1,27 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="464.0" prefWidth="365.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unipar.gdsystem.controller.PagamentoController">
+<AnchorPane prefHeight="572.0" prefWidth="425.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unipar.gdsystem.controller.PagamentoController">
    <children>
-      <Label layoutX="14.0" layoutY="38.0" text="Selecione a forma de pagamento">
+      <Label layoutX="34.0" layoutY="63.0" text="Selecione a forma de pagamento">
          <font>
             <Font size="15.0" />
          </font></Label>
-      <Label fx:id="lblFormaPAg" layoutX="14.0" layoutY="108.0" text="Selecione a forma de pagamento" />
-      <TextField fx:id="txtValorCompra" disable="true" layoutX="181.0" layoutY="164.0" prefHeight="25.0" prefWidth="166.0" />
-      <Label fx:id="lblValorCompra" layoutX="77.0" layoutY="168.0" text="Valor Compra(R$)" />
-      <TextField fx:id="txtValorRecebido" layoutX="181.0" layoutY="198.0" prefHeight="25.0" prefWidth="166.0" />
-      <Label fx:id="lblValorRecebido" layoutX="66.0" layoutY="202.0" text="Valor Recebido (R$)" />
-      <TextField fx:id="txtTroco" layoutX="181.0" layoutY="235.0" prefHeight="25.0" prefWidth="166.0" />
-      <Label fx:id="Troco" layoutX="119.0" layoutY="239.0" text="Troco(R$)" />
-      <Button fx:id="btnOk" layoutX="202.0" layoutY="407.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="62.0" text="OK" />
-      <Button fx:id="btnCancelar" layoutX="285.0" layoutY="407.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Cancelar" />
-      <ComboBox fx:id="cbFormaPagamento" layoutX="202.0" layoutY="104.0" prefWidth="150.0" />
+      <Label fx:id="lblFormaPAg" layoutX="30.0" layoutY="122.0" text="Forma de Pagamento" />
+      <ComboBox fx:id="cbFormaPagamento" layoutX="185.0" layoutY="117.0" prefHeight="31.0" prefWidth="210.0" />
+      <Label layoutX="34.0" layoutY="14.0" text="Pagamento">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <StackPane fx:id="spFormasPagamento" layoutX="25.0" layoutY="162.0" prefHeight="340.0" prefWidth="384.0">
+         <children>
+            <Pane fx:id="pBoleto" prefHeight="170.0" prefWidth="395.0" visible="false">
+               <children>
+                  <Label fx:id="lblValorCompra" layoutX="41.0" layoutY="65.0" text="Valor Compra (R$)" />
+                  <TextField fx:id="txtValorCompra" disable="true" layoutX="172.0" layoutY="60.0" prefHeight="25.0" prefWidth="166.0" />
+                  <Label fx:id="lblValorRecebido" layoutX="32.0" layoutY="109.0" text="Valor Recebido (R$)" />
+                  <TextField fx:id="txtValorRecebido" layoutX="172.0" layoutY="104.0" prefHeight="25.0" prefWidth="166.0" />
+                  <Label fx:id="lblTroco" layoutX="98.0" layoutY="160.0" text="Troco(R$)" />
+                  <TextField fx:id="txtTroco" disable="true" layoutX="172.0" layoutY="155.0" prefHeight="25.0" prefWidth="166.0" />
+               </children>
+            </Pane>
+            <Pane fx:id="pCrediario" prefHeight="326.0" prefWidth="384.0" visible="false">
+               <children>
+                  <TextField fx:id="txtValorCompraCred" disable="true" layoutX="131.0" layoutY="14.0" prefHeight="25.0" prefWidth="166.0" />
+                  <Label fx:id="lblValorCompraCre" layoutY="19.0" text="Valor Compra(R$)" />
+                  <Label fx:id="lblParcelas" layoutX="42.0" layoutY="61.0" text="N° Parcelas" />
+                  <Spinner fx:id="spParcelas" editable="true" layoutX="131.0" layoutY="56.0" prefHeight="31.0" prefWidth="94.0" />
+                  <TableView fx:id="tvParcelas" layoutY="96.0" prefHeight="226.0" prefWidth="384.0">
+                    <columns>
+                      <TableColumn fx:id="tbcParcela" prefWidth="126.0" text="N°" />
+                      <TableColumn fx:id="tbcValor" prefWidth="257.0" text="Valor" />
+                    </columns>
+                  </TableView>
+               </children>
+            </Pane>
+            <Pane fx:id="pCredito" prefHeight="261.0" prefWidth="384.0" visible="false" />
+            <Pane fx:id="pDebito" prefHeight="261.0" prefWidth="384.0" visible="false" />
+         </children>
+      </StackPane>
+      <ButtonBar fx:id="bbBtn" layoutX="87.0" layoutY="511.0" prefHeight="40.0" prefWidth="310.0">
+         <buttons>
+            <Button fx:id="btnOk" mnemonicParsing="false" prefHeight="63.0" prefWidth="62.0" text="OK" />
+            <Button fx:id="btnCancelar" minWidth="50.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="191.0" text="Cancelar" />
+         </buttons>
+      </ButtonBar>
    </children>
 </AnchorPane>
