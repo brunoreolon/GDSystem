@@ -1,29 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="464.0" prefWidth="365.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unipar.gdsystem.controller.SangriaController">
+<AnchorPane prefHeight="517.0" prefWidth="409.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unipar.gdsystem.controller.SangriaController">
    <children>
-      <Label layoutX="26.0" layoutY="30.0" text="Sangria">
+      <Label layoutX="26.0" layoutY="14.0" text="Sangria">
          <font>
-            <Font size="15.0" />
+            <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="23.0" layoutY="62.0" text="Informe o valor da sangria" />
-      <Label fx:id="lblSaldoAtual" layoutX="34.0" layoutY="123.0" text="Saldo Atual (R$)" />
-      <TextField fx:id="txtSaldoAtual" layoutX="166.0" layoutY="119.0" prefHeight="25.0" prefWidth="173.0" />
-      <Label fx:id="lblValorSangria" layoutX="29.0" layoutY="157.0" text="Valor da Sangria (R$)" />
-      <TextField fx:id="txtValorSangria" layoutX="166.0" layoutY="153.0" prefHeight="25.0" prefWidth="173.0" />
+      <Label layoutX="22.0" layoutY="53.0" text="Informe o valor da sangria" />
+      <Label fx:id="lblSaldoAtual" layoutX="82.0" layoutY="123.0" text="Saldo Atual (R$)" />
+      <TextField fx:id="txtSaldoAtual" disable="true" layoutX="199.0" layoutY="118.0" prefHeight="31.0" prefWidth="180.0" />
+      <Label fx:id="lblValorSangria" layoutX="49.0" layoutY="157.0" text="Valor da Sangria (R$)" />
+      <TextField fx:id="txtValorSangria" layoutX="199.0" layoutY="152.0" prefHeight="31.0" prefWidth="180.0" />
       <Label fx:id="lblValorPosSangria" layoutX="29.0" layoutY="192.0" text="Saldo Após Sangria (R$)" />
-      <TextField fx:id="txtVAlorPosSangria" layoutX="166.0" layoutY="188.0" prefHeight="25.0" prefWidth="173.0" />
-      <Label fx:id="lblMotivo" layoutX="26.0" layoutY="232.0" text="Motivo:" />
-      <TextArea fx:id="txtMotivo" layoutX="23.0" layoutY="249.0" prefHeight="109.0" prefWidth="320.0" />
-      <Button fx:id="btnOk" layoutX="202.0" layoutY="407.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="62.0" text="OK" />
-      <Button fx:id="btnCancelar" layoutX="285.0" layoutY="407.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="Cancelar" />
+      <TextField fx:id="txtVAlorPosSangria" disable="true" layoutX="199.0" layoutY="187.0" prefHeight="31.0" prefWidth="180.0" />
+      <Label fx:id="lblMotivo" layoutX="34.0" layoutY="244.0" text="Motivo:" />
+      <TextArea fx:id="txtMotivo" layoutX="29.0" layoutY="265.0" prefHeight="122.0" prefWidth="352.0" />
+      <ButtonBar fx:id="bbBtn" layoutX="179.0" layoutY="447.0" prefHeight="40.0" prefWidth="200.0">
+        <buttons>
+            <Button fx:id="btnOk" mnemonicParsing="false" prefHeight="55.0" prefWidth="62.0" text="OK" />
+            <Button fx:id="btnCancelar" mnemonicParsing="false" prefHeight="40.0" prefWidth="112.0" text="Cancelar" />
+        </buttons>
+      </ButtonBar>
    </children>
 </AnchorPane>
