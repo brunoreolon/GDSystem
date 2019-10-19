@@ -21,13 +21,13 @@
          </font>
       </Label>
       <Label fx:id="lblAbertura" layoutX="42.0" layoutY="207.0" text="Data de Abertura " />
-      <TextField fx:id="txtAbertura" disable="true" editable="false" layoutX="188.0" layoutY="203.0" prefHeight="25.0" prefWidth="166.0" />
-      <Label fx:id="lblValorAbertura" layoutX="42.0" layoutY="250.0" text="Valor de Abertura" />
-      <TextField fx:id="txtValorAbertura" disable="true" layoutX="187.0" layoutY="246.0" prefHeight="25.0" prefWidth="166.0" />
-      <Label fx:id="lblFechamento" layoutX="43.0" layoutY="297.0" text="Data de Fechamento" />
-      <TextField fx:id="txtFechamento" layoutX="222.0" layoutY="297.0" prefHeight="25.0" prefWidth="166.0" />
-      <Label fx:id="lblValor" layoutX="38.0" layoutY="341.0" text="Informe valor em Dinheiro" />
-      <TextField fx:id="txtValor" layoutX="222.0" layoutY="336.0" prefHeight="25.0" prefWidth="166.0" />
+      <TextField fx:id="txtAbertura" disable="true" editable="false" layoutX="154.0" layoutY="203.0" prefHeight="25.0" prefWidth="200.0" />
+      <Label fx:id="lblValorAbertura" layoutX="42.0" layoutY="242.0" text="Valor de Abertura" />
+      <TextField fx:id="txtValorAbertura" disable="true" layoutX="153.0" layoutY="238.0" prefHeight="25.0" prefWidth="200.0" />
+      <Label fx:id="lblFechamento" layoutX="68.0" layoutY="301.0" text="Data de Fechamento" />
+      <TextField fx:id="txtFechamento" layoutX="188.0" layoutY="297.0" prefHeight="25.0" prefWidth="166.0" />
+      <Label fx:id="lblValor" layoutX="38.0" layoutY="340.0" text="Informe valor em Dinheiro" />
+      <TextField fx:id="txtValor" layoutX="188.0" layoutY="336.0" prefHeight="25.0" prefWidth="166.0" />
       <ButtonBar fx:id="bbBtn" layoutX="188.0" layoutY="458.0" prefHeight="40.0" prefWidth="200.0">
          <buttons>
             <Button fx:id="btnOk" mnemonicParsing="false" prefHeight="61.0" prefWidth="62.0" text="OK" />
