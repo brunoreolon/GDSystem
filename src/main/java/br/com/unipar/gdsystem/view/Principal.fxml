@@ -8,33 +8,38 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="apPrincipal" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unipar.gdsystem.controller.PrincipalController">
+<AnchorPane id="apPrincipal" fx:id="apPrincipal" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unipar.gdsystem.controller.PrincipalController">
    <children>
       <MenuBar id="mbMenu" layoutY="2.0" prefHeight="25.0" prefWidth="800.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="2.0">
         <menus>
           <Menu fx:id="menuVenda" mnemonicParsing="false" text="Venda">
             <items>
-                  <MenuItem fx:id="miVenda" mnemonicParsing="false" text="Venda" />
+                  <MenuItem fx:id="miVenda" mnemonicParsing="false" onAction="#onAbrirVendaAction" text="Venda" />
               <MenuItem mnemonicParsing="false" text="..." />
             </items>
           </Menu>
           <Menu fx:id="menuCaixa" mnemonicParsing="false" text="Caixa">
             <items>
-              <MenuItem fx:id="miAbrirFecharCaixa" mnemonicParsing="false" text="Abrir/Fechar Caixa" />
+                  <Menu mnemonicParsing="false" text="Abrir/Fechar Caixa">
+                    <items>
+                    <MenuItem fx:id="miAbrirCaixa" mnemonicParsing="false" onAction="#onAbrirCaixaAction" text="Abrir Caixa" />
+                      <MenuItem fx:id="miFecharCaixa" mnemonicParsing="false" onAction="#onFecharCaixaAction" text="Fechar Caixa" />
+                    </items>
+                  </Menu>
                   <MenuItem fx:id="miRelatorio" mnemonicParsing="false" text="Relatório Caixa" />
-                  <MenuItem fx:id="miSangria" mnemonicParsing="false" text="Sangria" />
+                  <MenuItem fx:id="miSangria" mnemonicParsing="false" onAction="#onAbrirSangriaAction" text="Sangria" />
                   <MenuItem fx:id="Suprimento" mnemonicParsing="false" text="Suprimento" />
             </items>
           </Menu>
             <Menu fx:id="menuCadastro" mnemonicParsing="false" text="Cadastro">
               <items>
-                <MenuItem fx:id="miProduto" mnemonicParsing="false" text="Produto" />
-                  <MenuItem fx:id="miCliente" mnemonicParsing="false" text="Cliente" />
+                <MenuItem fx:id="miProduto" mnemonicParsing="false" onAction="#onAbrirCadastroProdutoAction" text="Produto" />
+                  <MenuItem fx:id="miCliente" mnemonicParsing="false" onAction="#onAbrirCadastroCliente" text="Cliente" />
               </items>
             </Menu>
           <Menu fx:id="menuConfiguracao" mnemonicParsing="false" text="Configuração">
             <items>
-              <MenuItem fx:id="miCadUsuario" mnemonicParsing="false" text="Cadastrar Usuário" />
+              <MenuItem fx:id="miCadUsuario" mnemonicParsing="false" onAction="#onAbrirCadastroUsuarioAction" text="Cadastrar Usuário" />
                   <MenuItem fx:id="miEmpresa" mnemonicParsing="false" text="Empresa" />
                   <MenuItem mnemonicParsing="false" text="..." />
             </items>
@@ -51,9 +56,9 @@
       <Separator layoutX="24.0" layoutY="34.0" orientation="VERTICAL" prefHeight="55.0" prefWidth="6.0" />
       <ButtonBar fx:id="bbPrincipal" layoutX="37.0" layoutY="36.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="55.0" prefWidth="265.0">
         <buttons>
-          <Button id="btnProduto" fx:id="btnProduto" mnemonicParsing="false" prefHeight="63.0" text="Produto" />
-            <Button id="btnCliente" fx:id="btnCliente" mnemonicParsing="false" prefHeight="65.0" text="Cliente" />
-            <Button id="btnVenda" fx:id="btnVenda" minWidth="25.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="138.0" text="Venda" />
+          <Button id="btnProduto" fx:id="btnProduto" mnemonicParsing="false" onAction="#onAbrirProduto" prefHeight="63.0" text="Produto" />
+            <Button id="btnCliente" fx:id="btnCliente" mnemonicParsing="false" onAction="#onAbrirCliente" prefHeight="65.0" text="Cliente" />
+            <Button id="btnVenda" fx:id="btnVenda" minWidth="25.0" mnemonicParsing="false" onAction="#onAbrirVendaAction" prefHeight="65.0" prefWidth="138.0" text="Venda" />
         </buttons>
       </ButtonBar>
    </children>

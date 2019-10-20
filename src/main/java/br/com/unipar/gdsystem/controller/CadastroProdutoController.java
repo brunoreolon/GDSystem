@@ -1,5 +1,195 @@
 package br.com.unipar.gdsystem.controller;
 
-public class CadastroProdutoController {
+import java.math.BigDecimal;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import br.com.unipar.gdsystem.dao.ProdutoDAO;
+import br.com.unipar.gdsystem.model.Produto;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+
+public class CadastroProdutoController implements Initializable {
+
+	@FXML
+	private AnchorPane apCadProduto;
+
+	@FXML
+	private Pane pIdentificacao;
+
+	@FXML
+	private Label lblCodInterno;
+
+	@FXML
+	private TextField txtCodInterno;
+
+	@FXML
+	private Label lblCodBarras;
+
+	@FXML
+	private TextField txtCodBarras;
+
+	@FXML
+	private Label lblDescricao;
+
+	@FXML
+	private TextField txtDescricao;
+
+	@FXML
+	private Pane pEspecificacao;
+
+	@FXML
+	private Label lblUnidade;
+
+	@FXML
+	private TextField txtUnidade;
+
+	@FXML
+	private Label lblPesoBruto;
+
+	@FXML
+	private TextField txtPesoBruto;
+
+	@FXML
+	private Label lblPesoLiquido;
+
+	@FXML
+	private TextField txtPesoLiquido;
+
+	@FXML
+	private Pane pEstoque;
+
+	@FXML
+	private Label lblQtdTotal;
+
+	@FXML
+	private TextField txtQtdTotal;
+
+	@FXML
+	private Label lblQtdMinimo;
+
+	@FXML
+	private TextField txtQtdMinimo;
+
+	@FXML
+	private Pane pValor;
+
+	@FXML
+	private Label lblValorVenda;
+
+	@FXML
+	private TextField txtValorVenda;
+
+	@FXML
+	private Label lblValorMinimo;
+
+	@FXML
+	private TextField txtValorMinimo;
+
+	@FXML
+	private Label lblDescontoMaximo;
+
+	@FXML
+	private TextField txtDescontoMaximo;
+
+	@FXML
+	private Pane pInfoAdcional;
+
+	@FXML
+	private Label lblMarca;
+
+	@FXML
+	private TextField txtMarca;
+
+	@FXML
+	private Label lblDepartamento;
+
+	@FXML
+	private TextField txtDepartamento;
+
+	@FXML
+	private Button btnCadastrar;
+
+	@FXML
+	void onCadastrarAction(ActionEvent event) {
+		if (empty()) {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("Aviso");
+			alert.setHeaderText("Todos os campos são obrigatórios");
+			alert.showAndWait();
+
+			return;
+		}
+
+		Produto produto = new Produto();
+		ProdutoDAO produtoDAO = new ProdutoDAO();
+
+		produto.setCodigoInterno(txtCodInterno.getText());
+		produto.setCodigoBarras(txtCodBarras.getText());
+		produto.setDescricao(txtDescricao.getText());
+		produto.setUnidade(txtUnidade.getText());
+		produto.setPesoBruto(Double.parseDouble(txtPesoBruto.getText()));
+		produto.setPesoLiquido(Double.parseDouble(txtPesoLiquido.getText()));
+		produto.setQuantidadeTotal(Integer.parseInt(txtQtdTotal.getText()));
+		produto.setQuantidadeMinima(Integer.parseInt(txtQtdMinimo.getText()));
+		produto.setValorVenda(new BigDecimal(txtValorVenda.getText()));
+		produto.setValorMinimo(new BigDecimal(txtValorMinimo.getText()));
+		produto.setDescontoMaximo(new BigDecimal(txtDescontoMaximo.getText()));
+		produto.setMarca(txtMarca.getText());
+		produto.setDepartamento(txtDepartamento.getText());
+		
+		produtoDAO.add(produto);
+
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Caixa de diálogo Informações");
+		alert.setHeaderText("Produto cadastrado com sucesso!");
+		alert.showAndWait();
+
+		reset();
+	}
+
+	@FXML
+	void onCancelarAction(ActionEvent event) {
+		reset();
+		PrincipalController.getStage().close();
+	}
+	
+	private void reset() {
+		txtCodInterno.setText("");
+		txtCodBarras.setText("");
+		txtDescricao.setText("");
+		txtUnidade.setText("");
+		txtPesoBruto.setText("");
+		txtPesoLiquido.setText("");
+		txtQtdTotal.setText("");
+		txtQtdMinimo.setText("");
+		txtValorVenda.setText("");
+		txtValorMinimo.setText("");
+		txtDescontoMaximo.setText("");
+		txtMarca.setText("");
+		txtDepartamento.setText("");
+	}
+
+	private Boolean empty() {
+		return txtCodInterno.getText().isEmpty() || txtCodBarras.getText().isEmpty() || txtDescricao.getText().isEmpty() || 
+				txtUnidade.getText().isEmpty() || txtPesoBruto.getText().isEmpty() || txtPesoLiquido.getText().isEmpty() || 
+				txtQtdTotal.getText().isEmpty() || txtQtdMinimo.getText().isEmpty() || txtValorVenda.getText().isEmpty() || 
+				txtValorMinimo.getText().isEmpty() || txtDescontoMaximo.getText().isEmpty() || txtMarca.getText().isEmpty() || 
+				txtDepartamento.getText().isEmpty();
+	}
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		// TODO Auto-generated method stub
+
+	}
 
 }

@@ -1,39 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 
-
-<AnchorPane prefHeight="600.0" prefWidth="1038.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="br.com.unipar.gdsystem.controller.CadastroProdutoController">
+<AnchorPane fx:id="apCadProduto" prefHeight="474.0" prefWidth="1038.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unipar.gdsystem.controller.CadastroProdutoController">
    <children>
-      <Button fx:id="btnCadastrar" layoutX="58.0" layoutY="523.0" mnemonicParsing="false" text="Cadastrar | F1" AnchorPane.bottomAnchor="52.0" AnchorPane.leftAnchor="58.0" />
-      <Label fx:id="lblCodInterno" layoutX="48.0" layoutY="89.0" text="Código Interno" AnchorPane.leftAnchor="48.0" AnchorPane.topAnchor="89.0" />
-      <TextField fx:id="txtCodInterno" layoutX="133.0" layoutY="85.0" AnchorPane.leftAnchor="133.0" AnchorPane.topAnchor="85.0" />
-      <Label fx:id="lblCodBarras" layoutX="367.0" layoutY="89.0" text="Código de Barras" AnchorPane.leftAnchor="367.0" AnchorPane.topAnchor="89.0" />
-      <TextField fx:id="txtCodBarras" layoutX="461.0" layoutY="85.0" AnchorPane.leftAnchor="461.0" AnchorPane.topAnchor="85.0" />
-      <Label fx:id="lblDescricao" layoutX="77.0" layoutY="128.0" text="Descrição" AnchorPane.leftAnchor="77.0" AnchorPane.topAnchor="128.0" />
-      <TextField fx:id="txtDescricao" layoutX="133.0" layoutY="124.0" prefHeight="25.0" prefWidth="865.0" AnchorPane.leftAnchor="133.0" AnchorPane.topAnchor="124.0" />
-      <Label fx:id="lblUnidade" layoutX="71.0" layoutY="215.0" text="Unidade" AnchorPane.leftAnchor="71.0" AnchorPane.topAnchor="215.0" />
-      <TextField fx:id="txtUnidade" layoutX="126.0" layoutY="213.0" AnchorPane.leftAnchor="126.0" AnchorPane.topAnchor="213.0" />
-      <Label fx:id="lblPesoBruto" layoutX="60.0" layoutY="254.0" text="Peso Bruto" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="254.0" />
-      <TextField fx:id="txtPesoBruto" layoutX="126.0" layoutY="250.0" AnchorPane.leftAnchor="126.0" AnchorPane.topAnchor="250.0" />
-      <Label fx:id="lblPesoLiquido" layoutX="51.0" layoutY="289.0" text="Peso Liquido" AnchorPane.leftAnchor="51.0" AnchorPane.topAnchor="289.0" />
-      <TextField fx:id="txtPesoLiquido" layoutX="126.0" layoutY="285.0" AnchorPane.leftAnchor="126.0" AnchorPane.topAnchor="285.0" />
-      <Label fx:id="lblQtdTotal" layoutX="401.0" layoutY="223.0" text="Quantitda Total" AnchorPane.leftAnchor="401.0" AnchorPane.topAnchor="223.0" />
-      <TextField fx:id="txtQtdTotal" layoutX="491.0" layoutY="219.0" prefHeight="25.0" prefWidth="168.0" AnchorPane.leftAnchor="491.0" AnchorPane.topAnchor="219.0" />
-      <Label fx:id="lblQtdMinimo" layoutX="379.0" layoutY="260.0" text="Quantidade Mínima" AnchorPane.leftAnchor="379.0" AnchorPane.topAnchor="260.0" />
-      <TextField fx:id="txtQtdMinimo" layoutX="491.0" layoutY="256.0" prefHeight="25.0" prefWidth="168.0" AnchorPane.leftAnchor="491.0" AnchorPane.topAnchor="256.0" />
-      <Label fx:id="lblValorVenda" layoutX="771.0" layoutY="217.0" text="Valor Venda" AnchorPane.topAnchor="217.0" />
-      <TextField fx:id="txtValorVenda" layoutX="845.0" layoutY="213.0" AnchorPane.topAnchor="213.0" />
-      <Label fx:id="lblValorMinimo" layoutX="764.0" layoutY="254.0" text="Valor Mínimo" AnchorPane.topAnchor="254.0" />
-      <TextField fx:id="txtValorMinimo" layoutX="845.0" layoutY="250.0" AnchorPane.topAnchor="250.0" />
-      <Label fx:id="lblDescontoMaximo" layoutX="739.0" layoutY="289.0" text="Desconto Máximo" AnchorPane.topAnchor="289.0" />
-      <TextField fx:id="txtDescontoMaximo" layoutX="845.0" layoutY="285.0" AnchorPane.topAnchor="285.0" />
-      <Label fx:id="lblMarca" layoutX="87.0" layoutY="395.0" text="Marca" AnchorPane.leftAnchor="87.0" />
-      <TextField fx:id="txtMarca" layoutX="126.0" layoutY="391.0" prefHeight="25.0" prefWidth="408.0" AnchorPane.leftAnchor="126.0" />
-      <Label fx:id="lblDepartamento" layoutX="566.0" layoutY="395.0" text="Departamento" AnchorPane.leftAnchor="566.0" />
-      <TextField fx:id="txtDepartamento" layoutX="649.0" layoutY="391.0" prefHeight="25.0" prefWidth="346.0" AnchorPane.leftAnchor="649.0" />
+      <Pane fx:id="pIdentificacao" layoutX="39.0" layoutY="14.0" prefHeight="99.0" prefWidth="977.0">
+         <children>
+            <Label fx:id="lblCodInterno" layoutX="14.0" layoutY="23.0" text="Código Interno" />
+            <TextField fx:id="txtCodInterno" layoutX="102.0" layoutY="19.0" />
+            <Label fx:id="lblCodBarras" layoutX="287.0" layoutY="23.0" text="Código de Barras" />
+            <TextField fx:id="txtCodBarras" layoutX="388.0" layoutY="19.0" />
+            <Label fx:id="lblDescricao" layoutX="41.0" layoutY="60.0" text="Descrição" />
+            <TextField fx:id="txtDescricao" layoutX="100.0" layoutY="56.0" prefHeight="25.0" prefWidth="862.0" />
+         </children>
+      </Pane>
+      <Pane fx:id="pEspecificacao" layoutX="46.0" layoutY="136.0" prefHeight="136.0" prefWidth="260.0">
+         <children>
+            <Label fx:id="lblUnidade" layoutX="32.0" layoutY="27.0" text="Unidade" />
+            <TextField fx:id="txtUnidade" layoutX="83.0" layoutY="23.0" prefHeight="25.0" prefWidth="149.0" />
+            <Label fx:id="lblPesoBruto" layoutX="17.0" layoutY="69.0" text="Peso Bruto" />
+            <TextField fx:id="txtPesoBruto" layoutX="83.0" layoutY="65.0" />
+            <Label fx:id="lblPesoLiquido" layoutX="9.0" layoutY="108.0" text="Peso Liquido" />
+            <TextField fx:id="txtPesoLiquido" layoutX="83.0" layoutY="104.0" />
+         </children>
+      </Pane>
+      <Pane fx:id="pEstoque" layoutX="377.0" layoutY="148.0" prefHeight="136.0" prefWidth="304.0">
+         <children>
+            <Label fx:id="lblQtdTotal" layoutX="27.0" layoutY="14.0" text="Quantitda Total" />
+            <TextField fx:id="txtQtdTotal" layoutX="122.0" layoutY="10.0" prefHeight="25.0" prefWidth="168.0" />
+            <Label fx:id="lblQtdMinimo" layoutX="4.0" layoutY="60.0" text="Quantidade Mínima" />
+            <TextField fx:id="txtQtdMinimo" layoutX="122.0" layoutY="56.0" prefHeight="25.0" prefWidth="168.0" />
+         </children>
+      </Pane>
+      <Pane fx:id="pValor" layoutX="745.0" layoutY="148.0" prefHeight="136.0" prefWidth="279.0">
+         <children>
+            <Label fx:id="lblValorVenda" layoutX="38.0" layoutY="14.0" text="Valor Venda" />
+            <TextField fx:id="txtValorVenda" layoutX="113.0" layoutY="10.0" />
+            <Label fx:id="lblValorMinimo" layoutX="32.0" layoutY="56.0" text="Valor Mínimo" />
+            <TextField fx:id="txtValorMinimo" layoutX="113.0" layoutY="52.0" />
+            <Label fx:id="lblDescontoMaximo" layoutX="7.0" layoutY="97.0" text="Desconto Máximo" />
+            <TextField fx:id="txtDescontoMaximo" layoutX="113.0" layoutY="93.0" />
+         </children>
+      </Pane>
+      <Pane fx:id="pInfoAdcional" layoutX="81.0" layoutY="310.0" prefHeight="81.0" prefWidth="932.0">
+         <children>
+            <Label fx:id="lblMarca" layoutX="3.0" layoutY="28.0" text="Marca" />
+            <TextField fx:id="txtMarca" layoutX="47.0" layoutY="24.0" prefHeight="25.0" prefWidth="408.0" />
+            <Label fx:id="lblDepartamento" layoutX="495.0" layoutY="28.0" text="Departamento" />
+            <TextField fx:id="txtDepartamento" layoutX="580.0" layoutY="24.0" prefHeight="25.0" prefWidth="346.0" />
+         </children>
+      </Pane>
+      <ButtonBar fx:id="bbBtn" layoutX="76.0" layoutY="391.0" prefHeight="40.0" prefWidth="200.0">
+        <buttons>
+            <Button fx:id="btnCadastrar" mnemonicParsing="false" onAction="#onCadastrarAction" prefHeight="35.0" prefWidth="90.0" text="Cadastrar " />
+            <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#onCancelarAction" prefHeight="35.0" prefWidth="90.0" text="Cancelar" />
+        </buttons>
+      </ButtonBar>
    </children>
 </AnchorPane>

@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane id="apCliente" prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unipar.gdsystem.controller.VisualizarClienteController">
+<AnchorPane id="apCliente" fx:id="apVisualizarCliente" prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unipar.gdsystem.controller.VisualizarClienteController">
    <children>
       <HBox fx:id="hbFiltro" layoutY="27.0" prefHeight="48.0" prefWidth="1200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="27.0">
          <children>
@@ -20,7 +20,7 @@
             </Label>
             <TextField prefHeight="31.0" prefWidth="495.0" HBox.hgrow="ALWAYS">
                <HBox.margin>
-                  <Insets right="5.0" top="15.0" />
+                  <Insets top="15.0" />
                </HBox.margin>
             </TextField>
             <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="27.0" text="Button" HBox.hgrow="ALWAYS">
@@ -35,7 +35,7 @@
             </Label>
             <TextField prefHeight="31.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                <HBox.margin>
-                  <Insets right="5.0" top="15.0" />
+                  <Insets top="15.0" />
                </HBox.margin>
             </TextField>
             <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="27.0" text="Button" HBox.hgrow="ALWAYS">
@@ -50,7 +50,7 @@
             </Label>
             <TextField prefHeight="31.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                <HBox.margin>
-                  <Insets right="5.0" top="15.0" />
+                  <Insets top="15.0" />
                </HBox.margin>
             </TextField>
             <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="27.0" text="Button" HBox.hgrow="ALWAYS">
@@ -63,7 +63,7 @@
             <Insets bottom="20.0" top="20.0" />
          </padding>
       </HBox>
-      <TableView fx:id="tvCliente" layoutX="9.0" layoutY="170.0" prefHeight="328.0" prefWidth="1163.0" AnchorPane.bottomAnchor="102.0" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="170.0">
+      <TableView fx:id="tvCliente" layoutX="9.0" layoutY="138.0" prefHeight="360.0" prefWidth="1183.0" AnchorPane.bottomAnchor="102.0" AnchorPane.leftAnchor="9.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="138.0">
         <columns>
           <TableColumn fx:id="tbcId" prefWidth="50.0" resizable="false" text="ID" />
           <TableColumn fx:id="tbcNome" prefWidth="363.0" resizable="false" text="Nome" />
@@ -73,6 +73,6 @@
             <TableColumn fx:id="tbcEndereco" prefWidth="297.0" resizable="false" text="Endereco" />
         </columns>
       </TableView>
-      <Button fx:id="btnAdicionar" layoutX="14.0" layoutY="521.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="130.0" text="Adicionar | F1" textAlignment="CENTER" AnchorPane.bottomAnchor="34.0" AnchorPane.leftAnchor="14.0" />
+      <Button fx:id="btnAdicionar" layoutX="14.0" layoutY="521.0" mnemonicParsing="false" onAction="#onAbrirCadClienteAction" prefHeight="35.0" prefWidth="90.0" text="Adicionar | F1" textAlignment="CENTER" AnchorPane.bottomAnchor="34.0" AnchorPane.leftAnchor="14.0" />
    </children>
 </AnchorPane>

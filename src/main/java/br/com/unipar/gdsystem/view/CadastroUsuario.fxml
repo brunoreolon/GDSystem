@@ -4,6 +4,7 @@
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -15,32 +16,32 @@
       <TextField fx:id="txtNome" layoutX="96.0" layoutY="63.0" prefHeight="31.0" prefWidth="577.0" />
       <Label fx:id="lblCpf" layoutX="754.0" layoutY="68.0" text="CPF" />
       <TextField fx:id="txtCpf" layoutX="786.0" layoutY="61.0" prefHeight="31.0" prefWidth="169.0" />
-      <Label fx:id="lblRg" layoutX="37.0" layoutY="109.0" text="Usuário" />
-      <TextField fx:id="txtRg" layoutX="95.0" layoutY="105.0" prefHeight="31.0" prefWidth="333.0" />
-      <Label fx:id="lblCracha" layoutX="446.0" layoutY="109.0" text="Crachá" />
+      <Label fx:id="lblUsuario" layoutX="37.0" layoutY="109.0" text="Usuário" />
+      <TextField fx:id="txtUsuario" layoutX="95.0" layoutY="105.0" prefHeight="31.0" prefWidth="333.0" />
+      <Label fx:id="lblCracha" layoutX="451.0" layoutY="109.0" text="Crachá" />
       <TextField fx:id="txtCracha" layoutX="503.0" layoutY="104.0" prefHeight="31.0" prefWidth="169.0" />
       <Label fx:id="lblAcesso" layoutX="687.0" layoutY="109.0" prefHeight="21.0" prefWidth="89.0" text="Nivel de Acesso" />
+      <ComboBox fx:id="cbAcesso" layoutX="786.0" layoutY="104.0" prefHeight="31.0" prefWidth="169.0" />
       <Label fx:id="lblEmail" layoutX="42.0" layoutY="154.0" text="E-Mail" />
-      <TextField fx:id="txtEmail" layoutX="96.0" layoutY="151.0" prefHeight="25.0" prefWidth="333.0" />
-      <Label fx:id="lblTelefone" layoutX="435.0" layoutY="154.0" text="Telefone" />
+      <TextField fx:id="txtEmail" layoutX="96.0" layoutY="151.0" prefHeight="31.0" prefWidth="333.0" />
+      <Label fx:id="lblTelefone" layoutX="442.0" layoutY="154.0" text="Telefone" />
       <TextField fx:id="txtTelefone" layoutX="503.0" layoutY="147.0" prefHeight="31.0" prefWidth="169.0" />
       <Label fx:id="lblCelular" layoutX="731.0" layoutY="156.0" text="Celular" />
       <TextField fx:id="txtCelular" layoutX="786.0" layoutY="147.0" prefHeight="31.0" prefWidth="169.0" />
-      <Label fx:id="lblSenha" layoutX="107.0" layoutY="211.0" text="Senha" />
-      <TextField fx:id="txtSenha" layoutX="154.0" layoutY="211.0" prefHeight="31.0" prefWidth="200.0" />
+      <Label fx:id="lblSenha" layoutX="107.0" layoutY="218.0" text="Senha" />
+      <PasswordField fx:id="txtSenha" layoutX="152.0" layoutY="211.0" prefHeight="31.0" prefWidth="200.0" />
       <Label fx:id="lblConfSenha" layoutX="51.0" layoutY="263.0" text="Confirmar Senha" />
-      <TextField fx:id="txtConfSenha" layoutX="154.0" layoutY="256.0" prefHeight="31.0" prefWidth="200.0" />
-      <ComboBox fx:id="cbAcesso" layoutX="786.0" layoutY="104.0" prefHeight="31.0" prefWidth="169.0" />
+      <PasswordField fx:id="txtConfSenha" layoutX="152.0" layoutY="256.0" prefHeight="31.0" prefWidth="200.0" />
       <ImageView fx:id="imgPerfil" fitHeight="150.0" fitWidth="200.0" layoutX="1015.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../../../../imagens/cliente.png" />
          </image>
       </ImageView>
-      <Button fx:id="btnaddImgPerfil" layoutX="1038.0" layoutY="207.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0" text="Button" />
+      <Button fx:id="btnaddImgPerfil" layoutX="1033.0" layoutY="199.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="114.0" text="Adicionar Imagem" />
       <ButtonBar layoutX="42.0" layoutY="327.0" prefHeight="40.0" prefWidth="200.0">
         <buttons>
-          <Button fx:id="btnSalvar" mnemonicParsing="false" prefHeight="58.0" text="Salvar" />
-            <Button fx:id="btnSair" mnemonicParsing="false" prefHeight="60.0" text="Sair" />
+          <Button fx:id="btnSalvar" mnemonicParsing="false" onAction="#onSalvarAction" prefHeight="35.0" prefWidth="90.0" text="Salvar" />
+            <Button fx:id="btnSair" mnemonicParsing="false" onAction="#onSairAction" prefHeight="35.0" prefWidth="90.0" text="Sair" />
         </buttons>
       </ButtonBar>
    </children>
