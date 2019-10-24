@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import br.com.unipar.gdsystem.dao.ClienteDAO;
 import br.com.unipar.gdsystem.model.Cliente;
+import br.com.unipar.gdsystem.util.OpenCloseStage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,9 +18,12 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 public class CadastroClienteController implements Initializable {
 
+	private static Stage stage;
+	
 	@FXML
 	private AnchorPane apCadCliente;
 
@@ -130,7 +134,7 @@ public class CadastroClienteController implements Initializable {
 
 	@FXML
 	void onCadastrarClienteAction(ActionEvent event) {
-		if (empty()) {
+		if (isEmpty()) {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("Aviso");
 			alert.setHeaderText("Campos com * são obrigatórios");
@@ -169,7 +173,7 @@ public class CadastroClienteController implements Initializable {
 	@FXML
 	void onCancelarAction(ActionEvent event) {
 		reset();
-		PrincipalController.getStage().close();
+		OpenCloseStage.getStage().close();
 	}
 
 	private void reset() {
@@ -188,9 +192,20 @@ public class CadastroClienteController implements Initializable {
 		txtEmail.setText("");
 	}
 
-	private Boolean empty() {
-		return txtNome.getText().isEmpty() || txtCpf.getText().isEmpty() || txtTelefone.getText().isEmpty()
-				|| txtCelular.getText().isEmpty() || txtEmail.getText().isEmpty();
+	private Boolean isEmpty() {
+		return txtNome.getText().isEmpty() || 
+				txtCpf.getText().isEmpty() || 
+				txtTelefone.getText().isEmpty() || 
+				txtCelular.getText().isEmpty() || 
+				txtEmail.getText().isEmpty();
+	}
+
+	public static void setStage(Stage stage) {
+		CadastroClienteController.stage = stage;
+	}
+	
+	public Stage getStage() {
+		return stage;
 	}
 
 	@Override
@@ -198,5 +213,4 @@ public class CadastroClienteController implements Initializable {
 		// TODO Auto-generated method stub
 
 	}
-
 }

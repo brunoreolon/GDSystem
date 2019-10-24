@@ -5,13 +5,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import br.com.unipar.gdsystem.dao.LoginDAO;
-import br.com.unipar.gdsystem.inicio.Login;
+import br.com.unipar.gdsystem.inicio.Start;
+import br.com.unipar.gdsystem.util.OpenCloseStage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -19,7 +17,6 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
 
 public class LoginController implements Initializable {
 
@@ -47,7 +44,7 @@ public class LoginController implements Initializable {
 		if (txtUsuario.getText().isEmpty() || pwSenha.getText().isEmpty()) {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("Aviso");
-			alert.setHeaderText("campo Usuário e Senha dem ser preenchidos");
+			alert.setHeaderText("campo Usuário e Senha devem ser preenchidos");
 			alert.showAndWait();
 			
 			return;
@@ -62,17 +59,8 @@ public class LoginController implements Initializable {
 			return;
 		}
 		
-		Login.getStage().close();
-		principal();
-	}
-	
-	private void principal() throws IOException {
-		Parent parent = FXMLLoader.load(getClass().getResource("/br/com/unipar/gdsystem/view/Principal.fxml"));
-		Scene scene = new Scene(parent);
-		Stage stage = new Stage();
-		stage.setResizable(true);
-		stage.setScene(scene);
-		stage.show();
+		Start.getStage().close();
+		OpenCloseStage.loadStage("/br/com/unipar/gdsystem/view/Principal.fxml", "Principal", true);
 	}
 	
 	@Override

@@ -10,35 +10,35 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="416.0" prefWidth="361.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unipar.gdsystem.controller.LoginController">
+<AnchorPane prefHeight="512.0" prefWidth="375.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unipar.gdsystem.controller.LoginController">
    <children>
-      <ImageView fx:id="imgUsuario" fitHeight="108.0" fitWidth="115.0" layoutX="127.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgUsuario" fitHeight="108.0" fitWidth="115.0" layoutX="128.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../../../../imagens/usuario.png" />
          </image>
       </ImageView>
-      <TextField fx:id="txtUsuario" layoutX="43.0" layoutY="153.0" prefHeight="35.0" prefWidth="275.0" promptText="Usuário">
+      <TextField fx:id="txtUsuario" layoutX="44.0" layoutY="175.0" prefHeight="45.0" prefWidth="275.0" promptText="Usuário">
          <cursor>
             <Cursor fx:constant="TEXT" />
          </cursor>
          <font>
-            <Font size="13.0" />
+            <Font size="18.0" />
          </font>
       </TextField>
-      <PasswordField fx:id="pwSenha" layoutX="44.0" layoutY="208.0" prefHeight="35.0" prefWidth="275.0" promptText="Senha">
+      <PasswordField fx:id="pwSenha" layoutX="44.0" layoutY="234.0" prefHeight="45.0" prefWidth="275.0" promptText="Senha">
          <font>
-            <Font size="13.0" />
+            <Font size="18.0" />
          </font>
       </PasswordField>
-      <Button fx:id="btnLogar" alignment="CENTER" layoutX="43.0" layoutY="264.0" mnemonicParsing="false" onAction="#onLogarAction" prefHeight="35.0" prefWidth="275.0" text="LOGIN" textAlignment="CENTER">
+      <Button fx:id="btnLogar" alignment="CENTER" layoutX="44.0" layoutY="304.0" mnemonicParsing="false" onAction="#onLogarAction" prefHeight="45.0" prefWidth="275.0" text="LOGIN" textAlignment="CENTER">
          <font>
-            <Font name="Arial Bold" size="13.0" />
+            <Font name="Arial Bold" size="18.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <CheckBox fx:id="cbLembrar" layoutX="44.0" layoutY="316.0" mnemonicParsing="false" text="Lembrar ">
+      <CheckBox fx:id="cbLembrar" layoutX="44.0" layoutY="365.0" mnemonicParsing="false" text="Lembrar ">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

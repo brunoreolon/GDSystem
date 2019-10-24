@@ -18,7 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
 public class CadastroUsuarioController implements Initializable {
-
+	
 	@FXML
 	private ResourceBundle resources;
 	@FXML
@@ -70,8 +70,8 @@ public class CadastroUsuarioController implements Initializable {
 	@FXML
 	private Button btnSalvar;
 	@FXML
-	private Button btnSair;
-
+	private Button btnCancelar;
+	
 	@FXML
 	public void onSalvarAction() {
 		if (empty()) {
@@ -115,7 +115,7 @@ public class CadastroUsuarioController implements Initializable {
 	}
 
 	@FXML
-	void onSairAction(ActionEvent event) {
+	void onCancelarAction(ActionEvent event) {
 		reset();
 		PrincipalController.getStage().close();
 	}

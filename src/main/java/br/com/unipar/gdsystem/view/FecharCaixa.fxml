@@ -33,8 +33,8 @@
       <TextField fx:id="txtValor" layoutX="188.0" layoutY="336.0" prefHeight="25.0" prefWidth="166.0" />
       <ButtonBar fx:id="bbBtn" layoutX="188.0" layoutY="458.0" prefHeight="40.0" prefWidth="200.0">
          <buttons>
-            <Button fx:id="btnOk" mnemonicParsing="false" prefHeight="35.0" prefWidth="90.0" text="OK" />
-            <Button fx:id="btnCancelar" mnemonicParsing="false" prefHeight="35.0" prefWidth="90.0" text="Cancelar" />
+            <Button fx:id="btnOk" mnemonicParsing="false" onAction="#onConfirmarAction" prefHeight="35.0" prefWidth="90.0" text="OK" />
+            <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#onCancelarAction" prefHeight="35.0" prefWidth="90.0" text="Cancelar" />
          </buttons>
       </ButtonBar>
    </children>

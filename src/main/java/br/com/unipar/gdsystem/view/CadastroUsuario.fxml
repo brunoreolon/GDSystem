@@ -41,7 +41,7 @@
       <ButtonBar layoutX="42.0" layoutY="327.0" prefHeight="40.0" prefWidth="200.0">
         <buttons>
           <Button fx:id="btnSalvar" mnemonicParsing="false" onAction="#onSalvarAction" prefHeight="35.0" prefWidth="90.0" text="Salvar" />
-            <Button fx:id="btnSair" mnemonicParsing="false" onAction="#onSairAction" prefHeight="35.0" prefWidth="90.0" text="Sair" />
+            <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#onCancelarAction" prefHeight="35.0" prefWidth="90.0" text="Cancelar" />
         </buttons>
       </ButtonBar>
    </children>

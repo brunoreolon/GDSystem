@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import br.com.unipar.gdsystem.dao.ProdutoDAO;
 import br.com.unipar.gdsystem.model.Produto;
+import br.com.unipar.gdsystem.util.OpenCloseStage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,9 +17,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 public class CadastroProdutoController implements Initializable {
 
+	private static Stage stage;
+	
 	@FXML
 	private AnchorPane apCadProduto;
 
@@ -159,7 +163,7 @@ public class CadastroProdutoController implements Initializable {
 	@FXML
 	void onCancelarAction(ActionEvent event) {
 		reset();
-		PrincipalController.getStage().close();
+		OpenCloseStage.getStage().close();
 	}
 	
 	private void reset() {
@@ -186,6 +190,14 @@ public class CadastroProdutoController implements Initializable {
 				txtDepartamento.getText().isEmpty();
 	}
 
+	public static void setStage(Stage stage) {
+		CadastroProdutoController.stage = stage;
+	}
+	
+	public Stage getStage() {
+		return stage;
+	}
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub

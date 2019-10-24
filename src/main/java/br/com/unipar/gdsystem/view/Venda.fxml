@@ -139,7 +139,7 @@
             </Button>
         </buttons>
       </ButtonBar>
-      <Button fx:id="btnCancelar" layoutX="1101.0" layoutY="678.0" mnemonicParsing="false" onAction="#onFecharAction" prefHeight="66.0" prefWidth="154.0" text="Cancelar | F6">
+      <Button fx:id="btnSair" layoutX="1101.0" layoutY="678.0" mnemonicParsing="false" onAction="#onSairVendaAction" prefHeight="66.0" prefWidth="154.0" text="Cancelar | F6">
          <font>
             <Font size="16.0" />
          </font>

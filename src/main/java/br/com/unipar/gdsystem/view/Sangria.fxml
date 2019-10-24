@@ -29,8 +29,8 @@
       <TextArea fx:id="txtMotivo" layoutX="29.0" layoutY="265.0" prefHeight="122.0" prefWidth="352.0" />
       <ButtonBar fx:id="bbBtn" layoutX="179.0" layoutY="447.0" prefHeight="40.0" prefWidth="200.0">
         <buttons>
-            <Button fx:id="btnOk" mnemonicParsing="false" prefHeight="35.0" prefWidth="90.0" text="OK" />
-            <Button fx:id="btnCancelar" mnemonicParsing="false" prefHeight="35.0" prefWidth="90.0" text="Cancelar" />
+            <Button fx:id="btnOk" mnemonicParsing="false" onAction="#onConfirmarAction" prefHeight="35.0" prefWidth="90.0" text="OK" />
+            <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#onCancelarAction" prefHeight="35.0" prefWidth="90.0" text="Cancelar" />
         </buttons>
       </ButtonBar>
    </children>

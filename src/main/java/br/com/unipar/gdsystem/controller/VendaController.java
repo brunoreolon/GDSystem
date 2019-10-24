@@ -4,12 +4,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import br.com.unipar.gdsystem.util.OpenCloseStage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.Label;
@@ -20,10 +18,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class VendaController implements Initializable{
+public class VendaController implements Initializable {
 
 	private static Stage stage;
-	
+
 	@FXML
 	private AnchorPane apVenda;
 
@@ -181,32 +179,27 @@ public class VendaController implements Initializable{
 	private Button btnFinalizar1;
 
 	@FXML
-	private Button btnCancelar;
+	private Button btnSair;
 
 	@FXML
-    void onAbrirPagamentoAction(ActionEvent event) throws IOException {
-		Parent parent = FXMLLoader.load(getClass().getResource("/br/com/unipar/gdsystem/view/Pagamento.fxml"));
-		Scene scene = new Scene(parent);
-		Stage stage = new Stage();
-		stage.setResizable(false);
-		stage.setScene(scene);
-		stage.show();
-		setStage(stage);
-    }
-	
-	@FXML
-	void onFecharAction(ActionEvent event) {
+	void onSairVendaAction(ActionEvent event) {
 		PrincipalController.getStage().close();
+	}
+
+	@FXML
+	void onAbrirPagamentoAction(ActionEvent event) throws IOException {
+		OpenCloseStage.loadStage("/br/com/unipar/gdsystem/view/Pagamento.fxml", "Visualizar Produto", false);
+		setStage(OpenCloseStage.getStage());
 	}
 
 	public void setStage(Stage stage) {
 		VendaController.stage = stage;
 	}
-	
+
 	public static Stage getStage() {
 		return stage;
 	}
-	
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
