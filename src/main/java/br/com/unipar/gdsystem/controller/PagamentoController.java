@@ -1,8 +1,13 @@
 package br.com.unipar.gdsystem.controller;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import br.com.unipar.gdsystem.enums.FormasPagamentoEnum;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -27,7 +32,7 @@ public class PagamentoController implements Initializable {
 	private Label lblFormaPAg;
 
 	@FXML
-	private ComboBox<?> cbFormaPagamento;
+	private ComboBox<FormasPagamentoEnum> cbFormaPagamento;
 
 	@FXML
 	private StackPane spFormasPagamento;
@@ -102,10 +107,13 @@ public class PagamentoController implements Initializable {
 		VendaController.getStage().close();
 	}
 
+	private void loadComboBox() {
+		cbFormaPagamento.getItems().addAll(FormasPagamentoEnum.values());
+	}
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-
+		loadComboBox();
 	}
 
 }

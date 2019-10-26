@@ -6,8 +6,6 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane id="apPrincipal" fx:id="apPrincipal" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unipar.gdsystem.controller.PrincipalController">
@@ -58,35 +56,10 @@
       <Separator layoutX="24.0" layoutY="36.0" orientation="VERTICAL" prefHeight="55.0" prefWidth="6.0" />
       <ButtonBar fx:id="bbPrincipal" layoutX="27.0" layoutY="36.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="57.0" prefWidth="271.0">
         <buttons>
-            <Button id="btnVenda" fx:id="btnVenda" minWidth="25.0" mnemonicParsing="false" onAction="#onAbrirVendaAction" prefHeight="65.0" text="Venda">
-               <graphic>
-                  <ImageView fitHeight="90.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../../../../../imagens/venda.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button id="btnCliente" fx:id="btnCliente" mnemonicParsing="false" onAction="#onAbrirCliente" prefHeight="65.0" text="Cliente">
-               <graphic>
-                  <ImageView fitHeight="115.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../../../../../imagens/cliente2.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-          <Button id="btnProduto" fx:id="btnProduto" mnemonicParsing="false" onAction="#onAbrirProduto" prefHeight="65.0" text="Produto">
-               <graphic>
-                  <ImageView fitHeight="77.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../../../../../imagens/produto.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
+            <Button id="btnVenda" fx:id="btnVenda" minWidth="25.0" mnemonicParsing="false" onAction="#onAbrirVendaAction" prefHeight="65.0" text="Venda" />
+            <Button id="btnCliente" fx:id="btnCliente" mnemonicParsing="false" onAction="#onAbrirCliente" prefHeight="65.0" text="Cliente" />
+          <Button id="btnProduto" fx:id="btnProduto" mnemonicParsing="false" onAction="#onAbrirProduto" prefHeight="65.0" text="Produto" />
         </buttons>
       </ButtonBar>
-      <ImageView fitHeight="397.0" fitWidth="668.0" layoutX="66.0" layoutY="148.0" opacity="0.2" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="66.0" AnchorPane.rightAnchor="66.0" />
    </children>
 </AnchorPane>
