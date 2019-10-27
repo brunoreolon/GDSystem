@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="525.0" prefWidth="425.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unipar.gdsystem.controller.AbrirCaixaController">
+<AnchorPane fx:id="abrirCaixa" prefHeight="525.0" prefWidth="425.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unipar.gdsystem.controller.AbrirCaixaController">
    <children>
       <Label layoutX="26.0" layoutY="30.0" text="Abrir Caixa">
          <font>
@@ -23,13 +23,13 @@
             <Font size="30.0" />
          </font>
       </Label>
-      <Label fx:id="lblAbertura" layoutX="42.0" layoutY="207.0" text="Data de Abertura " />
+      <Label layoutX="42.0" layoutY="207.0" text="Data de Abertura " />
       <TextField fx:id="txtAbertura" editable="false" layoutX="154.0" layoutY="203.0" prefHeight="25.0" prefWidth="200.0" />
-      <Label fx:id="lblValorAbertura" layoutX="42.0" layoutY="242.0" text="Valor de Abertura" />
+      <Label layoutX="42.0" layoutY="242.0" text="Valor de Abertura" />
       <TextField fx:id="txtValorAbertura" layoutX="153.0" layoutY="238.0" prefHeight="25.0" prefWidth="200.0" />
-      <Label fx:id="lblFechamento" layoutX="67.0" layoutY="301.0" text="Data de Fechamento" />
+      <Label layoutX="67.0" layoutY="301.0" text="Data de Fechamento" />
       <TextField fx:id="txtFechamento" disable="true" layoutX="188.0" layoutY="297.0" prefHeight="25.0" prefWidth="166.0" />
-      <Label fx:id="lblValor" layoutX="37.0" layoutY="340.0" text="Informe valor em Dinheiro" />
+      <Label layoutX="37.0" layoutY="340.0" text="Informe valor em Dinheiro" />
       <TextField fx:id="txtValor" disable="true" layoutX="188.0" layoutY="336.0" prefHeight="25.0" prefWidth="166.0" />
       <ButtonBar fx:id="bbBtn" layoutX="188.0" layoutY="458.0" prefHeight="40.0" prefWidth="200.0">
          <buttons>
