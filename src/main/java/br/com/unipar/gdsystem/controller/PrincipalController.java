@@ -90,7 +90,7 @@ public class PrincipalController implements Initializable {
 
 	@FXML
 	void onFecharCaixaAction(ActionEvent event) throws IOException {
-		OpenCloseStage.loadStage("/br/com/unipar/gdsystem/view/fecharCaixa.fxml", "Fechar Caixa", false);
+		OpenCloseStage.loadStage("/br/com/unipar/gdsystem/view/FecharCaixa.fxml", "Fechar Caixa", false);
 		seStage(OpenCloseStage.getStage());
 	}
 
@@ -108,7 +108,7 @@ public class PrincipalController implements Initializable {
 
 	@FXML
 	void onAbrirCliente(ActionEvent event) throws IOException {
-		OpenCloseStage.loadStage("/br/com/unipar/gdsystem/view/VisualizarCliente.fxml", "Visualizar Cliente", false);
+		OpenCloseStage.loadStage("/br/com/unipar/gdsystem/view/VisualizarCliente.fxml", "Visualizar Cliente", true);
 		seStage(OpenCloseStage.getStage());
 	}
 
@@ -120,7 +120,7 @@ public class PrincipalController implements Initializable {
 
 	@FXML
 	void onAbrirProduto(ActionEvent event) throws IOException {
-		OpenCloseStage.loadStage("/br/com/unipar/gdsystem/view/VisualizarProduto.fxml", "Visualizar Produto", false);
+		OpenCloseStage.loadStage("/br/com/unipar/gdsystem/view/VisualizarProduto.fxml", "Visualizar Produto", true);
 		seStage(OpenCloseStage.getStage());
 	}
 

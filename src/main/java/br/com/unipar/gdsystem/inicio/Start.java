@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 public class Start extends Application {
 
 	public static Stage stage;
-	public static Class thisClass;
+	public static Class<? extends Start> thisClass;
 
 	public Start() {
 		Start.thisClass = getClass();
@@ -23,7 +23,7 @@ public class Start extends Application {
 		Start.stage = stage;
 
 		try {
-			Parent parent = FXMLLoader.load(getClass().getResource("/br/com/unipar/gdsystem/view/Principal.fxml"));
+			Parent parent = FXMLLoader.load(getClass().getResource("/br/com/unipar/gdsystem/view/Login.fxml"));
 			Scene scene = new Scene(parent);
 			stage.setResizable(false);
 			stage.setScene(scene);

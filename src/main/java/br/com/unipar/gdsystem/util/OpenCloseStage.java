@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 public class OpenCloseStage {
 	
 	public static Stage stage;
-	public static Class thisClass;
+	public static Class<? extends OpenCloseStage> thisClass;
 
 	public OpenCloseStage() {
 		OpenCloseStage.thisClass = getClass();

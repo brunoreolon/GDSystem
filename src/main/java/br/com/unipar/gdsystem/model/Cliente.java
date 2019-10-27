@@ -11,6 +11,7 @@ public class Cliente {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
+//	private String status;
 	private String cpf;
 	private String rg;
 	private String cep;
@@ -23,7 +24,7 @@ public class Cliente {
 	private String telefone;
 	private String celular;
 	private String email;
-
+	
 	public Integer getId() {
 		return id;
 	}

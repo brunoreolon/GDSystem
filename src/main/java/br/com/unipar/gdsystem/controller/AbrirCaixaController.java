@@ -13,32 +13,24 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 
 public class AbrirCaixaController implements Initializable{
+
+	@FXML
+    private AnchorPane abrirCaixa;
 
     @FXML
     private Label lblCaixaFechado;
 
     @FXML
-    private Label lblAbertura;
-
-    @FXML
     private TextField txtAbertura;
-
-    @FXML
-    private Label lblValorAbertura;
 
     @FXML
     private TextField txtValorAbertura;
 
     @FXML
-    private Label lblFechamento;
-
-    @FXML
     private TextField txtFechamento;
-
-    @FXML
-    private Label lblValor;
 
     @FXML
     private TextField txtValor;

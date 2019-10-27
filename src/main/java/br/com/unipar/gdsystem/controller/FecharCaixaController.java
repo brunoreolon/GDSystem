@@ -16,29 +16,17 @@ import javafx.scene.control.Alert.AlertType;
 
 public class FecharCaixaController implements Initializable{
 
-    @FXML
+	@FXML
     private Label lblCaixaAberto;
-
-    @FXML
-    private Label lblAbertura;
 
     @FXML
     private TextField txtAbertura;
 
     @FXML
-    private Label lblValorAbertura;
-
-    @FXML
     private TextField txtValorAbertura;
 
     @FXML
-    private Label lblFechamento;
-
-    @FXML
     private TextField txtFechamento;
-
-    @FXML
-    private Label lblValor;
 
     @FXML
     private TextField txtValor;
@@ -51,7 +39,7 @@ public class FecharCaixaController implements Initializable{
 
     @FXML
     private Button btnCancelar;
-
+    
     @FXML
     void onConfirmarAction(ActionEvent event) {
     	Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -67,7 +55,6 @@ public class FecharCaixaController implements Initializable{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
 		
 	}
 

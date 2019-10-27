@@ -1,13 +1,9 @@
 package br.com.unipar.gdsystem.controller;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import br.com.unipar.gdsystem.enums.FormasPagamentoEnum;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

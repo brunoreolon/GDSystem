@@ -16,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class LoginController implements Initializable {
@@ -65,6 +66,8 @@ public class LoginController implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+		Image image = new Image("imagens/usuario.png");
+		imgUsuario.setImage(image);
+		imgUsuario.setCache(true);
 	}
 }
