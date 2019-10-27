@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane fx:id="apCadProduto" prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unipar.gdsystem.controller.VisualizarProdutoController">
@@ -12,13 +17,13 @@
       <Label fx:id="lblCodigo" layoutX="75.0" layoutY="31.0" text="Código" AnchorPane.leftAnchor="75.0" AnchorPane.topAnchor="31.0" />
       <Label fx:id="lblDepartamento" layoutX="33.0" layoutY="70.0" text="Departamento" AnchorPane.leftAnchor="33.0" AnchorPane.topAnchor="70.0" />
       <Label fx:id="lblMarca" layoutX="78.0" layoutY="109.0" text="Marca" AnchorPane.leftAnchor="78.0" AnchorPane.topAnchor="109.0" />
-      <TextField fx:id="txCodigo" layoutX="119.0" layoutY="27.0" AnchorPane.leftAnchor="119.0" AnchorPane.topAnchor="27.0" />
+      <TextField fx:id="txtCodigo" layoutX="119.0" layoutY="27.0" AnchorPane.leftAnchor="119.0" AnchorPane.topAnchor="27.0" />
       <TextField fx:id="txtDepartamento" layoutX="119.0" layoutY="63.0" prefHeight="25.0" prefWidth="226.0" AnchorPane.leftAnchor="119.0" AnchorPane.topAnchor="63.0" />
       <TextField fx:id="txtMarca" layoutX="119.0" layoutY="105.0" prefHeight="25.0" prefWidth="226.0" AnchorPane.leftAnchor="119.0" AnchorPane.topAnchor="105.0" />
       <Button fx:id="btnCodigo" layoutX="268.0" layoutY="27.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="21.0" text="Button" AnchorPane.leftAnchor="268.0" AnchorPane.topAnchor="27.0" />
       <Button fx:id="btnDepartamento" layoutX="345.0" layoutY="63.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="21.0" text="Button" AnchorPane.leftAnchor="345.0" AnchorPane.topAnchor="63.0" />
       <Button fx:id="btnMarca" layoutX="345.0" layoutY="105.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="21.0" text="Button" AnchorPane.leftAnchor="345.0" AnchorPane.topAnchor="105.0" />
-      <TableView fx:id="tvProduto" layoutX="30.0" layoutY="152.0" prefHeight="373.0" prefWidth="1141.0" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="152.0">
+      <TableView fx:id="tvProduto" layoutX="30.0" layoutY="152.0" onMouseClicked="#onGetId" prefHeight="373.0" prefWidth="1141.0" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="29.0" AnchorPane.topAnchor="152.0">
         <columns>
             <TableColumn fx:id="tbcCodigo" prefWidth="101.0" text="Código" />
           <TableColumn fx:id="tbcDescricao" prefWidth="543.9999694824219" text="Descrição" />
@@ -27,7 +32,28 @@
             <TableColumn fx:id="tbcEstoque" prefWidth="116.0" text="Qtd. Estoque" />
             <TableColumn fx:id="tbcValorVenda" prefWidth="128.0" text="Valor Venda" />
         </columns>
+         <contextMenu>
+            <ContextMenu>
+              <items>
+                <MenuItem fx:id="miRemover" mnemonicParsing="false" onAction="#onRemoverAction" text="Remover">
+                     <graphic>
+                        <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../../../resources/imagens/deletarCancelar16.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </MenuItem>
+              </items>
+            </ContextMenu>
+         </contextMenu>
       </TableView>
-      <Button fx:id="btnCadastrar" layoutX="30.0" layoutY="544.0" mnemonicParsing="false" onAction="#onCadProdutoAction" prefHeight="35.0" prefWidth="90.0" text="Cadastrar | F1" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="30.0" />
+      <ButtonBar layoutX="14.0" layoutY="539.0" prefHeight="40.0" prefWidth="311.0" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="14.0">
+        <buttons>
+            <Button fx:id="btnCadastrar" mnemonicParsing="false" onAction="#onCadProdutoAction" prefHeight="35.0" prefWidth="90.0" text="Cadastrar" />
+            <Button fx:id="btnAtualizar" mnemonicParsing="false" onAction="#onAtualizarAction" prefHeight="35.0" prefWidth="90.0" text="Atualizar" textAlignment="CENTER" />
+            <Button fx:id="btnRemover" disable="true" mnemonicParsing="false" onAction="#onRemoverAction" prefHeight="35.0" prefWidth="90.0" text="Remover" textAlignment="CENTER" />
+        </buttons>
+      </ButtonBar>
    </children>
 </AnchorPane>
