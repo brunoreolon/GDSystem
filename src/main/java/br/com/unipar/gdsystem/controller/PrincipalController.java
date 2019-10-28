@@ -4,10 +4,13 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import br.com.unipar.gdsystem.dao.CaixaDAO;
 import br.com.unipar.gdsystem.util.OpenCloseStage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.Menu;
@@ -84,6 +87,14 @@ public class PrincipalController implements Initializable {
 
 	@FXML
 	void onAbrirCaixaAction(ActionEvent event) throws IOException {
+//		CaixaDAO caixaDAO = new CaixaDAO();
+//		if(caixaDAO.isOpen()) {
+//    		Alert alert = new Alert(AlertType.WARNING);
+//    		alert.setTitle("");
+//    		alert.setHeaderText("Caixa aberto");
+//    		alert.showAndWait();
+//    	}
+		
 		OpenCloseStage.loadStage("/br/com/unipar/gdsystem/view/AbrirCaixa.fxml", "Abrir Caixa", false);
 		seStage(OpenCloseStage.getStage());
 	}

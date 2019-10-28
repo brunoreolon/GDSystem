@@ -23,7 +23,7 @@ public class Start extends Application {
 		Start.stage = stage;
 
 		try {
-			Parent parent = FXMLLoader.load(getClass().getResource("/br/com/unipar/gdsystem/view/Login.fxml"));
+			Parent parent = FXMLLoader.load(getClass().getResource("/br/com/unipar/gdsystem/view/Principal.fxml"));
 			Scene scene = new Scene(parent);
 			stage.setResizable(false);
 			stage.setScene(scene);

@@ -5,33 +5,38 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="abrirCaixa" prefHeight="525.0" prefWidth="425.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unipar.gdsystem.controller.AbrirCaixaController">
+<AnchorPane fx:id="abrirCaixa" prefHeight="493.0" prefWidth="358.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unipar.gdsystem.controller.AbrirCaixaController">
    <children>
-      <Label layoutX="26.0" layoutY="30.0" text="Abrir Caixa">
+      <Label fx:id="lblTitulo" layoutX="31.0" layoutY="28.0" text="Abrir Caixa">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="26.0" layoutY="70.0" text="Para abrir o caixa informe o valor de abertura">
+      <Label fx:id="lblSubTitulo" layoutX="31.0" layoutY="68.0" text="Para abrir o caixa informe o valor de abertura">
          <font>
             <Font size="15.0" />
          </font></Label>
-      <Label fx:id="lblCaixaFechado" alignment="CENTER" layoutX="127.0" layoutY="115.0" text="Caixa Fechado" textFill="RED">
+      <Label fx:id="lblCaixaFechado" alignment="CENTER" layoutX="101.0" layoutY="117.0" text="Caixa Fechado" textFill="RED">
          <font>
             <Font size="30.0" />
          </font>
       </Label>
-      <Label layoutX="42.0" layoutY="207.0" text="Data de Abertura " />
-      <TextField fx:id="txtAbertura" editable="false" layoutX="154.0" layoutY="203.0" prefHeight="25.0" prefWidth="200.0" />
-      <Label layoutX="42.0" layoutY="242.0" text="Valor de Abertura" />
-      <TextField fx:id="txtValorAbertura" layoutX="153.0" layoutY="238.0" prefHeight="25.0" prefWidth="200.0" />
-      <Label layoutX="67.0" layoutY="301.0" text="Data de Fechamento" />
-      <TextField fx:id="txtFechamento" disable="true" layoutX="188.0" layoutY="297.0" prefHeight="25.0" prefWidth="166.0" />
-      <Label layoutX="37.0" layoutY="340.0" text="Informe valor em Dinheiro" />
-      <TextField fx:id="txtValor" disable="true" layoutX="188.0" layoutY="336.0" prefHeight="25.0" prefWidth="166.0" />
-      <ButtonBar fx:id="bbBtn" layoutX="188.0" layoutY="458.0" prefHeight="40.0" prefWidth="200.0">
+      <Label layoutX="31.0" layoutY="210.0" text="Data de Abertura " />
+      <TextField fx:id="txtAbertura" editable="false" layoutX="137.0" layoutY="206.0" prefHeight="25.0" prefWidth="200.0" />
+      <Label layoutX="31.0" layoutY="245.0" text="Valor de Abertura" />
+      <Pane fx:id="pnFechamento" layoutX="15.0" layoutY="280.0" prefHeight="142.0" prefWidth="332.0">
+         <children>
+            <Label layoutX="33.0" layoutY="25.0" text="Data de Fechamento" />
+            <TextField fx:id="txtFechamento" disable="true" editable="false" layoutX="154.0" layoutY="21.0" prefHeight="25.0" prefWidth="166.0" />
+            <Label layoutX="4.0" layoutY="67.0" text="Informe valor em Dinheiro" />
+            <TextField fx:id="txtValorFechamento" disable="true" layoutX="154.0" layoutY="63.0" prefHeight="25.0" prefWidth="166.0" />
+         </children>
+      </Pane>
+      <TextField fx:id="txtValorAbertura" layoutX="136.0" layoutY="241.0" prefHeight="25.0" prefWidth="200.0" />
+      <ButtonBar fx:id="bbBtn" layoutX="154.0" layoutY="429.0" prefHeight="40.0" prefWidth="200.0">
          <buttons>
             <Button fx:id="btnOk" mnemonicParsing="false" onAction="#onConfirmarAction" prefHeight="35.0" prefWidth="90.0" text="OK" />
             <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#onCancelarAction" prefHeight="35.0" prefWidth="90.0" text="Cancelar" />

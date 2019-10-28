@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="525.0" prefWidth="425.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unipar.gdsystem.controller.FecharCaixaController">
    <children>
       <Label layoutX="36.0" layoutY="40.0" text="Fechar Caixa">
@@ -30,9 +29,9 @@
       <Label layoutX="52.0" layoutY="252.0" text="Valor de Abertura" />
       <TextField fx:id="txtValorAbertura" disable="true" layoutX="163.0" layoutY="248.0" prefHeight="25.0" prefWidth="200.0" />
       <Label layoutX="77.0" layoutY="311.0" text="Data de Fechamento" />
-      <TextField fx:id="txtFechamento" layoutX="198.0" layoutY="307.0" prefHeight="25.0" prefWidth="166.0" />
+      <TextField fx:id="txtFechamento" editable="false" layoutX="198.0" layoutY="307.0" prefHeight="25.0" prefWidth="166.0" />
       <Label layoutX="47.0" layoutY="350.0" text="Informe valor em Dinheiro" />
-      <TextField fx:id="txtValor" layoutX="198.0" layoutY="346.0" prefHeight="25.0" prefWidth="166.0" />
+      <TextField fx:id="txtValorFechamento" layoutX="198.0" layoutY="346.0" prefHeight="25.0" prefWidth="166.0" />
       <ButtonBar fx:id="bbBtn" layoutX="198.0" layoutY="468.0" prefHeight="40.0" prefWidth="200.0">
          <buttons>
             <Button fx:id="btnOk" mnemonicParsing="false" onAction="#onConfirmarAction" prefHeight="35.0" prefWidth="90.0" text="OK" />
