@@ -1,29 +1,55 @@
 package br.com.unipar.gdsystem.model;
 
 import java.math.BigDecimal;
+import java.util.Calendar;
+import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import br.com.unipar.gdsystem.enums.Situacao;
 
 @Entity
 public class Caixa {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String dataAbertura;
-	private String dataFechamento;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Calendar dataAbertura;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Calendar dataFechamento;
 	private BigDecimal valorAbertura;
 	private BigDecimal valorFechamento;
 	private BigDecimal diferenca;
-	private String situacao;
 	
-	public String getSituacao() {
+	@Enumerated(EnumType.STRING)
+	private Situacao situacao;
+	
+	@OneToMany(mappedBy = "caixa")
+	private List<Sangria> sangrias;
+	
+	public List<Sangria> getSangrias() {
+		return sangrias;
+	}
+
+	public void setSangrias(List<Sangria> sangrias) {
+		this.sangrias = sangrias;
+	}
+
+	public Situacao getSituacao() {
 		return situacao;
 	}
 
-	public void setSituacao(String situacao) {
+	public void setSituacao(Situacao situacao) {
 		this.situacao = situacao;
 	}
 
@@ -35,19 +61,19 @@ public class Caixa {
 		this.id = id;
 	}
 
-	public String getDataAbertura() {
+	public Calendar getDataAbertura() {
 		return dataAbertura;
 	}
 
-	public void setDataAbertura(String dataAbertura) {
+	public void setDataAbertura(Calendar dataAbertura) {
 		this.dataAbertura = dataAbertura;
 	}
 
-	public String getDataFechamento() {
+	public Calendar getDataFechamento() {
 		return dataFechamento;
 	}
 
-	public void setDataFechamento(String dataFechamento) {
+	public void setDataFechamento(Calendar dataFechamento) {
 		this.dataFechamento = dataFechamento;
 	}
 

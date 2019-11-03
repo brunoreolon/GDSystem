@@ -26,7 +26,7 @@ public class ClienteDAO {
 		manager.persist(cliente);
 		manager.getTransaction().commit();
 
-		manager.close();
+//		manager.close();
 	}
 	
 	public List<Cliente> getList(){

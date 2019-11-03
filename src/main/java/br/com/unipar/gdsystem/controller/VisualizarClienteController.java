@@ -116,15 +116,15 @@ public class VisualizarClienteController implements Initializable {
 		tbcCelular.setCellValueFactory(new PropertyValueFactory<>("celular"));
 		tbcEndereco.setCellValueFactory(new PropertyValueFactory<>("endereco"));
 
-		tvCliente.setItems(foo());
+		tvCliente.setItems(observableListCliente());
 	}
-
-	private ObservableList<Cliente> foo() {
+	
+	public ObservableList<Cliente> observableListCliente() {
 		clienteDao = new ClienteDAO();
 
 		return FXCollections.observableArrayList(clienteDao.getList());
 	}
-
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		initTable();
