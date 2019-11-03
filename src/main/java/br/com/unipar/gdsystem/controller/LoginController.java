@@ -6,12 +6,11 @@ import java.util.ResourceBundle;
 
 import br.com.unipar.gdsystem.dao.LoginDAO;
 import br.com.unipar.gdsystem.inicio.Start;
+import br.com.unipar.gdsystem.util.AlertUTIL;
 import br.com.unipar.gdsystem.util.OpenCloseStage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
@@ -43,19 +42,13 @@ public class LoginController implements Initializable {
 	
 	private void logar() throws IOException {
 		if (txtUsuario.getText().isEmpty() || pwSenha.getText().isEmpty()) {
-			Alert alert = new Alert(AlertType.WARNING);
-			alert.setTitle("Aviso");
-			alert.setHeaderText("campo Usuário e Senha devem ser preenchidos");
-			alert.showAndWait();
+			AlertUTIL.alertWarning("Aviso", "campo Usuário e Senha devem ser preenchidos");
 			
 			return;
 		}
 		
 		if (!LoginDAO.validarLogin(txtUsuario.getText(), pwSenha.getText())) {
-			Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("Aviso");
-			alert.setHeaderText("Usuário ou senha incorreto");
-			alert.showAndWait();
+			AlertUTIL.alertError("Aviso", "Usuário ou senha incorreto");
 
 			return;
 		}

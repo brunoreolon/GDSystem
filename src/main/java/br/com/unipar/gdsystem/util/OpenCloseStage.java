@@ -31,9 +31,9 @@ public class OpenCloseStage {
 		}
 	}
 	
-	public static void closeStage(Stage stage) {
-		stage.close();
-	}
+//	public static void closeStage(Stage stage) {
+//		stage.close();
+//	}
 	
 	public static Stage getStage() {
 		return stage;

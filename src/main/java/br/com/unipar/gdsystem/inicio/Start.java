@@ -21,7 +21,6 @@ public class Start extends Application {
 	@Override
 	public void start(Stage stage) {
 		Start.stage = stage;
-
 		try {
 			Parent parent = FXMLLoader.load(getClass().getResource("/br/com/unipar/gdsystem/view/Principal.fxml"));
 			Scene scene = new Scene(parent);

@@ -5,97 +5,70 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import br.com.unipar.gdsystem.dao.CaixaDAO;
+import br.com.unipar.gdsystem.util.AlertUTIL;
 import br.com.unipar.gdsystem.util.OpenCloseStage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
+import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
 public class PrincipalController implements Initializable {
 
 	private static Stage stage;
+	public static PrincipalController principalController;
 
-	@FXML
-	private AnchorPane apPrincipal;
-
-	@FXML
-	private Menu menuVenda;
-
-	@FXML
-	private MenuItem miVenda;
-
-	@FXML
-	private Menu menuCaixa;
-
-	@FXML
-	private MenuItem miAbrirFecharCaixa;
-
-	@FXML
-	private MenuItem miRelatorio;
-
-	@FXML
-	private MenuItem miSangria;
-
-	@FXML
-	private MenuItem Suprimento;
-
-	@FXML
-	private Menu menuCadastro;
-
-	@FXML
-	private MenuItem miProduto;
-
-	@FXML
-	private MenuItem miCliente;
-
-	@FXML
-	private Menu menuConfiguracao;
-
-	@FXML
-	private MenuItem miCadUsuario;
-
-	@FXML
-	private MenuItem miEmpresa;
-
-	@FXML
-	private Menu menuHelp;
-
-	@FXML
-	private ButtonBar bbPrincipal;
-
-	@FXML
-	private Button btnProduto;
-
-	@FXML
-	private Button btnCliente;
-
-	@FXML
-	private Button btnVenda;
+	@FXML private AnchorPane apPrincipal;
+	@FXML private Menu menuVenda;
+	@FXML private MenuItem miVenda;
+	@FXML private Menu menuCaixa;
+	@FXML private MenuItem miAbrirFecharCaixa;
+	@FXML private MenuItem miRelatorio;
+	@FXML private MenuItem miSangria;
+	@FXML private MenuItem miSuprimento;
+	@FXML private Menu menuCadastro;
+	@FXML private MenuItem miProduto;
+	@FXML private MenuItem miCliente;
+	@FXML private Menu menuConfiguracao;
+	@FXML private MenuItem miCadUsuario;
+	@FXML private MenuItem miEmpresa;
+	@FXML private Menu menuHelp;
+	@FXML private ButtonBar bbPrincipal;
+	@FXML private Button btnProduto;
+	@FXML private Button btnCliente;
+	@FXML private Button btnVenda;
+	@FXML private Label lblAbertoFechado;
+	
+	public void setLblAbertoFechado(Boolean abrir) {
+		if (abrir) {
+			lblAbertoFechado.setText("Caixa Aberto");
+			lblAbertoFechado.setTextFill(Paint.valueOf("#00da28"));
+			
+		}else {
+			lblAbertoFechado.setText("Caixa Fechado");
+			lblAbertoFechado.setTextFill(Paint.valueOf("#ff0000"));
+		}
+	}
 	
 	@FXML
 	public void onAbrirVendaAction(ActionEvent event) throws IOException {
+		AlertUTIL.alertInformation("", "O Caixa está fechado, para realizar uma venda abra o caixa!");
+		
 		OpenCloseStage.loadStage("/br/com/unipar/gdsystem/view/Venda.fxml", "Vendas", true);
+		
+		OpenCloseStage.loadStage("/br/com/unipar/gdsystem/view/AbrirFecharCaixa.fxml", "Vendas", false);
 		seStage(OpenCloseStage.getStage());
 	}
 
 	@FXML
-	void onAbrirCaixaAction(ActionEvent event) throws IOException {
-//		CaixaDAO caixaDAO = new CaixaDAO();
-//		if(caixaDAO.isOpen()) {
-//    		Alert alert = new Alert(AlertType.WARNING);
-//    		alert.setTitle("");
-//    		alert.setHeaderText("Caixa aberto");
-//    		alert.showAndWait();
-//    	}
-		
-		OpenCloseStage.loadStage("/br/com/unipar/gdsystem/view/AbrirCaixa.fxml", "Abrir Caixa", false);
+	void onAbrirfecharCaixaAction(ActionEvent event) throws IOException {
+		OpenCloseStage.loadStage("/br/com/unipar/gdsystem/view/AbrirFecharCaixa.fxml", "Abrir Caixa", false);
 		seStage(OpenCloseStage.getStage());
 	}
 
@@ -151,6 +124,14 @@ public class PrincipalController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
+		principalController = this;
+		
+		CaixaDAO c = new CaixaDAO();
+		if (c.isOpen()) {
+			setLblAbertoFechado(true);
+		}else {
+			setLblAbertoFechado(false);
+		}
+		
 	}
 }
