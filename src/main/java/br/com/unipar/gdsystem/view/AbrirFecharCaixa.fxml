@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="abrirCaixa" prefHeight="493.0" prefWidth="358.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unipar.gdsystem.controller.AbrirCaixaController">
+<AnchorPane fx:id="abrirCaixa" prefHeight="493.0" prefWidth="358.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.unipar.gdsystem.controller.AbrirFecharCaixaController">
    <children>
       <Label fx:id="lblTitulo" layoutX="31.0" layoutY="28.0" text="Abrir Caixa">
          <font>
