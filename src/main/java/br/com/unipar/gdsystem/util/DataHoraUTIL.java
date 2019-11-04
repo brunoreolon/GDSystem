@@ -9,9 +9,13 @@ public class DataHoraUTIL {
 
 	private static Locale locale = new Locale("pt", "BR");
 	private static GregorianCalendar calendar = new GregorianCalendar();
-	private static SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy - HH:mm", DataHoraUTIL.locale);
+	private static SimpleDateFormat formatador = new SimpleDateFormat("HH:mm - dd/MM/yyyy", DataHoraUTIL.locale);
 	
-	public static String getDataHora() {
+	public static Calendar getDataHora() {
+		return Calendar.getInstance();
+	}
+
+	public static String getDataHoraString() {
 		return formatador.format(calendar.getTime());
 	}
 	

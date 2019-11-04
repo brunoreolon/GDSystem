@@ -14,29 +14,39 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import br.com.unipar.gdsystem.enums.Situacao;
+import br.com.unipar.gdsystem.enums.SituacaoEnum;
 
 @Entity
 public class Caixa {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar dataAbertura;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar dataFechamento;
+
 	private BigDecimal valorAbertura;
+	private BigDecimal valorAtualCaixa;
 	private BigDecimal valorFechamento;
 	private BigDecimal diferenca;
-	
+
 	@Enumerated(EnumType.STRING)
-	private Situacao situacao;
-	
+	private SituacaoEnum situacaoEnum;
+
 	@OneToMany(mappedBy = "caixa")
 	private List<Sangria> sangrias;
-	
+
+	public BigDecimal getValorAtual() {
+		return valorAtualCaixa;
+	}
+
+	public void setValorAtual(BigDecimal valorAtual) {
+		this.valorAtualCaixa = valorAtual;
+	}
+
 	public List<Sangria> getSangrias() {
 		return sangrias;
 	}
@@ -45,12 +55,12 @@ public class Caixa {
 		this.sangrias = sangrias;
 	}
 
-	public Situacao getSituacao() {
-		return situacao;
+	public SituacaoEnum getSituacao() {
+		return situacaoEnum;
 	}
 
-	public void setSituacao(Situacao situacao) {
-		this.situacao = situacao;
+	public void setSituacao(SituacaoEnum situacaoEnum) {
+		this.situacaoEnum = situacaoEnum;
 	}
 
 	public Integer getId() {

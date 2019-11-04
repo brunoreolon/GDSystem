@@ -57,11 +57,11 @@ public class ProdutoDAO {
 		CriteriaQuery<Produto> query = criteriaBuilder.createQuery(Produto.class);
 		Root<Produto> root = query.from(Produto.class);
 		
-		Path<String> idPath = root.<String>get("id");
+		Path<String> codigoInternoPath = root.<String>get("codigoInterno");
 		
-		Predicate idIgual = criteriaBuilder.equal(idPath, id);
+		Predicate codigoInternoIgual = criteriaBuilder.equal(codigoInternoPath, id);
 		
-		query.where(idIgual);
+		query.where(codigoInternoIgual);
 		
 		TypedQuery<Produto> typedQuery = manager.createQuery(query);
 		

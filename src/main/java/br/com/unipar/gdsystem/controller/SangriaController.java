@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import br.com.unipar.gdsystem.dao.CaixaDAO;
 import br.com.unipar.gdsystem.dao.SangriaDAO;
+import br.com.unipar.gdsystem.model.Caixa;
 import br.com.unipar.gdsystem.model.Sangria;
 import br.com.unipar.gdsystem.util.AlertUTIL;
 import br.com.unipar.gdsystem.util.OpenCloseStage;
@@ -21,14 +22,17 @@ import javafx.scene.control.TextField;
 public class SangriaController implements Initializable{
 
 	private SangriaDAO sangriaDao = new SangriaDAO();
+	private CaixaDAO caixaDao = new CaixaDAO();
 	private Sangria sangria = new Sangria();
+	private Caixa caixa = new Caixa();
+	
 	
     @FXML private Label lblSaldoAtual;
     @FXML private TextField txtSaldoAtual;
     @FXML private Label lblValorSangria;
     @FXML private TextField txtValorSangria;
     @FXML private Label lblValorPosSangria;
-    @FXML private TextField txtVAlorPosSangria;
+    @FXML private TextField txtValorPosSangria;
     @FXML private Label lblMotivo;
     @FXML private TextArea txtMotivo;
     @FXML private ButtonBar bbBtn;
@@ -47,15 +51,11 @@ public class SangriaController implements Initializable{
     		return;
     	}
     	
-    	sangria.setCaixa(CaixaDAO.getCaixaAberto());
-    	sangria.setValorSangria(new BigDecimal(txtValorSangria.getText()));
-    	sangria.setMotivo(txtMotivo.getText());
-    	sangriaDao.add(sangria);
     	
-    	btnOk.setDisable(true);
-    	btnCancelar.setText("Sair");
     	
-    	AlertUTIL.alertConfirmation("", "Sangria realizada com sucesso");
+    	realizarSangria();
+    	txtValorSangria.setEditable(false);
+    	txtMotivo.setEditable(false);
     }
     
     @FXML
@@ -63,9 +63,33 @@ public class SangriaController implements Initializable{
     	OpenCloseStage.getStage().close();
     }
 
-	@Override
+	private void realizarSangria() {
+		txtValorPosSangria.setText(calcularValorSangria());
+    	
+    	sangria.setCaixa(caixaDao.getCaixa());
+    	sangria.setSaldoAtual(new BigDecimal(txtSaldoAtual.getText()));
+    	sangria.setValorSangria(new BigDecimal(txtValorSangria.getText()));
+    	sangria.setValorPosSangria(new BigDecimal(txtValorPosSangria.getText()));
+    	sangria.setMotivo(txtMotivo.getText());
+    	
+    	caixa = caixaDao.getCaixa();
+    	caixa.setValorAtual(new BigDecimal(txtValorPosSangria.getText()));
+
+    	CaixaDAO.update(caixa);
+    	sangriaDao.add(sangria);
+    	
+    	btnOk.setVisible(false);
+    	btnCancelar.setText("Sair");
+    	
+    	AlertUTIL.alertInformation("", "Sangria realizada com sucesso");
+	}
+
+    private String calcularValorSangria() {
+    	return String.valueOf(new BigDecimal((txtSaldoAtual.getText())).subtract(new BigDecimal((txtValorSangria.getText()))));
+    }
+
+    @Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-		
+		txtSaldoAtual.setText(String.valueOf(caixaDao.getCaixa().getValorAtual()));
 	}
 }

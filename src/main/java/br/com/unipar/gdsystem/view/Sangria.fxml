@@ -24,7 +24,7 @@
       <Label fx:id="lblValorSangria" layoutX="55.0" layoutY="159.0" text="Valor da Sangria (R$)" />
       <TextField fx:id="txtValorSangria" layoutX="199.0" layoutY="152.0" prefHeight="31.0" prefWidth="180.0" />
       <Label fx:id="lblValorPosSangria" layoutX="40.0" layoutY="194.0" text="Saldo Após Sangria (R$)" />
-      <TextField fx:id="txtVAlorPosSangria" disable="true" layoutX="199.0" layoutY="187.0" prefHeight="31.0" prefWidth="180.0" />
+      <TextField fx:id="txtValorPosSangria" disable="true" layoutX="199.0" layoutY="187.0" prefHeight="31.0" prefWidth="180.0" />
       <Label fx:id="lblMotivo" layoutX="34.0" layoutY="244.0" text="Motivo:" />
       <TextArea fx:id="txtMotivo" layoutX="29.0" layoutY="265.0" prefHeight="122.0" prefWidth="352.0" />
       <ButtonBar fx:id="bbBtn" layoutX="179.0" layoutY="447.0" prefHeight="40.0" prefWidth="200.0">

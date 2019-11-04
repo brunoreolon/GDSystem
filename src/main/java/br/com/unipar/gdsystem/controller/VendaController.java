@@ -1,10 +1,23 @@
 package br.com.unipar.gdsystem.controller;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import br.com.unipar.gdsystem.dao.ClienteDAO;
+import br.com.unipar.gdsystem.dao.PedidoDAO;
+import br.com.unipar.gdsystem.dao.ProdutoDAO;
+import br.com.unipar.gdsystem.model.Cliente;
+import br.com.unipar.gdsystem.model.Pedido;
+import br.com.unipar.gdsystem.model.Produto;
+import br.com.unipar.gdsystem.util.AlertUTIL;
+import br.com.unipar.gdsystem.util.DataHoraUTIL;
 import br.com.unipar.gdsystem.util.OpenCloseStage;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,79 +27,147 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class VendaController implements Initializable {
 
+	private Cliente cliente = new Cliente();
+	private ClienteDAO clienteDao = new ClienteDAO();
+	private Produto produto = new Produto();
+	private ProdutoDAO produtoDao = new ProdutoDAO();
+	private Pedido pedido = new Pedido();
+	
+	private List<Produto> produtos = new ArrayList<Produto>();
 	private static Stage stage;
 
 	@FXML private AnchorPane apVenda;
 	@FXML private Pane pTop;
-	@FXML private Label lblPedido;
 	@FXML private TextField txtPedido;
-	@FXML private Label lblData;
 	@FXML private TextField txtData;
-	@FXML private Label lblHora;
 	@FXML private TextField txtHora;
-	@FXML private Label lblCliente;
 	@FXML private TextField txtCpf;
 	@FXML private Button btnAddCpf;
 	@FXML private TextField txtNome;
-	@FXML private Button btnAddNome;
-	@FXML private Label lblItem;
 	@FXML private TextField txtItem;
-	@FXML private Button btnAddItem;
+	@FXML private Button btnPesquisarItem;
 	@FXML private TextField txtDescricaoItem;
-	@FXML private Label lblPreCad;
-	@FXML private TextField txtPrecCad;
-	@FXML private Label lblDescPor;
+	@FXML private TextField txtPrecoUnitario;
 	@FXML private TextField txtDescPor;
-	@FXML private Label lblDescDin;
 	@FXML private TextField txtDescDin;
-	@FXML private Label lblQtd;
 	@FXML private TextField txtQtd;
-	@FXML private Label lblEst;
 	@FXML private TextField txtEstoque;
-	@FXML private Button btnAddProduto;
+	@FXML private Button btnAddItem;
 	@FXML private Label lblValorTotal;
-	@FXML private TableView<?> tvItens;
-	@FXML private TableColumn<?, ?> tbcItem;
-	@FXML private TableColumn<?, ?> tbcCodigo;
-	@FXML private TableColumn<?, ?> tbcDescricao;
-	@FXML private TableColumn<?, ?> tbcUn;
-	@FXML private TableColumn<?, ?> tbcQtd;
-	@FXML private TableColumn<?, ?> tbcPrecoUni;
-	@FXML private TableColumn<?, ?> tbcDescPor;
-	@FXML private TableColumn<?, ?> tbcDescDin;
-	@FXML private TableColumn<?, ?> tbcSubTotal;
+	@FXML private TableView<Produto> tvItens;
+	@FXML private TableColumn<Produto, Integer> tbcItem;
+	@FXML private TableColumn<Produto, String> tbcCodigo;
+	@FXML private TableColumn<Produto, String> tbcDescricao;
+	@FXML private TableColumn<Produto, String> tbcUn;
+	@FXML private TableColumn<Produto, Integer> tbcQtd;
+	@FXML private TableColumn<Produto, BigDecimal> tbcPrecoUni;
+	@FXML private TableColumn<Produto, Integer> tbcDescPor;
+	@FXML private TableColumn<Produto, BigDecimal> tbcDescDin;
+	@FXML private TableColumn<Produto, BigDecimal> tbcSubTotal;
 	@FXML private Pane pBotton;
-	@FXML private Label lblDescontos;
 	@FXML private Label txtDescontos;
-	@FXML private Label lblTotalPago;
 	@FXML private Label txtTotalPago;
-	@FXML private Label lblTroco;
 	@FXML private Label txtTroco;
 	@FXML private ButtonBar bbBotoes;
 	@FXML private Button btnFinalizar;
 	@FXML private Button btnPagamento;
 	@FXML private Button btnRemoverItem;
 	@FXML private Button btnNovaVenda;
-	@FXML private Button btnFinalizar1;
+	@FXML private Button btnImprimir;
 	@FXML private Button btnSair;
 
 	@FXML
-	void onSairVendaAction(ActionEvent event) {
-		PrincipalController.getStage().close();
+	void onPesquisarCpfAction(ActionEvent event) {
+		try {
+			cliente = clienteDao.searchCpf(txtCpf.getText());
+		} catch (Exception e) {
+			AlertUTIL.alertInformation("", "Cliente nao encontrado");
+		}
+		
+		txtNome.setText(cliente.getNome());
+	}
+	
+	@FXML
+	void onPesquisarItemAction(ActionEvent event) {
+		try {
+			getProduto();
+		} catch (Exception e) {
+			AlertUTIL.alertInformation("", "Produto nao encontrado");
+		}
+		
+		txtDescricaoItem.setText(produto.getDescricao());
+		txtPrecoUnitario.setText(String.valueOf(produto.getPrecoUnitario()));
+		txtEstoque.setText(String.valueOf(produto.getQuantidadeTotal()));
+		
+		btnAddItem.setDisable(false);
 	}
 
+	
+	@FXML
+	void onAddItemListaAction(ActionEvent event) {
+		produtos.add(produto);
+		
+		txtDescricaoItem.setText("");
+		txtItem.setText("");
+		
+		listar();
+		btnAddItem.setDisable(true);
+		btnFinalizar.setDisable(false);
+	}
+
+	@FXML
+	void onFinalizarAction(ActionEvent event) {
+		PedidoDAO pedidoDAO = new PedidoDAO();
+		
+		pedido.setData(DataHoraUTIL.getDataHora());
+		pedido.setCliente(txtNome.getText());
+		pedido.setCpf(txtCpf.getText());
+		pedido.setProdutos(produtos);
+		
+//		pedidoDAO.add(produtos);
+		pedidoDAO.add(pedido);
+	}
+	
+	
 	@FXML
 	void onAbrirPagamentoAction(ActionEvent event) throws IOException {
 		OpenCloseStage.loadStage("/br/com/unipar/gdsystem/view/Pagamento.fxml", "Visualizar Produto", false);
 		setStage(OpenCloseStage.getStage());
 	}
 
+	@FXML
+	void onSairVendaAction(ActionEvent event) {
+		PrincipalController.getStage().close();
+	}
+
+	private Produto getProduto() {
+		return produto = produtoDao.search(Integer.parseInt(txtItem.getText()));
+	}
+	
+	public ObservableList<Produto> observableListProduto() {
+		return FXCollections.observableArrayList(produtos);
+	}
+	
+	private void listar() {
+		tbcItem.setCellValueFactory(new PropertyValueFactory<>("id"));
+		tbcCodigo.setCellValueFactory(new PropertyValueFactory<>("codigoInterno"));
+		tbcDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
+		tbcUn.setCellValueFactory(new PropertyValueFactory<>("unidade"));
+		tbcPrecoUni.setCellValueFactory(new PropertyValueFactory<>("precoUnitario"));
+//		tbcDescPor.setCellValueFactory(new PropertyValueFactory<>("celular"));
+//		tbcDescDin.setCellValueFactory(new PropertyValueFactory<>("endereco"));
+//		tbcSubTotal.setCellValueFactory(new PropertyValueFactory<>("endereco"));
+
+		tvItens.setItems(observableListProduto());
+	}
+	
 	public void setStage(Stage stage) {
 		VendaController.stage = stage;
 	}
@@ -97,7 +178,7 @@ public class VendaController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
+		btnAddItem.setDisable(true);
+		btnFinalizar.setDisable(true);
 	}
-
 }

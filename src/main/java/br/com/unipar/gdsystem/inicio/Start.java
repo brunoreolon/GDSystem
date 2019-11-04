@@ -24,7 +24,7 @@ public class Start extends Application {
 		try {
 			Parent parent = FXMLLoader.load(getClass().getResource("/br/com/unipar/gdsystem/view/Principal.fxml"));
 			Scene scene = new Scene(parent);
-			stage.setResizable(false);
+			stage.setResizable(true);
 			stage.setScene(scene);
 			stage.setTitle("Login");
 			stage.show();

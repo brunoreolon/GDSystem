@@ -20,11 +20,19 @@ public class Produto {
 	private Double pesoLiquido;
 	private Integer quantidadeTotal;
 	private Integer quantidadeMinima;
-	private BigDecimal valorVenda;
+	private BigDecimal precoUnitario;
 	private BigDecimal valorMinimo;
 	private BigDecimal descontoMaximo;
 	private String marca;
 	private String departamento;
+
+	public BigDecimal getPrecoUnitario() {
+		return precoUnitario;
+	}
+
+	public void setPrecoUnitario(BigDecimal precoUnitario) {
+		this.precoUnitario = precoUnitario;
+	}
 
 	public Integer getId() {
 		return id;
@@ -96,14 +104,6 @@ public class Produto {
 
 	public void setQuantidadeMinima(Integer quantidadeMinima) {
 		this.quantidadeMinima = quantidadeMinima;
-	}
-
-	public BigDecimal getValorVenda() {
-		return valorVenda;
-	}
-
-	public void setValorVenda(BigDecimal valorVenda) {
-		this.valorVenda = valorVenda;
 	}
 
 	public BigDecimal getValorMinimo() {

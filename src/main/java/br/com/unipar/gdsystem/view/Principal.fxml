@@ -59,6 +59,6 @@
       </ButtonBar>
       <Separator layoutY="569.0" prefHeight="3.0" prefWidth="800.0" AnchorPane.bottomAnchor="28.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
       <Separator layoutX="641.0" layoutY="568.0" orientation="VERTICAL" prefHeight="32.0" prefWidth="6.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="153.0" />
-      <Label fx:id="lblAbertoFechado" alignment="CENTER" contentDisplay="CENTER" layoutX="672.0" layoutY="575.0" AnchorPane.bottomAnchor="4.0" AnchorPane.rightAnchor="35.0" />
+      <Label fx:id="lblAbertoFechado" alignment="CENTER" contentDisplay="CENTER" layoutX="690.0" layoutY="576.0" AnchorPane.bottomAnchor="7.0" AnchorPane.rightAnchor="42.0" />
    </children>
 </AnchorPane>

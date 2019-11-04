@@ -40,7 +40,7 @@
       <Pane fx:id="pValor" layoutX="745.0" layoutY="148.0" prefHeight="136.0" prefWidth="279.0">
          <children>
             <Label fx:id="lblValorVenda" layoutX="38.0" layoutY="14.0" text="Valor Venda" />
-            <TextField fx:id="txtValorVenda" layoutX="113.0" layoutY="10.0" />
+            <TextField fx:id="txtPrecoUnitario" layoutX="113.0" layoutY="10.0" />
             <Label fx:id="lblValorMinimo" layoutX="32.0" layoutY="56.0" text="Valor Mínimo" />
             <TextField fx:id="txtValorMinimo" layoutX="113.0" layoutY="52.0" />
             <Label fx:id="lblDescontoMaximo" layoutX="7.0" layoutY="97.0" text="Desconto Máximo" />

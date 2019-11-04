@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 public class PrincipalController implements Initializable {
 
 	private static Stage stage;
+	private CaixaDAO caixaDao = new CaixaDAO();
 	public static PrincipalController principalController;
 
 	@FXML private AnchorPane apPrincipal;
@@ -45,25 +46,18 @@ public class PrincipalController implements Initializable {
 	@FXML private Button btnVenda;
 	@FXML private Label lblAbertoFechado;
 	
-	public void setLblAbertoFechado(Boolean abrir) {
-		if (abrir) {
-			lblAbertoFechado.setText("Caixa Aberto");
-			lblAbertoFechado.setTextFill(Paint.valueOf("#00da28"));
-			
-		}else {
-			lblAbertoFechado.setText("Caixa Fechado");
-			lblAbertoFechado.setTextFill(Paint.valueOf("#ff0000"));
-		}
-	}
 	
 	@FXML
 	public void onAbrirVendaAction(ActionEvent event) throws IOException {
-		AlertUTIL.alertInformation("", "O Caixa está fechado, para realizar uma venda abra o caixa!");
+		if(!caixaDao.isOpen()) {
+    		AlertUTIL.alertWarning("Caixa fechado", "O Caixa está fechado, para realizar uma venda abra o caixa!");
+    		OpenCloseStage.loadStage("/br/com/unipar/gdsystem/view/AbrirFecharCaixa.fxml", "Vendas", false);
+    		return;
+    	}
 		
 		OpenCloseStage.loadStage("/br/com/unipar/gdsystem/view/Venda.fxml", "Vendas", true);
-		
-		OpenCloseStage.loadStage("/br/com/unipar/gdsystem/view/AbrirFecharCaixa.fxml", "Vendas", false);
 		seStage(OpenCloseStage.getStage());
+		
 	}
 
 	@FXML
@@ -80,6 +74,11 @@ public class PrincipalController implements Initializable {
 
 	@FXML
 	void onAbrirSangriaAction(ActionEvent event) throws IOException {
+		if(!caixaDao.isOpen()) {
+			AlertUTIL.alertWarning("Caixa fechado", "O Caixa está fechado, para realizar uma sangria abra o caixa!");
+    		return;
+    	}
+		
 		OpenCloseStage.loadStage("/br/com/unipar/gdsystem/view/Sangria.fxml", "Sangria", false);
 		seStage(OpenCloseStage.getStage());
 	}
@@ -114,6 +113,17 @@ public class PrincipalController implements Initializable {
 		seStage(OpenCloseStage.getStage());
 	}
 
+	public void setLblAbertoFechado(Boolean abrir) {
+		if (abrir) {
+			lblAbertoFechado.setText("Caixa Aberto");
+			lblAbertoFechado.setTextFill(Paint.valueOf("#00da28"));
+			
+		}else {
+			lblAbertoFechado.setText("Caixa Fechado");
+			lblAbertoFechado.setTextFill(Paint.valueOf("#ff0000"));
+		}
+	}
+	
 	public static Stage getStage() {
 		return stage;
 	}
@@ -126,8 +136,7 @@ public class PrincipalController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		principalController = this;
 		
-		CaixaDAO c = new CaixaDAO();
-		if (c.isOpen()) {
+		if (caixaDao.isOpen()) {
 			setLblAbertoFechado(true);
 		}else {
 			setLblAbertoFechado(false);

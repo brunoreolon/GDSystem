@@ -13,7 +13,7 @@ public class Sangria {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private BigDecimal saldoAtual;
+	private BigDecimal saldoAtualCaixa;
 	private BigDecimal valorSangria;
 	private BigDecimal valorPosSangria;
 	private String motivo;
@@ -38,11 +38,11 @@ public class Sangria {
 	}
 
 	public BigDecimal getSaldoAtual() {
-		return saldoAtual;
+		return saldoAtualCaixa;
 	}
 
 	public void setSaldoAtual(BigDecimal saldoAtual) {
-		this.saldoAtual = saldoAtual;
+		this.saldoAtualCaixa = saldoAtual;
 	}
 
 	public BigDecimal getValorSangria() {

@@ -6,7 +6,7 @@ import java.util.Calendar;
 import java.util.ResourceBundle;
 
 import br.com.unipar.gdsystem.dao.CaixaDAO;
-import br.com.unipar.gdsystem.enums.Situacao;
+import br.com.unipar.gdsystem.enums.SituacaoEnum;
 import br.com.unipar.gdsystem.model.Caixa;
 import br.com.unipar.gdsystem.util.AlertUTIL;
 import br.com.unipar.gdsystem.util.DataHoraUTIL;
@@ -26,8 +26,7 @@ public class AbrirFecharCaixaController implements Initializable{
 
 	private static Stage stage;
 	private Caixa caixa = new Caixa();
-	private CaixaDAO caixaDAO = new CaixaDAO();
-	private BigDecimal diferenca;
+	private CaixaDAO caixaDao = new CaixaDAO();
 	
     @FXML private Label lblTitulo;
     @FXML private Label lblSubTitulo;
@@ -44,52 +43,52 @@ public class AbrirFecharCaixaController implements Initializable{
     @FXML
     void onConfirmarAction(ActionEvent event) {
     	if (isOpen()) {
-    		Caixa caixaUp = CaixaDAO.getCaixa();
-    		caixaUp.setDataFechamento(Calendar.getInstance());
-    		caixaUp.setValorFechamento(new BigDecimal(txtValorFechamento.getText()));
-    		caixaUp.setSituacao(Situacao.FECHADO);
-        	
-        	diferenca = caixaUp.getValorAbertura().subtract(new BigDecimal(txtValorFechamento.getText()));
-        	caixaUp.setDiferenca(diferenca);
-
-        	caixaDAO.update(caixaUp);
-        	
-        	AlertUTIL.alertConfirmation("", "O Caixa foi fechado");
-    		
-    		lblTitulo.setText("Caixa Fechado");
-    		lblSubTitulo.setText("O caixa foi fechado!");
-    		lblCaixaFechado.setText("Caixa Fechado");
-    		lblCaixaFechado.setTextFill(Paint.valueOf("#ff0000"));
-    		txtAbertura.setDisable(true);
-    		txtValorAbertura.setDisable(true);
-    		txtFechamento.setDisable(true);
-    		txtValorFechamento.setDisable(true);
-    		
-    		btnOk.setDisable(true);
-        	btnCancelar.setText("Sair");
-        	
-        	PrincipalController.principalController.setLblAbertoFechado(false);
-        	
-    		return;
+    		fecharCaixa();
+		}else {
+			abrirCaixa();
 		}
-    	
-    	caixa.setDataAbertura(Calendar.getInstance());
-    	caixa.setValorAbertura(new BigDecimal(txtValorAbertura.getText()));
-    	caixa.setSituacao(Situacao.ABERTO);
-    	
-    	caixaDAO.add(caixa);
-    	
-    	AlertUTIL.alertConfirmation("", "O Caixa foi aberto");
-    	
-    	PrincipalController.principalController.setLblAbertoFechado(true);
-    	
-		OpenCloseStage.getStage().close();;
     }
 
     @FXML
     void onCancelarAction(ActionEvent event) {
     	OpenCloseStage.getStage().close();
     }
+
+    private void abrirCaixa() {
+		caixa.setDataAbertura(Calendar.getInstance());
+    	caixa.setValorAbertura(new BigDecimal(txtValorAbertura.getText()));
+    	caixa.setValorAtual(new BigDecimal(txtValorAbertura.getText()));
+    	caixa.setSituacao(SituacaoEnum.ABERTO);
+    	
+    	CaixaDAO.add(caixa);
+    	
+    	AlertUTIL.alertInformation("", "O Caixa foi aberto");
+    	
+    	PrincipalController.principalController.setLblAbertoFechado(true);
+    	
+		OpenCloseStage.getStage().close();
+	}
+
+	private void fecharCaixa() {
+		caixa = caixaDao.getCaixa();
+		
+		caixa.setDataFechamento(Calendar.getInstance());
+		caixa.setValorFechamento(new BigDecimal(txtValorFechamento.getText()));
+		caixa.setDiferenca(caixa.getValorAbertura().subtract(new BigDecimal(txtValorFechamento.getText())));
+		caixa.setSituacao(SituacaoEnum.FECHADO);
+
+		CaixaDAO.update(caixa);
+		
+		AlertUTIL.alertInformation("", "O Caixa foi fechado");
+		
+		setLbl("Caixa Fechado", "O caixa foi fechado!", "Caixa Fechado", "#ff0000");
+		setTxt(true, true, true, true);
+		
+		btnOk.setDisable(true);
+		btnCancelar.setText("Sair");
+		
+		PrincipalController.principalController.setLblAbertoFechado(false);
+	}
 
     public static void setStage(Stage stage) {
     	AbrirFecharCaixaController.stage = stage;
@@ -99,42 +98,38 @@ public class AbrirFecharCaixaController implements Initializable{
 		return stage;
 	}
     
+	private Boolean isOpen() {
+		return caixaDao.isOpen();
+	}
+
+	private void setLbl(String setTitulo, String setSubTitulo, String setCaixaFechado, String setCor) {
+		lblTitulo.setText(setTitulo);
+		lblSubTitulo.setText(setSubTitulo);
+		lblCaixaFechado.setText(setCaixaFechado);
+		lblCaixaFechado.setTextFill(Paint.valueOf(setCor));
+	}
+	
+	private void setTxt(Boolean aberturaDisable, Boolean ValorAberturaDisabe, Boolean FechamentoDisabe, Boolean ValorFechamentotDisabe) {
+		txtAbertura.setDisable(aberturaDisable);
+		txtValorAbertura.setDisable(ValorAberturaDisabe);
+		txtFechamento.setDisable(FechamentoDisabe);
+		txtValorFechamento.setDisable(ValorFechamentotDisabe);
+	}
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		if(!isOpen()) {
-    		abrirCaixa();
-    	}else {
-    		fecharCaixa();
-    	}
-	}
-
-	private void abrirCaixa() {
-		lblTitulo.setText("Abrir Caixa");
-		lblSubTitulo.setText("Para abrir o caixa informe o valor de abertura");
-		lblCaixaFechado.setText("Caixa Fechado");
-		lblCaixaFechado.setTextFill(Paint.valueOf("#ff0000"));
-		txtAbertura.setDisable(false);
-		txtValorAbertura.setDisable(false);
-		txtFechamento.setDisable(true);
-		txtValorFechamento.setDisable(true);
-		txtAbertura.setText(DataHoraUTIL.getDataHora());
-	}
-
-	private void fecharCaixa() {
-		lblTitulo.setText("Fechar Caixa");
-		lblSubTitulo.setText("Para fechar o caixa informe o valor de fechamento");
-		lblCaixaFechado.setText("Caixa Aberto");
-		lblCaixaFechado.setTextFill(Paint.valueOf("#00da28"));
-		txtAbertura.setText(DataHoraUTIL.converterDataHoraString(CaixaDAO.getDataAbertura()));
-		txtValorAbertura.setText(caixaDAO.getValorAbertura());
-		txtAbertura.setDisable(true);
-		txtValorAbertura.setDisable(true);
-		txtFechamento.setDisable(false);
-		txtValorFechamento.setDisable(false);
-		txtFechamento.setText(DataHoraUTIL.getDataHora());
-	}
-	
-	private Boolean isOpen() {
-    	return caixaDAO.isOpen() ? true : false;
+			setLbl("Abrir Caixa", "Para abrir o caixa informe o valor de abertura", "Caixa Fechado", "#ff0000");
+			setTxt(false, false, true, true);
+			
+			txtAbertura.setText(DataHoraUTIL.getDataHoraString());
+		}else {
+			setLbl("Fechar Caixa", "Para fechar o caixa informe o valor de fechamento", "Caixa Aberto", "#00da28");
+			setTxt(true, true, false, false);
+			
+			txtAbertura.setText(DataHoraUTIL.converterDataHoraString(caixaDao.getDataAbertura()));
+			txtValorAbertura.setText(caixaDao.getValorAbertura());
+			txtFechamento.setText(DataHoraUTIL.getDataHoraString());
+		}
 	}
 }

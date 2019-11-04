@@ -69,31 +69,51 @@ public class ClienteDAO {
 		return typedQuery.getSingleResult();
 	}
 	
-//	public List<Cliente> searchNome(String nome) {
-//		Session session = manager.unwrap(Session.class);
-//		Criteria criteria = session.createCriteria(Cliente.class);
-//		
-//		criteria.add(Restrictions.ilike("nome", "%" + nome + "%", MatchMode.ANYWHERE));
-//		
-//		return (List<Cliente>) criteria.list();
-//	}
-//	
-//	public Cliente searchCpf(String cpf) {
-//		Session session = manager.unwrap(Session.class);
-//		Criteria criteria = session.createCriteria(Cliente.class);
-//		
-//		criteria.add(Restrictions.ilike("cpf", "%" + cpf + "%", MatchMode.ANYWHERE));
-//		
-//		return (Cliente) criteria.setFirstResult(1);
-//	}
-//	
-//	public Cliente searchRg(String rg) {
-//		Session session = manager.unwrap(Session.class);
-//		Criteria criteria = session.createCriteria(Cliente.class);
-//		
-//		criteria.add(Restrictions.ilike("rg", "%" + rg + "%", MatchMode.ANYWHERE));
-//		
-//		return (Cliente) criteria.list();
-//	}
+	public List<Cliente> searchNome(String nome) {
+		CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
+	    CriteriaQuery<Cliente> query = criteriaBuilder.createQuery(Cliente.class);
+	    Root<Cliente> root = query.from(Cliente.class);
+
+	    Path<String> nomePath = root.<String> get("nome");
+		
+	    Predicate nomeIgual = criteriaBuilder.like(nomePath, "%" + nome + "%");
+	    
+	    query.where(nomeIgual);
+
+	    TypedQuery<Cliente> typedQuery = manager.createQuery(query);
+	    
+		return typedQuery.getResultList();
+	}
 	
+	public Cliente searchCpf(String cpf) {
+		CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
+		CriteriaQuery<Cliente> query = criteriaBuilder.createQuery(Cliente.class);
+		Root<Cliente> root = query.from(Cliente.class);
+		
+		Path<String> cpfPath = root.<String>get("cpf");
+		
+		Predicate cpfIgual = criteriaBuilder.equal(cpfPath, cpf);
+		
+		query.where(cpfIgual);
+		
+		TypedQuery<Cliente> typedQuery = manager.createQuery(query);
+		
+		return typedQuery.getSingleResult();
+	}
+	
+	public Cliente searchRg(String rg) {
+		CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
+		CriteriaQuery<Cliente> query = criteriaBuilder.createQuery(Cliente.class);
+		Root<Cliente> root = query.from(Cliente.class);
+		
+		Path<String> rgPath = root.<String>get("cpf");
+		
+		Predicate rgIgual = criteriaBuilder.equal(rgPath, rg);
+		
+		query.where(rgIgual);
+		
+		TypedQuery<Cliente> typedQuery = manager.createQuery(query);
+		
+		return typedQuery.getSingleResult();
+	}
 }
