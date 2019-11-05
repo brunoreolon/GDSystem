@@ -14,7 +14,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -24,76 +23,28 @@ public class CadastroProdutoController implements Initializable {
 
 	private static Stage stage;
 	
-	@FXML
-	private AnchorPane apCadProduto;
-	@FXML
-	private Pane pIdentificacao;
-	@FXML
-	private Label lblCodInterno;
-	@FXML
-	private TextField txtCodInterno;
-	@FXML
-	private Label lblCodBarras;
-	@FXML
-	private TextField txtCodBarras;
-	@FXML
-	private Label lblDescricao;
-	@FXML
-	private TextField txtDescricao;
-	@FXML
-	private Pane pEspecificacao;
-	@FXML
-	private Label lblUnidade;
-	@FXML
-	private TextField txtUnidade;
-	@FXML
-	private Label lblPesoBruto;
-	@FXML
-	private TextField txtPesoBruto;
-	@FXML
-	private Label lblPesoLiquido;
-	@FXML
-	private TextField txtPesoLiquido;
-	@FXML
-	private Pane pEstoque;
-	@FXML
-	private Label lblQtdTotal;
-	@FXML
-	private TextField txtQtdTotal;
-	@FXML
-	private Label lblQtdMinimo;
-	@FXML
-	private TextField txtQtdMinimo;
-	@FXML
-	private Pane pValor;
-	@FXML
-	private Label lblValorVenda;
-	@FXML
-	private TextField txtPrecoUnitario;
-	@FXML
-	private Label lblValorMinimo;
-	@FXML
-	private TextField txtValorMinimo;
-	@FXML
-	private Label lblDescontoMaximo;
-	@FXML
-	private TextField txtDescontoMaximo;
-	@FXML
-	private Pane pInfoAdcional;
-	@FXML
-	private Label lblMarca;
-	@FXML
-	private TextField txtMarca;
-	@FXML
-	private Label lblDepartamento;
-	@FXML
-	private TextField txtDepartamento;
-	@FXML
-	private ButtonBar bbBtn;
-	@FXML
-	private Button btnCadastrar;
-	@FXML
-	private Button btnCancelar;
+	@FXML private AnchorPane apCadProduto;
+	@FXML private Pane pIdentificacao;
+	@FXML private TextField txtCodInterno;
+//	@FXML private TextField txtCodBarras;
+	@FXML private TextField txtDescricao;
+	@FXML private Pane pEspecificacao;
+	@FXML private TextField txtUnidade;
+	@FXML private TextField txtPesoBruto;
+	@FXML private TextField txtPesoLiquido;
+	@FXML private Pane pEstoque;
+	@FXML private TextField txtQtdTotal;
+	@FXML private TextField txtQtdMinimo;
+	@FXML private Pane pValor;
+	@FXML private TextField txtPrecoUnitario;
+	@FXML private TextField txtValorMinimo;
+	@FXML private TextField txtDescontoMaximo;
+	@FXML private Pane pInfoAdcional;
+	@FXML private TextField txtMarca;
+	@FXML private TextField txtDepartamento;
+	@FXML private ButtonBar bbBtn;
+	@FXML private Button btnCadastrar;
+	@FXML private Button btnCancelar;
 
 	@FXML
 	void onCadastrarAction(ActionEvent event) {
@@ -110,7 +61,7 @@ public class CadastroProdutoController implements Initializable {
 		ProdutoDAO produtoDAO = new ProdutoDAO();
 
 		produto.setCodigoInterno(txtCodInterno.getText());
-		produto.setCodigoBarras(txtCodBarras.getText());
+//		produto.setCodigoBarras(txtCodBarras.getText());
 		produto.setDescricao(txtDescricao.getText());
 		produto.setUnidade(txtUnidade.getText());
 		produto.setPesoBruto(Double.parseDouble(txtPesoBruto.getText()));
@@ -141,7 +92,7 @@ public class CadastroProdutoController implements Initializable {
 	
 	private void reset() {
 		txtCodInterno.setText("");
-		txtCodBarras.setText("");
+//		txtCodBarras.setText("");
 		txtDescricao.setText("");
 		txtUnidade.setText("");
 		txtPesoBruto.setText("");
@@ -156,7 +107,7 @@ public class CadastroProdutoController implements Initializable {
 	}
 
 	private Boolean empty() {
-		return txtCodInterno.getText().isEmpty() || txtCodBarras.getText().isEmpty() || txtDescricao.getText().isEmpty() || 
+		return txtCodInterno.getText().isEmpty() || /*txtCodBarras.getText().isEmpty() ||*/ txtDescricao.getText().isEmpty() || 
 				txtUnidade.getText().isEmpty() || txtPesoBruto.getText().isEmpty() || txtPesoLiquido.getText().isEmpty() || 
 				txtQtdTotal.getText().isEmpty() || txtQtdMinimo.getText().isEmpty() || txtPrecoUnitario.getText().isEmpty() || 
 				txtValorMinimo.getText().isEmpty() || txtDescontoMaximo.getText().isEmpty() || txtMarca.getText().isEmpty() || 

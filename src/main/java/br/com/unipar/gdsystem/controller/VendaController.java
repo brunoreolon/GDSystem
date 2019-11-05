@@ -1,18 +1,16 @@
 package br.com.unipar.gdsystem.controller;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import br.com.unipar.gdsystem.dao.ClienteDAO;
-import br.com.unipar.gdsystem.dao.PedidoDAO;
 import br.com.unipar.gdsystem.dao.ProdutoDAO;
 import br.com.unipar.gdsystem.model.Cliente;
-import br.com.unipar.gdsystem.model.Pedido;
 import br.com.unipar.gdsystem.model.Produto;
+import br.com.unipar.gdsystem.model.ProdutoVenda;
 import br.com.unipar.gdsystem.util.AlertUTIL;
 import br.com.unipar.gdsystem.util.DataHoraUTIL;
 import br.com.unipar.gdsystem.util.OpenCloseStage;
@@ -35,13 +33,14 @@ import javafx.stage.Stage;
 public class VendaController implements Initializable {
 
 	public static VendaController vendaController;
+	
 	private Cliente cliente = new Cliente();
 	private ClienteDAO clienteDao = new ClienteDAO();
-	private Produto produto = new Produto();
+	private Produto produto1 = new Produto();
+	private ProdutoVenda produto = new ProdutoVenda();
 	private ProdutoDAO produtoDao = new ProdutoDAO();
-	private Pedido pedido = new Pedido();
 	
-	private List<Produto> produtos = new ArrayList<Produto>();
+	private List<ProdutoVenda> produtos = new ArrayList<ProdutoVenda>();
 	private static Stage stage;
 
 	@FXML private AnchorPane apVenda;
@@ -62,16 +61,16 @@ public class VendaController implements Initializable {
 	@FXML private TextField txtEstoque;
 	@FXML private Button btnAddItem;
 	@FXML private Label lblValorTotal;
-	@FXML private TableView<Produto> tvItens;
-	@FXML private TableColumn<Produto, Integer> tbcItem;
-	@FXML private TableColumn<Produto, String> tbcCodigo;
-	@FXML private TableColumn<Produto, String> tbcDescricao;
-	@FXML private TableColumn<Produto, String> tbcUn;
-	@FXML private TableColumn<Produto, Integer> tbcQtd;
-	@FXML private TableColumn<Produto, BigDecimal> tbcPrecoUni;
-	@FXML private TableColumn<Produto, Integer> tbcDescPor;
-	@FXML private TableColumn<Produto, BigDecimal> tbcDescDin;
-	@FXML private TableColumn<Produto, BigDecimal> tbcSubTotal;
+	@FXML private TableView<ProdutoVenda> tvItens;
+	@FXML private TableColumn<ProdutoVenda, Integer> tbcItem;
+//	@FXML private TableColumn<ProdutoVenda, String> tbcCodigo;
+//	@FXML private TableColumn<ProdutoVenda, String> tbcDescricao;
+//	@FXML private TableColumn<ProdutoVenda, String> tbcUn;
+//	@FXML private TableColumn<ProdutoVenda, Integer> tbcQtd;
+//	@FXML private TableColumn<ProdutoVenda, BigDecimal> tbcPrecoUni;
+//	@FXML private TableColumn<ProdutoVenda, Integer> tbcDescPor;
+//	@FXML private TableColumn<ProdutoVenda, BigDecimal> tbcDescDin;
+//	@FXML private TableColumn<ProdutoVenda, BigDecimal> tbcSubTotal;
 	@FXML private Pane pBotton;
 	@FXML private Label txtDescontos;
 	@FXML private Label txtTotalPago;
@@ -112,11 +111,13 @@ public class VendaController implements Initializable {
 			AlertUTIL.alertInformation("", "Produto nao encontrado");
 		}
 		
+		txtDescDin.setEditable(true);
+		txtDescPor.setEditable(true);
+		txtQtd.setEditable(true);
 		
-		
-		txtDescricaoItem.setText(produto.getDescricao());
-		txtPrecoUnitario.setText(String.valueOf(produto.getPrecoUnitario()));
-		txtEstoque.setText(String.valueOf(produto.getQuantidadeTotal()));
+//		txtDescricaoItem.setText(produto.getDescricao());
+//		txtPrecoUnitario.setText(String.valueOf(produto.getPrecoUnitario()));
+//		txtEstoque.setText(String.valueOf(produto.getQuantidadeTotal()));
 		
 		btnAddItem.setDisable(false);
 	}
@@ -124,6 +125,11 @@ public class VendaController implements Initializable {
 	
 	@FXML
 	void onAddItemListaAction(ActionEvent event) {
+		if (Integer.parseInt(txtQtd.getText()) > Integer.parseInt(txtEstoque.getText())) {
+			AlertUTIL.alertInformation("", "Estoque insuficiente");
+			return;
+		}
+		
 		produtos.add(produto);
 		
 		txtDescricaoItem.setText("");
@@ -142,15 +148,15 @@ public class VendaController implements Initializable {
 
 	@FXML
 	void onFinalizarAction(ActionEvent event) {
-		PedidoDAO pedidoDAO = new PedidoDAO();
+//		VendaDAO vendaDAO = new VendaDAO();
 		
-		pedido.setData(DataHoraUTIL.getDataHora());
-		pedido.setCliente(txtNome.getText());
-		pedido.setCpf(txtCpf.getText());
+//		pedido.setData(DataHoraUTIL.getDataHora());
+//		pedido.setCliente(txtNome.getText());
+//		pedido.setCpf(txtCpf.getText());
 //		pedido.setProdutos(produtos);
 		
 //		pedidoDAO.add(produtos);
-		pedidoDAO.add(pedido);
+//		pedidoDAO.add(pedido);
 	}
 	
 	
@@ -172,10 +178,10 @@ public class VendaController implements Initializable {
 	}
 
 	private Produto getProduto() {
-		return produto = produtoDao.search(Integer.parseInt(txtItem.getText()));
+		return produto1 = produtoDao.search(Integer.parseInt(txtItem.getText()));
 	}
 	
-	public ObservableList<Produto> observableListProduto() {
+	public ObservableList<ProdutoVenda> observableListProduto() {
 		return FXCollections.observableArrayList(produtos);
 	}
 
@@ -200,10 +206,11 @@ public class VendaController implements Initializable {
 	
 	private void listar() {
 		tbcItem.setCellValueFactory(new PropertyValueFactory<>("id"));
-		tbcCodigo.setCellValueFactory(new PropertyValueFactory<>("codigoInterno"));
-		tbcDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
-		tbcUn.setCellValueFactory(new PropertyValueFactory<>("unidade"));
-		tbcPrecoUni.setCellValueFactory(new PropertyValueFactory<>("precoUnitario"));
+//		tbcCodigo.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
+//		tbcDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
+//		tbcUn.setCellValueFactory(new PropertyValueFactory<>("unidade"));
+//		tbcQtd.setCellValueFactory(new PropertyValueFactory<>("quantidadeTotal"));
+//		tbcPrecoUni.setCellValueFactory(new PropertyValueFactory<>("precoUnitario"));
 //		tbcDescPor.setCellValueFactory(new PropertyValueFactory<>("celular"));
 //		tbcDescDin.setCellValueFactory(new PropertyValueFactory<>("endereco"));
 //		tbcSubTotal.setCellValueFactory(new PropertyValueFactory<>("endereco"));

@@ -13,7 +13,8 @@
 		<class>br.com.unipar.gdsystem.model.Sangria</class>
 		<class>br.com.unipar.gdsystem.model.Usuario</class>
 		<class>br.com.unipar.gdsystem.model.Caixa</class>
-		<class>br.com.unipar.gdsystem.model.Pedido</class>
+		<class>br.com.unipar.gdsystem.model.Venda</class>
+		<class>br.com.unipar.gdsystem.model.ProdutoVenda</class>
 		<properties>
 			<!-- Propriedades JDBC -->
 			<property name="javax.persistence.jdbc.driver"

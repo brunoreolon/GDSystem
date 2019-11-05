@@ -12,8 +12,8 @@ public class Produto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String codigoInterno;
-	private String codigoBarras;
+	
+	private String codigo;
 	private String descricao;
 	private String unidade;
 	private Double pesoBruto;
@@ -43,19 +43,11 @@ public class Produto {
 	}
 
 	public String getCodigoInterno() {
-		return codigoInterno;
+		return codigo;
 	}
 
-	public void setCodigoInterno(String codigoInterno) {
-		this.codigoInterno = codigoInterno;
-	}
-
-	public String getCodigoBarras() {
-		return codigoBarras;
-	}
-
-	public void setCodigoBarras(String codigoBarras) {
-		this.codigoBarras = codigoBarras;
+	public void setCodigoInterno(String codigo) {
+		this.codigo = codigo;
 	}
 
 	public String getDescricao() {

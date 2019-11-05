@@ -2,20 +2,20 @@ package br.com.unipar.gdsystem.dao;
 
 import javax.persistence.EntityManager;
 
-import br.com.unipar.gdsystem.model.Pedido;
+import br.com.unipar.gdsystem.model.Venda;
 import br.com.unipar.gdsystem.util.JPAUtil;
 
-public class PedidoDAO {
+public class VendaDAO {
 	
 	private EntityManager manager;
 	
-	public PedidoDAO() {
+	public VendaDAO() {
 		manager = new JPAUtil().getEntityManager();
 	}
 	
-	public void add(Pedido pedido) {
+	public void add(Venda venda) {
 		manager.getTransaction().begin();
-		manager.persist(pedido);
+		manager.persist(venda);
 		manager.getTransaction().commit();
 
 		manager.close();

@@ -11,47 +11,47 @@
    <children>
       <Pane fx:id="pIdentificacao" layoutX="39.0" layoutY="14.0" prefHeight="99.0" prefWidth="977.0">
          <children>
-            <Label fx:id="lblCodInterno" layoutX="14.0" layoutY="23.0" text="Código Interno" />
+            <Label layoutX="50.0" layoutY="23.0" text="Código " />
             <TextField fx:id="txtCodInterno" layoutX="102.0" layoutY="19.0" />
-            <Label fx:id="lblCodBarras" layoutX="287.0" layoutY="23.0" text="Código de Barras" />
-            <TextField fx:id="txtCodBarras" layoutX="388.0" layoutY="19.0" />
-            <Label fx:id="lblDescricao" layoutX="41.0" layoutY="60.0" text="Descrição" />
+            <Label layoutX="287.0" layoutY="23.0" text="Código de Barras" visible="false" />
+            <TextField fx:id="txtCodBarras" layoutX="388.0" layoutY="19.0" visible="false" />
+            <Label layoutX="41.0" layoutY="60.0" text="Descrição" />
             <TextField fx:id="txtDescricao" layoutX="100.0" layoutY="56.0" prefHeight="25.0" prefWidth="862.0" />
          </children>
       </Pane>
       <Pane fx:id="pEspecificacao" layoutX="46.0" layoutY="136.0" prefHeight="136.0" prefWidth="260.0">
          <children>
-            <Label fx:id="lblUnidade" layoutX="32.0" layoutY="27.0" text="Unidade" />
+            <Label layoutX="32.0" layoutY="27.0" text="Unidade" />
             <TextField fx:id="txtUnidade" layoutX="83.0" layoutY="23.0" prefHeight="25.0" prefWidth="149.0" />
-            <Label fx:id="lblPesoBruto" layoutX="17.0" layoutY="69.0" text="Peso Bruto" />
+            <Label layoutX="17.0" layoutY="69.0" text="Peso Bruto" />
             <TextField fx:id="txtPesoBruto" layoutX="83.0" layoutY="65.0" />
-            <Label fx:id="lblPesoLiquido" layoutX="9.0" layoutY="108.0" text="Peso Liquido" />
+            <Label layoutX="9.0" layoutY="108.0" text="Peso Liquido" />
             <TextField fx:id="txtPesoLiquido" layoutX="83.0" layoutY="104.0" />
          </children>
       </Pane>
       <Pane fx:id="pEstoque" layoutX="377.0" layoutY="148.0" prefHeight="136.0" prefWidth="304.0">
          <children>
-            <Label fx:id="lblQtdTotal" layoutX="27.0" layoutY="14.0" text="Quantitda Total" />
+            <Label layoutX="27.0" layoutY="14.0" text="Quantitda Total" />
             <TextField fx:id="txtQtdTotal" layoutX="122.0" layoutY="10.0" prefHeight="25.0" prefWidth="168.0" />
-            <Label fx:id="lblQtdMinimo" layoutX="4.0" layoutY="60.0" text="Quantidade Mínima" />
+            <Label layoutX="4.0" layoutY="60.0" text="Quantidade Mínima" />
             <TextField fx:id="txtQtdMinimo" layoutX="122.0" layoutY="56.0" prefHeight="25.0" prefWidth="168.0" />
          </children>
       </Pane>
       <Pane fx:id="pValor" layoutX="745.0" layoutY="148.0" prefHeight="136.0" prefWidth="279.0">
          <children>
-            <Label fx:id="lblValorVenda" layoutX="38.0" layoutY="14.0" text="Valor Venda" />
+            <Label layoutX="30.0" layoutY="14.0" text="Preço Unitario" />
             <TextField fx:id="txtPrecoUnitario" layoutX="113.0" layoutY="10.0" />
-            <Label fx:id="lblValorMinimo" layoutX="32.0" layoutY="56.0" text="Valor Mínimo" />
+            <Label layoutX="32.0" layoutY="56.0" text="Valor Mínimo" />
             <TextField fx:id="txtValorMinimo" layoutX="113.0" layoutY="52.0" />
-            <Label fx:id="lblDescontoMaximo" layoutX="7.0" layoutY="97.0" text="Desconto Máximo" />
+            <Label layoutX="7.0" layoutY="97.0" text="Desconto Máximo" />
             <TextField fx:id="txtDescontoMaximo" layoutX="113.0" layoutY="93.0" />
          </children>
       </Pane>
       <Pane fx:id="pInfoAdcional" layoutX="81.0" layoutY="310.0" prefHeight="81.0" prefWidth="932.0">
          <children>
-            <Label fx:id="lblMarca" layoutX="3.0" layoutY="28.0" text="Marca" />
+            <Label layoutX="3.0" layoutY="28.0" text="Marca" />
             <TextField fx:id="txtMarca" layoutX="47.0" layoutY="24.0" prefHeight="25.0" prefWidth="408.0" />
-            <Label fx:id="lblDepartamento" layoutX="495.0" layoutY="28.0" text="Departamento" />
+            <Label layoutX="495.0" layoutY="28.0" text="Departamento" />
             <TextField fx:id="txtDepartamento" layoutX="580.0" layoutY="24.0" prefHeight="25.0" prefWidth="346.0" />
          </children>
       </Pane>
