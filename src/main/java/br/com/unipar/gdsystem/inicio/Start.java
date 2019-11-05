@@ -16,7 +16,6 @@ public class Start extends Application {
 		Start.thisClass = getClass();
 		new OpenCloseStage();
 	}
-	
 
 	@Override
 	public void start(Stage stage) {

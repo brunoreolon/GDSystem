@@ -34,6 +34,7 @@ import javafx.stage.Stage;
 
 public class VendaController implements Initializable {
 
+	public static VendaController vendaController;
 	private Cliente cliente = new Cliente();
 	private ClienteDAO clienteDao = new ClienteDAO();
 	private Produto produto = new Produto();
@@ -83,6 +84,10 @@ public class VendaController implements Initializable {
 	@FXML private Button btnImprimir;
 	@FXML private Button btnSair;
 
+	public VendaController() {
+		vendaController = this;
+	}
+	
 	@FXML
 	void onPesquisarCpfAction(ActionEvent event) {
 		try {
@@ -96,11 +101,18 @@ public class VendaController implements Initializable {
 	
 	@FXML
 	void onPesquisarItemAction(ActionEvent event) {
+		if (txtItem.getText().equals("")) {
+			AlertUTIL.alertInformation("", "informe o código do produto");
+			return;
+		}
+		
 		try {
 			getProduto();
 		} catch (Exception e) {
 			AlertUTIL.alertInformation("", "Produto nao encontrado");
 		}
+		
+		
 		
 		txtDescricaoItem.setText(produto.getDescricao());
 		txtPrecoUnitario.setText(String.valueOf(produto.getPrecoUnitario()));
@@ -116,10 +128,16 @@ public class VendaController implements Initializable {
 		
 		txtDescricaoItem.setText("");
 		txtItem.setText("");
-		
+		txtPrecoUnitario.setText("");
+		txtDescPor.setText("");
+		txtDescDin.setText("");
+		txtQtd.setText("");
+		txtEstoque.setText("");
+
 		listar();
+		
 		btnAddItem.setDisable(true);
-		btnFinalizar.setDisable(false);
+//		btnFinalizar.setDisable(false);
 	}
 
 	@FXML
@@ -129,7 +147,7 @@ public class VendaController implements Initializable {
 		pedido.setData(DataHoraUTIL.getDataHora());
 		pedido.setCliente(txtNome.getText());
 		pedido.setCpf(txtCpf.getText());
-		pedido.setProdutos(produtos);
+//		pedido.setProdutos(produtos);
 		
 //		pedidoDAO.add(produtos);
 		pedidoDAO.add(pedido);
@@ -140,6 +158,12 @@ public class VendaController implements Initializable {
 	void onAbrirPagamentoAction(ActionEvent event) throws IOException {
 		OpenCloseStage.loadStage("/br/com/unipar/gdsystem/view/Pagamento.fxml", "Visualizar Produto", false);
 		setStage(OpenCloseStage.getStage());
+	}
+	
+	@FXML
+	void onNovaVendaAction(ActionEvent event) {
+		resetar();
+		AlertUTIL.alertInformation("", "nova venda");
 	}
 
 	@FXML
@@ -153,6 +177,25 @@ public class VendaController implements Initializable {
 	
 	public ObservableList<Produto> observableListProduto() {
 		return FXCollections.observableArrayList(produtos);
+	}
+
+	private void resetar() {
+		txtData.setText(DataHoraUTIL.getData());
+		txtHora.setText(DataHoraUTIL.getHora());
+		txtCpf.setText("");
+		txtNome.setText("");
+		txtItem.setText("");
+		txtDescricaoItem.setText("");
+		txtPrecoUnitario.setText("");
+		txtDescPor.setText("");
+		txtDescDin.setText("");
+		txtQtd.setText("");
+		txtEstoque.setText("");
+		lblValorTotal.setText("R$ 0,00");
+		txtDescontos.setText("R$ 0,00");
+		txtTotalPago.setText("R$ 0,00");
+		txtTroco.setText("R$ 0,00");
+		tvItens.getItems().clear();
 	}
 	
 	private void listar() {
@@ -180,5 +223,11 @@ public class VendaController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		btnAddItem.setDisable(true);
 		btnFinalizar.setDisable(true);
+		txtData.setText(DataHoraUTIL.getData());
+		txtHora.setText(DataHoraUTIL.getHora());
+	}
+
+	public void setFinalizarVisivel(Boolean b) {
+		btnFinalizar.setDisable(b);
 	}
 }

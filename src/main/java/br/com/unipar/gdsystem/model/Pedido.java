@@ -1,13 +1,11 @@
 package br.com.unipar.gdsystem.model;
 
 import java.util.Calendar;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Pedido {
@@ -23,8 +21,8 @@ public class Pedido {
 	private String cpf;
 	private String cliente;
 
-	@OneToMany(mappedBy = "pedido")
-	private List<Produto> produtos;
+//	@OneToMany(mappedBy = "pedido")
+//	private List<Produto> produtos;
 
 	public Integer getId() {
 		return id;
@@ -74,12 +72,11 @@ public class Pedido {
 		this.cliente = cliente;
 	}
 
-	public List<Produto> getProdutos() {
-		return produtos;
-	}
-
-	public void setProdutos(List<Produto> produtos) {
-		this.produtos = produtos;
-	}
-
+//	public List<Produto> getProdutos() {
+//		return produtos;
+//	}
+//
+//	public void setProdutos(List<Produto> produtos) {
+//		this.produtos = produtos;
+//	}
 }

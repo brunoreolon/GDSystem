@@ -9,12 +9,11 @@
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		<!-- Aqui são listadas todas as entidades -->
 		<class>br.com.unipar.gdsystem.model.Cliente</class>
-		
-		<!-- <class>br.com.unipar.gdsystem.model.Produto</class>
+		<class>br.com.unipar.gdsystem.model.Produto</class>
 		<class>br.com.unipar.gdsystem.model.Sangria</class>
-		<class>br.com.unipar.gdsystem.model.Usuario</class>-->
-		
+		<class>br.com.unipar.gdsystem.model.Usuario</class>
 		<class>br.com.unipar.gdsystem.model.Caixa</class>
+		<class>br.com.unipar.gdsystem.model.Pedido</class>
 		<properties>
 			<!-- Propriedades JDBC -->
 			<property name="javax.persistence.jdbc.driver"

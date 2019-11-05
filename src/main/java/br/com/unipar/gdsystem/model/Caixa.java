@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -34,6 +35,7 @@ public class Caixa {
 	private BigDecimal diferenca;
 
 	@Enumerated(EnumType.STRING)
+	@Column(name = "situação")
 	private SituacaoEnum situacaoEnum;
 
 	@OneToMany(mappedBy = "caixa")

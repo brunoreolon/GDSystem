@@ -103,6 +103,7 @@ public class CadastroUsuarioController implements Initializable {
 		usuario.setTelefone(txtTelefone.getText());
 		usuario.setCelular(txtCelular.getText());
 		usuario.setSenha(txtSenha.getText());
+		usuario.setConfSenha(txtConfSenha.getText());
 
 		usuarioDAO.add(usuario);
 

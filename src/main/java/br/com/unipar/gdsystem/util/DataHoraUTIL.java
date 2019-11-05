@@ -22,4 +22,14 @@ public class DataHoraUTIL {
 	public static String converterDataHoraString(Calendar calendar) {
 		return formatador.format(calendar.getTime());
 	}
+
+	public static String getData() {
+		formatador = new SimpleDateFormat("dd/MM/yyyy", DataHoraUTIL.locale);
+		return formatador.format(calendar.getTime());
+	}
+	
+	public static String getHora() {
+		formatador = new SimpleDateFormat("HH:mm", DataHoraUTIL.locale);
+		return formatador.format(calendar.getTime());
+	}
 }

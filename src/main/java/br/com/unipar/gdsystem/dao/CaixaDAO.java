@@ -18,18 +18,23 @@ public class CaixaDAO {
 	public static CaixaDAO caixaDAO;
 
 	public CaixaDAO() {
-		caixaDAO = this;
 		manager = new JPAUtil().getEntityManager();
+		caixaDAO = this;
 	}
 
 	public static void add(Caixa caixa) {
+		manager = new JPAUtil().getEntityManager();
+		
 		manager.getTransaction().begin();
 		manager.persist(caixa);
 		manager.getTransaction().commit();
 
+//		manager.close();
 	}
 
 	public static void update(Caixa cx) {
+		manager = new JPAUtil().getEntityManager();
+		
 		manager.getTransaction().begin();
 		manager.merge(cx);
 		manager.getTransaction().commit();
