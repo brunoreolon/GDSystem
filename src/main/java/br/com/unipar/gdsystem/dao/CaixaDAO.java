@@ -32,7 +32,7 @@ public class CaixaDAO {
 //		manager.close();
 	}
 
-	public static void update(Caixa cx) {
+	public void update(Caixa cx) {
 		manager = new JPAUtil().getEntityManager();
 		
 		manager.getTransaction().begin();

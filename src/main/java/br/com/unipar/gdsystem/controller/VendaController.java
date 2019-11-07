@@ -7,9 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import br.com.unipar.gdsystem.dao.CaixaDAO;
 import br.com.unipar.gdsystem.dao.ClienteDAO;
 import br.com.unipar.gdsystem.dao.ProdutoDAO;
-import br.com.unipar.gdsystem.dao.VendaDAO;
+import br.com.unipar.gdsystem.model.Caixa;
 import br.com.unipar.gdsystem.model.Cliente;
 import br.com.unipar.gdsystem.model.Produto;
 import br.com.unipar.gdsystem.model.ProdutoVenda;
@@ -51,7 +52,8 @@ public class VendaController implements Initializable {
 	BigDecimal totDesconto = new BigDecimal("0");
 	BigDecimal precoUnitario = new BigDecimal("0");
 	BigDecimal subTotal =  new BigDecimal("0");
-	
+	BigDecimal valorTotal = new BigDecimal("0");
+
 	@FXML private AnchorPane apVenda;
 	@FXML private Pane pTop;
 	@FXML private TextField txtPedido;
@@ -83,6 +85,7 @@ public class VendaController implements Initializable {
 	@FXML private Pane pBotton;
 	@FXML private Label txtDescontos;
 	@FXML private Label txtTotalPago;
+
 	@FXML private Label txtTroco;
 	@FXML private ButtonBar bbBotoes;
 	@FXML private Button btnFinalizar;
@@ -153,16 +156,13 @@ public class VendaController implements Initializable {
 			return;
 		}
 		
-		precoUnitario = produto.getPrecoUnitario();
-		subTotal = precoUnitario.multiply(new BigDecimal(qtd));
-
-		BigDecimal desconto = descPorcentagem.multiply(subTotal).divide(new BigDecimal("100"));
-		subTotal = subTotal.subtract(desconto);
-		totDesconto = totDesconto.add(desconto);
-
-		subTotal = subTotal.subtract(descDinheiro);
-		totDesconto = totDesconto.add(descDinheiro);
-				
+		if (txtQtd.getText().equals("")) {
+			AlertUTIL.alertWarning("", "Informe a quantidade");
+			return;
+		}
+		
+		calcularPreco();
+		
 		txtDescontos.setText(String.valueOf(totDesconto));
 //		txtTotalPago.setText(String.valueOf(totDesconto));
 //		txtTroco.setText(String.valueOf(totDesconto));
@@ -180,12 +180,11 @@ public class VendaController implements Initializable {
 
 	@FXML
 	void onFinalizarAction(ActionEvent event) {
-//		VendaDAO vendaDao = new VendaDAO();
+		CaixaDAO c = new CaixaDAO();
+		Caixa caixa = c.getCaixa();
+		caixa.setValorAtual(caixa.getValorAtual().add(PagamentoController.pagamentoController.getCaixaAtualizado()));
 		
-//		produtoVenda.setVenda(venda);
-		
-		
-//		vendaDao.add(produtos);
+		c.update(caixa);
 	}
 	
 	
@@ -206,8 +205,36 @@ public class VendaController implements Initializable {
 		PrincipalController.getStage().close();
 	}
 
+
+	private void calcularPreco() {
+		precoUnitario = produto.getPrecoUnitario();
+		subTotal = precoUnitario.multiply(new BigDecimal(qtd));
+
+		BigDecimal desconto = descPorcentagem.multiply(subTotal).divide(new BigDecimal("100"));
+		subTotal = subTotal.subtract(desconto);
+		totDesconto = totDesconto.add(desconto);
+
+		subTotal = subTotal.subtract(descDinheiro);
+		totDesconto = totDesconto.add(descDinheiro);
+		
+		valorTotal = valorTotal.add(subTotal);
+		lblValorTotal.setText(String.valueOf(valorTotal));
+	}
+
+	public BigDecimal getValorTotal() {
+		return valorTotal;
+	}
+	
 	private Produto getProduto() {
 		return produto = produtoDao.search(Integer.parseInt(txtItem.getText()));
+	}
+	
+	public void setTxtTotalPago(String txtTotalPago) {
+		this.txtTotalPago.setText(txtTotalPago);;
+	}
+
+	public void setTxtTroco(String txtTroco) {
+		this.txtTroco.setText(txtTroco);
 	}
 	
 	public ObservableList<Produto> observableListProduto() {
@@ -275,5 +302,5 @@ public class VendaController implements Initializable {
 		btnFinalizar.setDisable(true);
 		txtData.setText(DataHoraUTIL.getData());
 		txtHora.setText(DataHoraUTIL.getHora());
-	}
+	}	
 }

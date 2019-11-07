@@ -77,7 +77,7 @@ public class AbrirFecharCaixaController implements Initializable{
 		caixa.setDiferenca(caixa.getValorAbertura().subtract(new BigDecimal(txtValorFechamento.getText())));
 		caixa.setSituacao(SituacaoEnum.FECHADO);
 
-		CaixaDAO.update(caixa);
+		caixaDao.update(caixa);
 		
 		AlertUTIL.alertInformation("", "O Caixa foi fechado");
 		

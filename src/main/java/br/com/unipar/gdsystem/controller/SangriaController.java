@@ -75,7 +75,7 @@ public class SangriaController implements Initializable{
     	caixa = caixaDao.getCaixa();
     	caixa.setValorAtual(new BigDecimal(txtValorPosSangria.getText()));
 
-    	CaixaDAO.update(caixa);
+    	caixaDao.update(caixa);
     	sangriaDao.add(sangria);
     	
     	btnOk.setVisible(false);

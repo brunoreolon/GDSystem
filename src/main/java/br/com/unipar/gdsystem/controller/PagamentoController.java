@@ -1,9 +1,13 @@
 package br.com.unipar.gdsystem.controller;
 
+import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import br.com.unipar.gdsystem.dao.CaixaDAO;
 import br.com.unipar.gdsystem.enums.FormasPagamentoEnum;
+import br.com.unipar.gdsystem.model.Caixa;
+import br.com.unipar.gdsystem.util.AlertUTIL;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -20,16 +24,27 @@ import javafx.scene.layout.StackPane;
 
 public class PagamentoController implements Initializable {
 
+	public static PagamentoController pagamentoController;
+	
+	private BigDecimal valorTotal = VendaController.vendaController.getValorTotal();
+	private BigDecimal troco = new BigDecimal("0");
+	private BigDecimal valorRecebido = new BigDecimal("0");
+	private BigDecimal caixaAtualizado = new BigDecimal("0");
+	
+	public BigDecimal getCaixaAtualizado() {
+		return caixaAtualizado;
+	}
+
 	@FXML private AnchorPane apPagamento;
 	@FXML private ComboBox<FormasPagamentoEnum> cbFormaPagamento;
 	@FXML private StackPane spFormasPagamento;
-	@FXML private Pane pBoleto;
+	@FXML private Pane pDinheiro;
 	@FXML private TextField txtValorCompra;
 	@FXML private TextField txtValorRecebido;
 	@FXML private TextField txtTroco;
 	@FXML private Pane pCrediario;
 	@FXML private TextField txtValorCompraCred;
-	@FXML private Spinner<?> spParcelas;
+	@FXML private Spinner<Integer> spParcelas;
 	@FXML private TableView<?> tvParcelas;
 	@FXML private TableColumn<?, ?> tbcParcela;
 	@FXML private TableColumn<?, ?> tbcValor;
@@ -39,8 +54,19 @@ public class PagamentoController implements Initializable {
 	@FXML private Button btnOk;
 	@FXML private Button btnCancelar;
 
+	public PagamentoController() {
+		pagamentoController = this;
+	}
+
 	@FXML
 	void onOkAction(ActionEvent event) {
+		if (txtValorRecebido.getText().equals("")) {
+			AlertUTIL.alertInformation("", "Informe o valor recebido");
+			return;
+		}
+		
+		VendaController.vendaController.setTxtTotalPago(txtValorRecebido.getText());
+		VendaController.vendaController.setTxtTroco(String.valueOf(troco));
 		VendaController.vendaController.setFinalizarVisivel(false);
 		
 		VendaController.getStage().close();
@@ -53,6 +79,7 @@ public class PagamentoController implements Initializable {
 	@FXML
 	void onSelecionadoAction(ActionEvent event) {
 		if (cbFormaPagamento.getSelectionModel().getSelectedIndex() == 0) {
+			txtValorCompra.setText(String.valueOf(VendaController.vendaController.getValorTotal()));
 			setPaneVisivel(true, false, false, false);
 		}
 		if (cbFormaPagamento.getSelectionModel().getSelectedIndex() == 1) {
@@ -65,9 +92,24 @@ public class PagamentoController implements Initializable {
 			setPaneVisivel(false, false, false, true);
 		}
 	}
-
+	
+	 @FXML
+	 void onCalcularTroco(ActionEvent event) {
+		 valorRecebido = new BigDecimal(txtValorRecebido.getText());
+		 if (valorRecebido.compareTo(valorTotal) <= 0) {
+			 troco = new BigDecimal("0");
+			 caixaAtualizado = valorRecebido;
+			 txtTroco.setText("0,00");
+			 return;
+		 }
+		 
+		 troco = valorRecebido.subtract(valorTotal);
+		 txtTroco.setText(String.valueOf(troco));
+		 caixaAtualizado = valorRecebido.subtract(troco);
+	 }
+	
 	private void setPaneVisivel(Boolean boleto, Boolean crediario, Boolean credito, Boolean debito) {
-		pBoleto.setVisible(boleto);
+		pDinheiro.setVisible(boleto);
 		pCrediario.setVisible(crediario);
 		pCredito.setVisible(credito);
 		pDebito.setVisible(debito);

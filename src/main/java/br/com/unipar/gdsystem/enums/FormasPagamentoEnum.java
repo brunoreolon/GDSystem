@@ -1,7 +1,7 @@
 package br.com.unipar.gdsystem.enums;
 
 public enum FormasPagamentoEnum {
-	BOLETO("Boleto"),
+	DINHEIRO("Dinheiro"),
 	CREDIARIO("Crediário"),
 	CARTAO_DE_CREDITO("Cartão de Crédito"),
 	CARTAO_DE_DEBITO("Cartão de Débito");
