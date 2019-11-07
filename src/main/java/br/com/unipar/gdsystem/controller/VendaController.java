@@ -1,6 +1,7 @@
 package br.com.unipar.gdsystem.controller;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.ResourceBundle;
 
 import br.com.unipar.gdsystem.dao.ClienteDAO;
 import br.com.unipar.gdsystem.dao.ProdutoDAO;
+import br.com.unipar.gdsystem.dao.VendaDAO;
 import br.com.unipar.gdsystem.model.Cliente;
 import br.com.unipar.gdsystem.model.Produto;
 import br.com.unipar.gdsystem.model.ProdutoVenda;
@@ -33,16 +35,23 @@ import javafx.stage.Stage;
 public class VendaController implements Initializable {
 
 	public static VendaController vendaController;
-	
-	private Cliente cliente = new Cliente();
-	private ClienteDAO clienteDao = new ClienteDAO();
-	private Produto produto1 = new Produto();
-	private ProdutoVenda produto = new ProdutoVenda();
-	private ProdutoDAO produtoDao = new ProdutoDAO();
-	
-	private List<ProdutoVenda> produtos = new ArrayList<ProdutoVenda>();
 	private static Stage stage;
 
+	private Cliente cliente = new Cliente();
+	private ClienteDAO clienteDao = new ClienteDAO();
+	private Produto produto = new Produto();
+	private ProdutoVenda produtoVenda = new ProdutoVenda();
+	private ProdutoDAO produtoDao = new ProdutoDAO();
+	private List<Produto> produtos = new ArrayList<Produto>();
+	private List<ProdutoVenda> produtoVendaList = new ArrayList<ProdutoVenda>();
+	
+	Integer qtd = 0;
+	BigDecimal descPorcentagem = new BigDecimal("0");
+	BigDecimal descDinheiro = new BigDecimal("0");
+	BigDecimal totDesconto = new BigDecimal("0");
+	BigDecimal precoUnitario = new BigDecimal("0");
+	BigDecimal subTotal =  new BigDecimal("0");
+	
 	@FXML private AnchorPane apVenda;
 	@FXML private Pane pTop;
 	@FXML private TextField txtPedido;
@@ -61,11 +70,11 @@ public class VendaController implements Initializable {
 	@FXML private TextField txtEstoque;
 	@FXML private Button btnAddItem;
 	@FXML private Label lblValorTotal;
-	@FXML private TableView<ProdutoVenda> tvItens;
-	@FXML private TableColumn<ProdutoVenda, Integer> tbcItem;
-//	@FXML private TableColumn<ProdutoVenda, String> tbcCodigo;
-//	@FXML private TableColumn<ProdutoVenda, String> tbcDescricao;
-//	@FXML private TableColumn<ProdutoVenda, String> tbcUn;
+	@FXML private TableView<Produto> tvItens;
+	@FXML private TableColumn<Produto, Integer> tbcItem;
+	@FXML private TableColumn<Produto, String> tbcCodigo;
+	@FXML private TableColumn<Produto, String> tbcDescricao;
+	@FXML private TableColumn<Produto, String> tbcUn;
 //	@FXML private TableColumn<ProdutoVenda, Integer> tbcQtd;
 //	@FXML private TableColumn<ProdutoVenda, BigDecimal> tbcPrecoUni;
 //	@FXML private TableColumn<ProdutoVenda, Integer> tbcDescPor;
@@ -111,13 +120,14 @@ public class VendaController implements Initializable {
 			AlertUTIL.alertInformation("", "Produto nao encontrado");
 		}
 		
+
+		txtDescricaoItem.setText(produto.getDescricao());
+		txtPrecoUnitario.setText(String.valueOf(produto.getPrecoUnitario()));
+		txtEstoque.setText(String.valueOf(produto.getQuantidadeTotal()));
+
 		txtDescDin.setEditable(true);
 		txtDescPor.setEditable(true);
 		txtQtd.setEditable(true);
-		
-//		txtDescricaoItem.setText(produto.getDescricao());
-//		txtPrecoUnitario.setText(String.valueOf(produto.getPrecoUnitario()));
-//		txtEstoque.setText(String.valueOf(produto.getQuantidadeTotal()));
 		
 		btnAddItem.setDisable(false);
 	}
@@ -125,38 +135,57 @@ public class VendaController implements Initializable {
 	
 	@FXML
 	void onAddItemListaAction(ActionEvent event) {
-		if (Integer.parseInt(txtQtd.getText()) > Integer.parseInt(txtEstoque.getText())) {
+		if (!txtDescPor.getText().equals("")) {
+			descPorcentagem = new BigDecimal(txtDescPor.getText());
+		}
+		
+		if (!txtDescDin.getText().equals("")) {
+			descDinheiro = new BigDecimal(txtDescDin.getText());
+		}
+		
+		if (!txtQtd.getText().equals("")) {
+			qtd = Integer.parseInt(txtQtd.getText());
+		}
+		
+		if (qtd > produto.getQuantidadeTotal()) {
 			AlertUTIL.alertInformation("", "Estoque insuficiente");
+			
 			return;
 		}
 		
+		precoUnitario = produto.getPrecoUnitario();
+		subTotal = precoUnitario.multiply(new BigDecimal(qtd));
+
+		BigDecimal desconto = descPorcentagem.multiply(subTotal).divide(new BigDecimal("100"));
+		subTotal = subTotal.subtract(desconto);
+		totDesconto = totDesconto.add(desconto);
+
+		subTotal = subTotal.subtract(descDinheiro);
+		totDesconto = totDesconto.add(descDinheiro);
+				
+		txtDescontos.setText(String.valueOf(totDesconto));
+//		txtTotalPago.setText(String.valueOf(totDesconto));
+//		txtTroco.setText(String.valueOf(totDesconto));
+		
+		produtoVenda.setQuantidade(qtd);
+		produtoVenda.setSubTotal(subTotal);
+		
 		produtos.add(produto);
 		
-		txtDescricaoItem.setText("");
-		txtItem.setText("");
-		txtPrecoUnitario.setText("");
-		txtDescPor.setText("");
-		txtDescDin.setText("");
-		txtQtd.setText("");
-		txtEstoque.setText("");
-
+		resetItem();
 		listar();
 		
 		btnAddItem.setDisable(true);
-//		btnFinalizar.setDisable(false);
 	}
 
 	@FXML
 	void onFinalizarAction(ActionEvent event) {
-//		VendaDAO vendaDAO = new VendaDAO();
+//		VendaDAO vendaDao = new VendaDAO();
 		
-//		pedido.setData(DataHoraUTIL.getDataHora());
-//		pedido.setCliente(txtNome.getText());
-//		pedido.setCpf(txtCpf.getText());
-//		pedido.setProdutos(produtos);
+//		produtoVenda.setVenda(venda);
 		
-//		pedidoDAO.add(produtos);
-//		pedidoDAO.add(pedido);
+		
+//		vendaDao.add(produtos);
 	}
 	
 	
@@ -168,7 +197,7 @@ public class VendaController implements Initializable {
 	
 	@FXML
 	void onNovaVendaAction(ActionEvent event) {
-		resetar();
+		resetAll();
 		AlertUTIL.alertInformation("", "nova venda");
 	}
 
@@ -178,14 +207,24 @@ public class VendaController implements Initializable {
 	}
 
 	private Produto getProduto() {
-		return produto1 = produtoDao.search(Integer.parseInt(txtItem.getText()));
+		return produto = produtoDao.search(Integer.parseInt(txtItem.getText()));
 	}
 	
-	public ObservableList<ProdutoVenda> observableListProduto() {
+	public ObservableList<Produto> observableListProduto() {
 		return FXCollections.observableArrayList(produtos);
 	}
+	
+	private void resetItem() {
+		txtDescricaoItem.setText("");
+		txtItem.setText("");
+		txtPrecoUnitario.setText("");
+		txtDescPor.setText("");
+		txtDescDin.setText("");
+		txtQtd.setText("");
+		txtEstoque.setText("");
+	}
 
-	private void resetar() {
+	private void resetAll() {
 		txtData.setText(DataHoraUTIL.getData());
 		txtHora.setText(DataHoraUTIL.getHora());
 		txtCpf.setText("");
@@ -206,9 +245,9 @@ public class VendaController implements Initializable {
 	
 	private void listar() {
 		tbcItem.setCellValueFactory(new PropertyValueFactory<>("id"));
-//		tbcCodigo.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
-//		tbcDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
-//		tbcUn.setCellValueFactory(new PropertyValueFactory<>("unidade"));
+		tbcCodigo.setCellValueFactory(new PropertyValueFactory<>("codigo"));
+		tbcDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
+		tbcUn.setCellValueFactory(new PropertyValueFactory<>("unidade"));
 //		tbcQtd.setCellValueFactory(new PropertyValueFactory<>("quantidadeTotal"));
 //		tbcPrecoUni.setCellValueFactory(new PropertyValueFactory<>("precoUnitario"));
 //		tbcDescPor.setCellValueFactory(new PropertyValueFactory<>("celular"));
@@ -225,16 +264,16 @@ public class VendaController implements Initializable {
 	public static Stage getStage() {
 		return stage;
 	}
-
+	
+	public void setFinalizarVisivel(Boolean b) {
+		btnFinalizar.setDisable(b);
+	}
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		btnAddItem.setDisable(true);
 		btnFinalizar.setDisable(true);
 		txtData.setText(DataHoraUTIL.getData());
 		txtHora.setText(DataHoraUTIL.getHora());
-	}
-
-	public void setFinalizarVisivel(Boolean b) {
-		btnFinalizar.setDisable(b);
 	}
 }

@@ -12,7 +12,7 @@ public class Produto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	private String codigo;
 	private String descricao;
 	private String unidade;
@@ -26,14 +26,6 @@ public class Produto {
 	private String marca;
 	private String departamento;
 
-	public BigDecimal getPrecoUnitario() {
-		return precoUnitario;
-	}
-
-	public void setPrecoUnitario(BigDecimal precoUnitario) {
-		this.precoUnitario = precoUnitario;
-	}
-
 	public Integer getId() {
 		return id;
 	}
@@ -42,11 +34,11 @@ public class Produto {
 		this.id = id;
 	}
 
-	public String getCodigoInterno() {
+	public String getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigoInterno(String codigo) {
+	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
 
@@ -98,6 +90,14 @@ public class Produto {
 		this.quantidadeMinima = quantidadeMinima;
 	}
 
+	public BigDecimal getPrecoUnitario() {
+		return precoUnitario;
+	}
+
+	public void setPrecoUnitario(BigDecimal precoUnitario) {
+		this.precoUnitario = precoUnitario;
+	}
+
 	public BigDecimal getValorMinimo() {
 		return valorMinimo;
 	}
@@ -129,4 +129,5 @@ public class Produto {
 	public void setDepartamento(String departamento) {
 		this.departamento = departamento;
 	}
+
 }

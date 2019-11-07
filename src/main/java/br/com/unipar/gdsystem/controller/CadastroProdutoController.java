@@ -60,8 +60,7 @@ public class CadastroProdutoController implements Initializable {
 		Produto produto = new Produto();
 		ProdutoDAO produtoDAO = new ProdutoDAO();
 
-		produto.setCodigoInterno(txtCodInterno.getText());
-//		produto.setCodigoBarras(txtCodBarras.getText());
+		produto.setCodigo(txtCodInterno.getText());
 		produto.setDescricao(txtDescricao.getText());
 		produto.setUnidade(txtUnidade.getText());
 		produto.setPesoBruto(Double.parseDouble(txtPesoBruto.getText()));
@@ -92,7 +91,6 @@ public class CadastroProdutoController implements Initializable {
 	
 	private void reset() {
 		txtCodInterno.setText("");
-//		txtCodBarras.setText("");
 		txtDescricao.setText("");
 		txtUnidade.setText("");
 		txtPesoBruto.setText("");
@@ -107,7 +105,7 @@ public class CadastroProdutoController implements Initializable {
 	}
 
 	private Boolean empty() {
-		return txtCodInterno.getText().isEmpty() || /*txtCodBarras.getText().isEmpty() ||*/ txtDescricao.getText().isEmpty() || 
+		return txtCodInterno.getText().isEmpty() ||  txtDescricao.getText().isEmpty() || 
 				txtUnidade.getText().isEmpty() || txtPesoBruto.getText().isEmpty() || txtPesoLiquido.getText().isEmpty() || 
 				txtQtdTotal.getText().isEmpty() || txtQtdMinimo.getText().isEmpty() || txtPrecoUnitario.getText().isEmpty() || 
 				txtValorMinimo.getText().isEmpty() || txtDescontoMaximo.getText().isEmpty() || txtMarca.getText().isEmpty() || 

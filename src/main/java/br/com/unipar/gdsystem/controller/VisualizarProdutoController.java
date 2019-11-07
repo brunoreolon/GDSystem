@@ -99,12 +99,12 @@ public class VisualizarProdutoController implements Initializable {
 	}
 	
 	private void initTable() {
-		tbcCodigo.setCellValueFactory(new PropertyValueFactory<>("codigoInterno"));
+		tbcCodigo.setCellValueFactory(new PropertyValueFactory<>("codigo"));
 		tbcDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
 		tbcUn.setCellValueFactory(new PropertyValueFactory<>("unidade"));
 		tbcDepartamento.setCellValueFactory(new PropertyValueFactory<>("departamento"));
 		tbcEstoque.setCellValueFactory(new PropertyValueFactory<>("quantidadeTotal"));
-		tbcValorVenda.setCellValueFactory(new PropertyValueFactory<>("valorVenda"));
+		tbcValorVenda.setCellValueFactory(new PropertyValueFactory<>("precoUnitario"));
 
 		tvProduto.setItems(foo());
 	}

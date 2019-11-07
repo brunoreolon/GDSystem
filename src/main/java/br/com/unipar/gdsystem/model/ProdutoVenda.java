@@ -18,11 +18,27 @@ public class ProdutoVenda {
 	@ManyToOne
 	private Venda venda;
 
-//	private Produto produto;
 	private Integer quantidade;
 	private BigDecimal subTotal;
+	private BigDecimal descPorcentagem;
+	private BigDecimal descDinheiro;
 
-	
+	public BigDecimal getDescPorcentagem() {
+		return descPorcentagem;
+	}
+
+	public void setDescPorcentagem(BigDecimal descPorcentagem) {
+		this.descPorcentagem = descPorcentagem;
+	}
+
+	public BigDecimal getDescDinheiro() {
+		return descDinheiro;
+	}
+
+	public void setDescDinheiro(BigDecimal descDinheiro) {
+		this.descDinheiro = descDinheiro;
+	}
+
 	public BigDecimal getSubTotal() {
 		return subTotal;
 	}
@@ -53,10 +69,6 @@ public class ProdutoVenda {
 
 	public Venda getVenda() {
 		return venda;
-	}
-
-	public void setPedido(Venda venda) {
-		this.venda = venda;
 	}
 
 	public Integer getId() {
