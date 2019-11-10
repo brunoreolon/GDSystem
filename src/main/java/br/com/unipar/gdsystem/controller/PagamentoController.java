@@ -4,9 +4,7 @@ import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import br.com.unipar.gdsystem.dao.CaixaDAO;
 import br.com.unipar.gdsystem.enums.FormasPagamentoEnum;
-import br.com.unipar.gdsystem.model.Caixa;
 import br.com.unipar.gdsystem.util.AlertUTIL;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -65,8 +64,11 @@ public class PagamentoController implements Initializable {
 			return;
 		}
 		
-		VendaController.vendaController.setTxtTotalPago(txtValorRecebido.getText());
-		VendaController.vendaController.setTxtTroco(String.valueOf(troco));
+		calcularTroco();
+		
+		VendaController.vendaController.setLblTotalPago(String.valueOf(valorRecebido));
+		VendaController.vendaController.setLblTroco("");
+		VendaController.vendaController.setLblTroco("R$ " + String.valueOf(troco));
 		VendaController.vendaController.setFinalizarVisivel(false);
 		
 		VendaController.getStage().close();
@@ -93,11 +95,10 @@ public class PagamentoController implements Initializable {
 		}
 	}
 	
-	 @FXML
-	 void onCalcularTroco(ActionEvent event) {
+	 private void calcularTroco() {
 		 valorRecebido = new BigDecimal(txtValorRecebido.getText());
+		 
 		 if (valorRecebido.compareTo(valorTotal) <= 0) {
-			 troco = new BigDecimal("0");
 			 caixaAtualizado = valorRecebido;
 			 txtTroco.setText("0,00");
 			 return;

@@ -33,7 +33,7 @@
                   <Label layoutX="50.0" layoutY="65.0" text="Valor Compra (R$)" />
                   <TextField fx:id="txtValorCompra" editable="false" layoutX="172.0" layoutY="60.0" prefHeight="25.0" prefWidth="166.0" />
                   <Label layoutX="46.0" layoutY="112.0" text="Valor Recebido (R$)" />
-                  <TextField fx:id="txtValorRecebido" layoutX="172.0" layoutY="108.0" onAction="#onCalcularTroco" prefHeight="25.0" prefWidth="166.0" />
+                  <TextField fx:id="txtValorRecebido" layoutX="172.0" layoutY="108.0" prefHeight="25.0" prefWidth="166.0" />
                   <Label layoutX="98.0" layoutY="160.0" text="Troco(R$)" />
                   <TextField fx:id="txtTroco" editable="false" layoutX="172.0" layoutY="155.0" prefHeight="25.0" prefWidth="166.0" />
                </children>

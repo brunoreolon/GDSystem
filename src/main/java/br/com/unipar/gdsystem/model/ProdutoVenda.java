@@ -18,10 +18,46 @@ public class ProdutoVenda {
 	@ManyToOne
 	private Venda venda;
 
+	private String codigo;
+	private String descricao;
+	private String unidade;
 	private Integer quantidade;
-	private BigDecimal subTotal;
+	private BigDecimal precoUnitario;
 	private BigDecimal descPorcentagem;
 	private BigDecimal descDinheiro;
+	private BigDecimal subTotal;
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+
+	public String getUnidade() {
+		return unidade;
+	}
+
+	public void setUnidade(String unidade) {
+		this.unidade = unidade;
+	}
+
+	public BigDecimal getPrecoUnitario() {
+		return precoUnitario;
+	}
+
+	public void setPrecoUnitario(BigDecimal precoUnitario) {
+		this.precoUnitario = precoUnitario;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
 
 	public BigDecimal getDescPorcentagem() {
 		return descPorcentagem;

@@ -23,12 +23,12 @@ public class DataHoraUTIL {
 		return formatador.format(calendar.getTime());
 	}
 
-	public static String getData() {
+	public static String getDataString() {
 		formatador = new SimpleDateFormat("dd/MM/yyyy", DataHoraUTIL.locale);
 		return formatador.format(calendar.getTime());
 	}
 	
-	public static String getHora() {
+	public static String getHoraString() {
 		formatador = new SimpleDateFormat("HH:mm", DataHoraUTIL.locale);
 		return formatador.format(calendar.getTime());
 	}
