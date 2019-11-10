@@ -29,17 +29,17 @@ public class Caixa {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar dataFechamento;
 
+	@OneToMany(mappedBy = "caixa")
+	private List<Sangria> sangrias;
+
+	@Enumerated(EnumType.STRING)
+	@Column(name = "Situacao")
+	private SituacaoEnum situacaoEnum;
+
 	private BigDecimal valorAbertura;
 	private BigDecimal valorAtualCaixa;
 	private BigDecimal valorFechamento;
 	private BigDecimal diferenca;
-
-	@Enumerated(EnumType.STRING)
-	@Column(name = "situação")
-	private SituacaoEnum situacaoEnum;
-
-	@OneToMany(mappedBy = "caixa")
-	private List<Sangria> sangrias;
 
 	public BigDecimal getValorAtual() {
 		return valorAtualCaixa;

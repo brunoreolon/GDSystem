@@ -9,6 +9,8 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
@@ -18,7 +20,7 @@
       <Pane fx:id="pTop" layoutX="-1.0" prefHeight="200.0" prefWidth="889.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="331.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label layoutX="15.0" layoutY="11.0" text="Pedido" />
-            <TextField fx:id="txtPedido" disable="true" layoutX="14.0" layoutY="33.0" prefHeight="31.0" prefWidth="77.0" />
+            <TextField fx:id="txtNumVenda" disable="true" layoutX="14.0" layoutY="33.0" prefHeight="31.0" prefWidth="77.0" />
             <Label layoutX="99.0" layoutY="11.0" text="Data" />
             <TextField fx:id="txtData" disable="true" layoutX="99.0" layoutY="33.0" prefHeight="31.0" prefWidth="146.0" />
             <Label layoutX="254.0" layoutY="11.0" text="Hora" />
@@ -61,7 +63,7 @@
             </Label>
          </children>
       </Pane>
-      <TableView fx:id="tvProdutos" layoutX="15.0" layoutY="203.0" onMouseClicked="#onGetCodigo" prefHeight="345.0" prefWidth="1240.0">
+      <TableView fx:id="tvProdutos" layoutX="15.0" layoutY="203.0" onMouseClicked="#onGetId" prefHeight="345.0" prefWidth="1240.0">
         <columns>
           <TableColumn fx:id="tbcCodigo" prefWidth="90.0" text="Código" />
             <TableColumn fx:id="tbcDescricao" prefWidth="475.0" text="Descrição" />
@@ -75,7 +77,14 @@
          <contextMenu>
             <ContextMenu>
               <items>
-                <MenuItem fx:id="removerProduto" mnemonicParsing="false" onAction="#onRemoverAction" text="Remover" />
+                <MenuItem fx:id="removerProduto" mnemonicParsing="false" onAction="#onRemoverAction" text="Remover">
+                     <graphic>
+                        <ImageView fx:id="imgTV" fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../../../resources/imagens/deletarCancelar16.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></MenuItem>
               </items>
             </ContextMenu>
          </contextMenu>
@@ -87,12 +96,7 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label layoutY="31.0" text="R$" textFill="#9a4545">
-               <font>
-                  <Font size="45.0" />
-               </font>
-            </Label>
-            <Label fx:id="lblDescontos" layoutX="62.0" layoutY="31.0" prefHeight="66.0" prefWidth="276.0" text="0,00" textFill="#9a4545">
+            <Label fx:id="lblDescontos" layoutY="31.0" prefHeight="66.0" prefWidth="276.0" text="R$ 0,00" textFill="#9a4545">
                <font>
                   <Font size="45.0" />
                </font>
@@ -102,12 +106,7 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label layoutX="525.0" layoutY="31.0" prefHeight="66.0" prefWidth="56.0" text="R$" textFill="BLUE">
-               <font>
-                  <Font size="45.0" />
-               </font>
-            </Label>
-            <Label fx:id="lblTotalPago" layoutX="586.0" layoutY="31.0" prefHeight="66.0" prefWidth="276.0" text="0,00" textFill="BLUE">
+            <Label fx:id="lblTotalPago" layoutX="525.0" layoutY="31.0" prefHeight="66.0" prefWidth="276.0" text="R$ 0,00" textFill="BLUE">
                <font>
                   <Font size="45.0" />
                </font>
@@ -133,36 +132,71 @@
             </Label>
          </children>
       </Pane>
-      <ButtonBar fx:id="bbBotoes" layoutY="678.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="66.0" prefWidth="810.0" AnchorPane.bottomAnchor="56.0" AnchorPane.leftAnchor="0.0">
+      <ButtonBar fx:id="bbBotoes" layoutY="678.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="66.0" prefWidth="866.0" AnchorPane.bottomAnchor="56.0" AnchorPane.leftAnchor="0.0">
         <buttons>
-            <Button fx:id="btnFinalizar" disable="true" mnemonicParsing="false" onAction="#onFinalizarAction" prefHeight="66.0" prefWidth="154.0" text="Finalizar | F1">
+            <Button fx:id="btnFinalizar" disable="true" mnemonicParsing="false" onAction="#onFinalizarAction" prefHeight="66.0" prefWidth="154.0" text="Finalizar ">
                <font>
                   <Font size="16.0" />
                </font>
+               <graphic>
+                  <ImageView fx:id="imgFinalizar" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../../resources/imagens/check16.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Button>
-            <Button fx:id="btnPagamento" disable="true" mnemonicParsing="false" onAction="#onAbrirPagamentoAction" prefHeight="86.0" text="Pagamento | F2">
+            <Button fx:id="btnPagamento" disable="true" mnemonicParsing="false" onAction="#onAbrirPagamentoAction" prefHeight="86.0" text="Pagamento ">
                <font>
                   <Font size="16.0" />
                </font>
+               <graphic>
+                  <ImageView fx:id="imgPagamento" fitHeight="39.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../../resources/imagens/pagamento.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Button>
-            <Button fx:id="btnRemoverItem" disable="true" mnemonicParsing="false" onAction="#onRemoverAction" prefHeight="68.0" text="Remover Item | F3">
+            <Button fx:id="btnRemoverItem" disable="true" mnemonicParsing="false" onAction="#onRemoverAction" prefHeight="68.0" text="Remover ">
                <font>
                   <Font size="16.0" />
                </font>
+               <graphic>
+                  <ImageView fx:id="imgRemover" fitHeight="36.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../../resources/imagens/deletarCancelar32.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Button>
-            <Button fx:id="btnNovaVenda" mnemonicParsing="false" onAction="#onNovaVendaAction" prefHeight="74.0" prefWidth="121.0" text="Nova Venda | F4">
+            <Button fx:id="btnNovaVenda" mnemonicParsing="false" onAction="#onNovaVendaAction" prefHeight="74.0" prefWidth="121.0" text="Nova Venda ">
                <font>
                   <Font size="16.0" />
                </font>
+               <graphic>
+                  <ImageView fx:id="imgNVenda" fitHeight="38.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../../resources/imagens/venda.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Button>
-            <Button fx:id="btnImprimir" disable="true" mnemonicParsing="false" prefHeight="66.0" prefWidth="154.0" text="Imprimir | F5">
+            <Button fx:id="btnImprimir" disable="true" mnemonicParsing="false" prefHeight="66.0" prefWidth="154.0" text="Imprimir ">
                <font>
                   <Font size="16.0" />
                </font>
+               <graphic>
+                  <ImageView fx:id="imgImprimir" fitHeight="35.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../../resources/imagens/imprimir.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Button>
         </buttons>
       </ButtonBar>
-      <Button fx:id="btnSair" layoutX="1101.0" layoutY="678.0" mnemonicParsing="false" onAction="#onSairVendaAction" prefHeight="66.0" prefWidth="154.0" text="Cancelar | F6" AnchorPane.bottomAnchor="56.0" AnchorPane.rightAnchor="15.0">
+      <Button fx:id="btnSair" layoutX="1101.0" layoutY="678.0" mnemonicParsing="false" onAction="#onSairVendaAction" prefHeight="66.0" prefWidth="154.0" text="Cancelar " AnchorPane.bottomAnchor="56.0" AnchorPane.rightAnchor="15.0">
          <font>
             <Font size="16.0" />
          </font>

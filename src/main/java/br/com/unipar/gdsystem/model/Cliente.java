@@ -1,17 +1,24 @@
 package br.com.unipar.gdsystem.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Cliente {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+
+	@OneToMany(mappedBy = "cliente")
+	private List<Venda> comprasRealizadas = new ArrayList<Venda>();
+
 	private String nome;
-//	private String status;
 	private String cpf;
 	private String rg;
 	private String cep;
@@ -24,7 +31,7 @@ public class Cliente {
 	private String telefone;
 	private String celular;
 	private String email;
-	
+
 	public Integer getId() {
 		return id;
 	}

@@ -12,7 +12,7 @@ public class Produto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-
+	
 	private Integer codigo;
 	private String descricao;
 	private String unidade;
@@ -25,7 +25,7 @@ public class Produto {
 	private BigDecimal descontoMaximo;
 	private String marca;
 	private String departamento;
-
+	
 	public Integer getId() {
 		return id;
 	}

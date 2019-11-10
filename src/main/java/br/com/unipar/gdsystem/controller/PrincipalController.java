@@ -62,7 +62,7 @@ public class PrincipalController implements Initializable {
 
 	@FXML
 	void onAbrirfecharCaixaAction(ActionEvent event) throws IOException {
-		OpenCloseStage.loadStage("/br/com/unipar/gdsystem/view/AbrirFecharCaixa.fxml", "Abrir Caixa", false);
+		OpenCloseStage.loadStage("/br/com/unipar/gdsystem/view/AbrirFecharCaixa.fxml", "Abrir/Fechar Caixa", false);
 		seStage(OpenCloseStage.getStage());
 	}
 

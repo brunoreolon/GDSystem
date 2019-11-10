@@ -10,15 +10,16 @@ public class VendaDAO {
 	private EntityManager manager;
 	
 	public VendaDAO() {
-		manager = new JPAUtil().getEntityManager();
+		
 	}
 	
 	public void add(Venda venda) {
+		manager = new JPAUtil().getEntityManager();
+		
 		manager.getTransaction().begin();
 		manager.persist(venda);
 		manager.getTransaction().commit();
 
 		manager.close();
 	}
-
 }

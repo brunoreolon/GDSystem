@@ -10,10 +10,12 @@ public class SangriaDAO {
 	private static EntityManager manager;
 
 	public SangriaDAO() {
-		manager = new JPAUtil().getEntityManager();
+		
 	}
 
 	public void add(Sangria sangria) {
+		manager = new JPAUtil().getEntityManager();
+		
 		manager.getTransaction().begin();
 		manager.persist(sangria);
 		manager.getTransaction().commit();

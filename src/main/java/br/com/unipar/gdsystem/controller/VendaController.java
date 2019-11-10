@@ -19,6 +19,7 @@ import br.com.unipar.gdsystem.model.ProdutoVenda;
 import br.com.unipar.gdsystem.model.Venda;
 import br.com.unipar.gdsystem.util.AlertUTIL;
 import br.com.unipar.gdsystem.util.DataHoraUTIL;
+import br.com.unipar.gdsystem.util.GeradorNumeroVenda;
 import br.com.unipar.gdsystem.util.OpenCloseStage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -33,6 +34,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -44,13 +47,14 @@ public class VendaController implements Initializable {
 
 	private Cliente cliente = new Cliente();
 	private ClienteDAO clienteDao = new ClienteDAO();
-	private Produto produto = new Produto();
-	private ProdutoVenda produtoVenda;
+	private Produto produto = null;
+	private ProdutoVenda produtoVenda = null;
 	private ProdutoDAO produtoDao = new ProdutoDAO();
 	private VendaDAO vendaDAO = new VendaDAO();
-	private Venda venda = new Venda();
+	private Venda venda = null;
 	private List<ProdutoVenda> produtoVendaList = new ArrayList<ProdutoVenda>();
 	private ProdutoVendaDAO produtoVendaDao = new ProdutoVendaDAO();
+	private static Integer numeroVenda = 1;
 	
 	Integer qtd = 0;
 	BigDecimal descPorcentagem = new BigDecimal("0");
@@ -64,7 +68,7 @@ public class VendaController implements Initializable {
 
 	@FXML private AnchorPane apVenda;
 	@FXML private Pane pTop;
-	@FXML private TextField txtPedido;
+	@FXML private TextField txtNumVenda;
 	@FXML private TextField txtData;
 	@FXML private TextField txtHora;
 	@FXML private TextField txtCpf;
@@ -101,6 +105,12 @@ public class VendaController implements Initializable {
 	@FXML private Button btnNovaVenda;
 	@FXML private Button btnImprimir;
 	@FXML private Button btnSair;
+	@FXML private ImageView imgFinalizar;
+	@FXML private ImageView imgPagamento;
+	@FXML private ImageView imgRemover;
+	@FXML private ImageView imgNVenda;
+	@FXML private ImageView imgImprimir;
+	@FXML private ImageView imgTV;
 	
 	public VendaController() {
 		vendaController = this;
@@ -125,11 +135,10 @@ public class VendaController implements Initializable {
 		}
 		
 		try {
-			produto = getProduto(Integer.parseInt(txtItem.getText()));
+			produto = produtoDao.search(Integer.parseInt(txtItem.getText()));
 		} catch (Exception e) {
 			AlertUTIL.alertInformation("", "Produto nao encontrado");
 		}
-		
 
 		txtDescricaoItem.setText(produto.getDescricao());
 		txtPrecoUnitario.setText(String.valueOf(produto.getPrecoUnitario()));
@@ -162,6 +171,7 @@ public class VendaController implements Initializable {
 		
 		if (qtd > produto.getQuantidadeTotal()) {
 			AlertUTIL.alertInformation("", "Estoque insuficiente");
+			txtQtd.setEditable(true);
 			return;
 		}
 		
@@ -174,11 +184,10 @@ public class VendaController implements Initializable {
 		btnPagamento.setDisable(false);
 		calcularPreco();
 		
-		lblDescontos.setText(String.valueOf(totDesconto));
+		lblDescontos.setText(String.valueOf("R$ " + totDesconto));
 		resetItem();
 		
 		produtoVenda = new ProdutoVenda();
-		produtoVenda.setVenda(venda);
 		produtoVenda.setCodigo(produto.getCodigo());
 		produtoVenda.setDescricao(produto.getDescricao());
 		produtoVenda.setUnidade(produto.getUnidade());
@@ -197,6 +206,20 @@ public class VendaController implements Initializable {
 
 	@FXML
 	void onFinalizarAction(ActionEvent event) {
+		try {
+			cliente = clienteDao.searchCpf(txtCpf.getText());
+		} catch (Exception e) {
+			new Cliente().setNome("Cliente");
+		}
+		venda = new Venda();
+		produtoVenda.setVenda(venda);
+		
+		venda.setNumeroVenda(numeroVenda);
+		
+		if (!cliente.equals(null)) {
+			venda.setCliente(cliente);
+		}
+		
 		venda.setDataVenda(DataHoraUTIL.getDataHora());
 		venda.setValorTotal(valorTotal);
 		venda.setDescontoPorcentagem(totDescPorcentagem);
@@ -209,12 +232,28 @@ public class VendaController implements Initializable {
 		
 		c.update(caixa);
 		
-		
+		for (ProdutoVenda produtoVenda : produtoVendaList) {
+			Integer quantidade = produtoVenda.getQuantidade();
+			
+			Produto p = produtoDao.search((produtoVenda.getCodigo()));
+			Integer novaQuantidade = p.getQuantidadeTotal() - quantidade;
+			p.setQuantidadeTotal(novaQuantidade);
+			
+			produtoDao.update(p);
+		}
 		
 		vendaDAO.add(venda);
 		produtoVendaDao.add(produtoVendaList);
+		
+		AlertUTIL.alertInformation("", "Venda realizada com sucesso!");
+		
+		numeroVenda = GeradorNumeroVenda.getProximaNumeroVenda();
+		txtNumVenda.setText(String.valueOf(numeroVenda));
+		
+		btnFinalizar.setDisable(true);
+		
+		resetAll();
 	}
-	
 	
 	@FXML
 	void onAbrirPagamentoAction(ActionEvent event) throws IOException {
@@ -224,25 +263,20 @@ public class VendaController implements Initializable {
 	
 	@FXML
 	private void onRemoverAction() {
-		Integer codigo = onGetCodigo();
+		Integer id = onGetId();
 		
-		if (codigo == -1) {
+		if (id == -1) {
 			return;
 		}
 		
-		boolean a = produtoVendaList.remove(new ProdutoVenda(codigo));
-		System.out.println("removido: " + a);
-		
-		for (ProdutoVenda produtoVenda : produtoVendaList) {
-			System.out.println(produtoVenda.getDescricao());
-		}
+		produtoVendaList.remove(new ProdutoVenda(id));
 		
 		btnRemoverItem.setDisable(true);
 		listar();
 	}
 
 	@FXML
-	public Integer onGetCodigo() {
+	public Integer onGetId() {
 		Object object = tvProdutos.getSelectionModel().getSelectedItem();
 		
 		if (object == null) {
@@ -251,21 +285,23 @@ public class VendaController implements Initializable {
 
 		btnRemoverItem.setDisable(false);
 
-		Integer codigo = ((ProdutoVenda) object).getCodigo();
-		return codigo != null ? codigo : -1;
+		Integer id = ((ProdutoVenda) object).getId();
+		return id != null ? id : -1;
 	}
 	
 	@FXML
 	void onNovaVendaAction(ActionEvent event) {
-		resetAll();
 		AlertUTIL.alertConfirmation("", "Deseja realizar uma nova venda?");
+		
+		txtNumVenda.setText(String.valueOf(numeroVenda));
+		
+		resetAll();
 	}
 
 	@FXML
 	void onSairVendaAction(ActionEvent event) {
 		PrincipalController.getStage().close();
 	}
-
 
 	private void calcularPreco() {
 		precoUnitario = produto.getPrecoUnitario();
@@ -290,10 +326,6 @@ public class VendaController implements Initializable {
 		return valorTotal;
 	}
 	
-	private Produto getProduto(Integer id) {
-		return produto = produtoDao.search(id);
-	}
-	
 	public void setLblTotalPago(String totalPago) {
 		this.lblTotalPago.setText(totalPago);;
 	}
@@ -312,7 +344,7 @@ public class VendaController implements Initializable {
 		txtPrecoUnitario.setText("");
 		txtDescPor.setText("");
 		txtDescDin.setText("");
-		txtQtd.setText("");
+		txtEstoque.setText(" ");
 		txtEstoque.setText("");
 	}
 
@@ -334,6 +366,15 @@ public class VendaController implements Initializable {
 		lblTroco.setText("R$ 0,00");
 		produtoVendaList.clear();
 		tvProdutos.getItems().clear();
+		
+		descPorcentagem = new BigDecimal("0");
+		descDinheiro = new BigDecimal("0");
+		totDesconto = new BigDecimal("0");
+		precoUnitario = new BigDecimal("0");
+		subTotal =  new BigDecimal("0");
+		valorTotal = new BigDecimal("0");
+		totDescPorcentagem = new BigDecimal("0");
+		totDescDinheiro = new BigDecimal("0");
 	}
 	
 	private void listar() {
@@ -363,7 +404,27 @@ public class VendaController implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		txtNumVenda.setText(String.valueOf(numeroVenda));
 		txtData.setText(DataHoraUTIL.getDataString());
 		txtHora.setText(DataHoraUTIL.getHoraString());
+		
+		Image image = new Image("imagens/check32.png");
+		imgFinalizar.setImage(image);
+		
+		image = new Image("imagens/pagamento.png");
+		imgPagamento.setImage(image);
+		
+		image = new Image("imagens/deletarCancelar32.png");
+		imgRemover.setImage(image);
+		
+		image = new Image("imagens/deletarCancelar16.png");
+		imgTV.setImage(image);
+		
+		image = new Image("imagens/venda.png");
+		imgNVenda.setImage(image);
+		
+		image = new Image("imagens/imprimir.png");
+		imgImprimir.setImage(image);
+		
 	}	
 }

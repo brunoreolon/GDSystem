@@ -2,6 +2,7 @@ package br.com.unipar.gdsystem.model;
 
 import java.math.BigDecimal;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,7 +19,9 @@ public class ProdutoVenda {
 	@ManyToOne
 	private Venda venda;
 
+	@Column(name = "Codigo")
 	private Integer codigo;
+	
 	private String descricao;
 	private String unidade;
 	private Integer quantidade;
@@ -31,8 +34,8 @@ public class ProdutoVenda {
 
 	}
 	
-	public ProdutoVenda(Integer codigo) {
-		this.codigo = codigo;
+	public ProdutoVenda(Integer id) {
+		this.id = id;
 	}
 	
 	public Integer getCodigo() {
@@ -130,11 +133,11 @@ public class ProdutoVenda {
 		}
 		
 		ProdutoVenda other = (ProdutoVenda) obj;
-		return this.codigo == other.codigo;
+		return this.id == other.id;
 	}
 	
 	@Override
 	public int hashCode() {
-		return Integer.hashCode(codigo);
+		return Integer.hashCode(id);
 	}
 }

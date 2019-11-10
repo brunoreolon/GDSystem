@@ -21,6 +21,8 @@ public class ProdutoDAO {
 	}
 
 	public void add(Produto produto) {
+		manager = new JPAUtil().getEntityManager();
+		
 		manager.getTransaction().begin();
 		manager.persist(produto);
 		manager.getTransaction().commit();
@@ -41,25 +43,34 @@ public class ProdutoDAO {
 	}
 	
 	public void remove(Integer id) {
+		manager = new JPAUtil().getEntityManager();
 		Produto produto = search(id);
 		
 		manager.getTransaction().begin();
 		manager.remove(produto);
 		manager.getTransaction().commit();
+		
+		manager.close();
 	}
 	
-	public void update() {
-		getList();
+	public void update(Produto produto) {
+		manager = new JPAUtil().getEntityManager();
+		
+		manager.getTransaction().begin();
+		manager.merge(produto);
+		manager.getTransaction().commit();
+		
+		manager.close();
 	}
 	
-	public Produto search(Integer id) {
+	public Produto search(Integer codigo) {
 		CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
 		CriteriaQuery<Produto> query = criteriaBuilder.createQuery(Produto.class);
 		Root<Produto> root = query.from(Produto.class);
 		
 		Path<String> codigoPath = root.<String>get("codigo");
 		
-		Predicate codigoIgual = criteriaBuilder.equal(codigoPath, id);
+		Predicate codigoIgual = criteriaBuilder.equal(codigoPath, codigo);
 		
 		query.where(codigoIgual);
 		

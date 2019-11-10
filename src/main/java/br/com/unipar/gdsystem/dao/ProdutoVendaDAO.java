@@ -11,10 +11,12 @@ public class ProdutoVendaDAO {
 	private EntityManager manager;
 
 	public ProdutoVendaDAO() {
-		manager = new JPAUtil().getEntityManager();
+		
 	}
 
 	public void add(List<ProdutoVenda> produtos){
+		manager = new JPAUtil().getEntityManager();
+		
 		manager.getTransaction().begin();
 		
 		for (ProdutoVenda produtoVenda : produtos) {

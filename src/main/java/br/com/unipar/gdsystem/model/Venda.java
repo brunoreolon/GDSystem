@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Venda {
@@ -20,11 +21,22 @@ public class Venda {
 	@OneToMany(mappedBy = "venda")
 	private List<ProdutoVenda> produtos;
 
+	@OneToOne
+	private Cliente cliente;
+
+	private Integer numeroVenda;
 	private Calendar dataVenda;
-//	private Cliente cliente;
 	private BigDecimal valorTotal;
 	private BigDecimal descontoDinheiro;
 	private BigDecimal descontoPorcentagem;
+
+	public Integer getNumeroVenda() {
+		return numeroVenda;
+	}
+
+	public void setNumeroVenda(Integer numeroVenda) {
+		this.numeroVenda = numeroVenda;
+	}
 
 	public Integer getId() {
 		return id;
@@ -50,13 +62,14 @@ public class Venda {
 		this.dataVenda = dataVenda;
 	}
 
-//	public Cliente getCliente() {
-//		return cliente;
-//	}
-//
-//	public void setCliente(Cliente cliente) {
-//		this.cliente = cliente;
-//	}
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
 	public BigDecimal getValorTotal() {
 		return valorTotal;
 	}

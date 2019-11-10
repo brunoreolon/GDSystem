@@ -13,13 +13,14 @@ public class Sangria {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
+	@ManyToOne
+	private Caixa caixa;
+
 	private BigDecimal saldoAtualCaixa;
 	private BigDecimal valorSangria;
 	private BigDecimal valorPosSangria;
 	private String motivo;
-	
-	@ManyToOne
-	private Caixa caixa;
 
 	public Caixa getCaixa() {
 		return caixa;

@@ -52,7 +52,6 @@ public class SangriaController implements Initializable{
     	}
     	
     	
-    	
     	realizarSangria();
     	txtValorSangria.setEditable(false);
     	txtMotivo.setEditable(false);

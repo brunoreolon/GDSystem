@@ -50,7 +50,7 @@ public class VisualizarProdutoController implements Initializable {
 
 	@FXML
 	void onCadProdutoAction(ActionEvent event) throws IOException {
-		OpenCloseStage.loadStage("/br/com/unipar/gdsystem/view/CadastroProduto.fxml", "Visualizar Produto", false);
+		OpenCloseStage.loadStage("/br/com/unipar/gdsystem/view/CadastroProduto.fxml", "Cadastro Produto", false);
 		setStage(OpenCloseStage.getStage());
 	}
 
