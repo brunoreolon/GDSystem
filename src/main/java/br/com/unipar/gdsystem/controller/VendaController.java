@@ -209,6 +209,8 @@ public class VendaController implements Initializable {
 		
 		c.update(caixa);
 		
+		
+		
 		vendaDAO.add(venda);
 		produtoVendaDao.add(produtoVendaList);
 	}
