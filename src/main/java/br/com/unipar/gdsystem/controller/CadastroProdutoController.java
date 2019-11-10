@@ -60,7 +60,7 @@ public class CadastroProdutoController implements Initializable {
 		Produto produto = new Produto();
 		ProdutoDAO produtoDAO = new ProdutoDAO();
 
-		produto.setCodigo(txtCodInterno.getText());
+		produto.setCodigo(Integer.parseInt(txtCodInterno.getText()));
 		produto.setDescricao(txtDescricao.getText());
 		produto.setUnidade(txtUnidade.getText());
 		produto.setPesoBruto(Double.parseDouble(txtPesoBruto.getText()));

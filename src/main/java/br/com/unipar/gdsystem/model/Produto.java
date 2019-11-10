@@ -13,7 +13,7 @@ public class Produto {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	private String codigo;
+	private Integer codigo;
 	private String descricao;
 	private String unidade;
 	private Double pesoBruto;
@@ -34,11 +34,11 @@ public class Produto {
 		this.id = id;
 	}
 
-	public String getCodigo() {
+	public Integer getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(String codigo) {
+	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
 	}
 
@@ -129,5 +129,4 @@ public class Produto {
 	public void setDepartamento(String departamento) {
 		this.departamento = departamento;
 	}
-
 }

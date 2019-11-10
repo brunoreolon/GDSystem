@@ -18,7 +18,7 @@ public class ProdutoVenda {
 	@ManyToOne
 	private Venda venda;
 
-	private String codigo;
+	private Integer codigo;
 	private String descricao;
 	private String unidade;
 	private Integer quantidade;
@@ -27,11 +27,19 @@ public class ProdutoVenda {
 	private BigDecimal descDinheiro;
 	private BigDecimal subTotal;
 
-	public String getCodigo() {
+	public ProdutoVenda() {
+
+	}
+	
+	public ProdutoVenda(Integer codigo) {
+		this.codigo = codigo;
+	}
+	
+	public Integer getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(String codigo) {
+	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
 	}
 
@@ -113,5 +121,20 @@ public class ProdutoVenda {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null || obj.getClass() != ProdutoVenda.class) {
+			return false;
+		}
+		
+		ProdutoVenda other = (ProdutoVenda) obj;
+		return this.codigo == other.codigo;
+	}
+	
+	@Override
+	public int hashCode() {
+		return Integer.hashCode(codigo);
 	}
 }

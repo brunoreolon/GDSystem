@@ -28,6 +28,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -44,7 +45,7 @@ public class VendaController implements Initializable {
 	private Cliente cliente = new Cliente();
 	private ClienteDAO clienteDao = new ClienteDAO();
 	private Produto produto = new Produto();
-	private ProdutoVenda produtoVenda = new ProdutoVenda();
+	private ProdutoVenda produtoVenda;
 	private ProdutoDAO produtoDao = new ProdutoDAO();
 	private VendaDAO vendaDAO = new VendaDAO();
 	private Venda venda = new Venda();
@@ -79,7 +80,8 @@ public class VendaController implements Initializable {
 	@FXML private TextField txtEstoque;
 	@FXML private Button btnAddItem;
 	@FXML private Label lblValorTotal;
-	@FXML private TableView<ProdutoVenda> tvItens;
+	@FXML private MenuItem removerProduto;
+	@FXML private TableView<ProdutoVenda> tvProdutos;
 	@FXML private TableColumn<ProdutoVenda, String> tbcCodigo;
 	@FXML private TableColumn<ProdutoVenda, String> tbcDescricao;
 	@FXML private TableColumn<ProdutoVenda, String> tbcUn;
@@ -99,7 +101,7 @@ public class VendaController implements Initializable {
 	@FXML private Button btnNovaVenda;
 	@FXML private Button btnImprimir;
 	@FXML private Button btnSair;
-
+	
 	public VendaController() {
 		vendaController = this;
 	}
@@ -169,11 +171,13 @@ public class VendaController implements Initializable {
 			return;
 		}
 		
+		btnPagamento.setDisable(false);
 		calcularPreco();
 		
 		lblDescontos.setText(String.valueOf(totDesconto));
 		resetItem();
 		
+		produtoVenda = new ProdutoVenda();
 		produtoVenda.setVenda(venda);
 		produtoVenda.setCodigo(produto.getCodigo());
 		produtoVenda.setDescricao(produto.getDescricao());
@@ -214,6 +218,39 @@ public class VendaController implements Initializable {
 	void onAbrirPagamentoAction(ActionEvent event) throws IOException {
 		OpenCloseStage.loadStage("/br/com/unipar/gdsystem/view/Pagamento.fxml", "Visualizar Produto", false);
 		setStage(OpenCloseStage.getStage());
+	}
+	
+	@FXML
+	private void onRemoverAction() {
+		Integer codigo = onGetCodigo();
+		
+		if (codigo == -1) {
+			return;
+		}
+		
+		boolean a = produtoVendaList.remove(new ProdutoVenda(codigo));
+		System.out.println("removido: " + a);
+		
+		for (ProdutoVenda produtoVenda : produtoVendaList) {
+			System.out.println(produtoVenda.getDescricao());
+		}
+		
+		btnRemoverItem.setDisable(true);
+		listar();
+	}
+
+	@FXML
+	public Integer onGetCodigo() {
+		Object object = tvProdutos.getSelectionModel().getSelectedItem();
+		
+		if (object == null) {
+			return -1;
+		}
+
+		btnRemoverItem.setDisable(false);
+
+		Integer codigo = ((ProdutoVenda) object).getCodigo();
+		return codigo != null ? codigo : -1;
 	}
 	
 	@FXML
@@ -293,7 +330,8 @@ public class VendaController implements Initializable {
 		lblDescontos.setText("R$ 0,00");
 		lblTotalPago.setText("R$ 0,00");
 		lblTroco.setText("R$ 0,00");
-		tvItens.getItems().clear();
+		produtoVendaList.clear();
+		tvProdutos.getItems().clear();
 	}
 	
 	private void listar() {
@@ -306,7 +344,7 @@ public class VendaController implements Initializable {
 		tbcDescDin.setCellValueFactory(new PropertyValueFactory<>("descDinheiro"));
 		tbcSubTotal.setCellValueFactory(new PropertyValueFactory<>("subTotal"));
 
-		tvItens.setItems(observableListProduto());
+		tvProdutos.setItems(observableListProduto());
 	}
 	
 	public void setStage(Stage stage) {
@@ -323,8 +361,6 @@ public class VendaController implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		btnAddItem.setDisable(true);
-		btnFinalizar.setDisable(true);
 		txtData.setText(DataHoraUTIL.getDataString());
 		txtHora.setText(DataHoraUTIL.getHoraString());
 	}	

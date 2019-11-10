@@ -12,7 +12,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -30,10 +29,6 @@ public class PagamentoController implements Initializable {
 	private BigDecimal valorRecebido = new BigDecimal("0");
 	private BigDecimal caixaAtualizado = new BigDecimal("0");
 	
-	public BigDecimal getCaixaAtualizado() {
-		return caixaAtualizado;
-	}
-
 	@FXML private AnchorPane apPagamento;
 	@FXML private ComboBox<FormasPagamentoEnum> cbFormaPagamento;
 	@FXML private StackPane spFormasPagamento;
@@ -93,6 +88,10 @@ public class PagamentoController implements Initializable {
 		if (cbFormaPagamento.getSelectionModel().getSelectedIndex() == 3) {
 			setPaneVisivel(false, false, false, true);
 		}
+	}
+	
+	public BigDecimal getCaixaAtualizado() {
+		return caixaAtualizado;
 	}
 	
 	 private void calcularTroco() {

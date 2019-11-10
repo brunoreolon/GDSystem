@@ -44,7 +44,7 @@ public class VisualizarClienteController implements Initializable {
 	@FXML private TableColumn<Cliente, String> tbcEndereco;
 	@FXML private Button btnAdicionar;
 	@FXML private Button btnAtualizar;
-	@FXML private Button btnRemover;
+	@FXML private Button btnRemoverItem;
 
 	public void setStage(Stage stage) {
 		VisualizarClienteController.stage = stage;
@@ -101,7 +101,7 @@ public class VisualizarClienteController implements Initializable {
 			return -1;
 		}
 
-		btnRemover.setDisable(false);
+		btnRemoverItem.setDisable(false);
 
 		Integer id = ((Cliente) object).getId();
 		
