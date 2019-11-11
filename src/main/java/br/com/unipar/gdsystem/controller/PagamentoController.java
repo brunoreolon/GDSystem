@@ -32,6 +32,7 @@ public class PagamentoController implements Initializable {
 	private BigDecimal troco = new BigDecimal("0");
 	private BigDecimal valorRecebido = new BigDecimal("0");
 	private BigDecimal caixaAtualizado = new BigDecimal("0");
+	private BigDecimal v = new BigDecimal("0");
 	private Integer totalParcelas;
 	
 	@FXML private AnchorPane apPagamento;
@@ -65,9 +66,7 @@ public class PagamentoController implements Initializable {
 			return;
 		}
 		
-		System.out.println(valorRecebido.compareTo(valorTotal) == 1);
-		
-		if (new BigDecimal(txtValorRecebido.getText()).compareTo(valorTotal) == -1) {
+		if (valorRecebido.compareTo(valorTotal) == -1) {
 			AlertUTIL.alertInformation("", "Valor insuficiente");
 			return;
 		}
