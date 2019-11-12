@@ -11,7 +11,7 @@ Trabalho do 4° bimestre da aula de POO do curso de análise e desenvolvimento d
 
 # Imagens
 Tela Principal
-![principal](https://user-images.githubusercontent.com/27326162/68700978-a1582b80-0564-11ea-9589-8b94a664ea60.jpg)
+![p](https://user-images.githubusercontent.com/27326162/68701459-8fc35380-0565-11ea-9843-f71c7fab26b4.jpg)
 
 Tela de Venda
 ![venda](https://user-images.githubusercontent.com/27326162/68701026-b6cd5580-0564-11ea-82e9-0a719fc71e2a.jpg)
